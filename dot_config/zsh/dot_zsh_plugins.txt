@@ -1,0 +1,9 @@
+mattmc3/ez-compinit
+MichaelAquilina/zsh-auto-notify
+jeffreytse/zsh-vi-mode
+agkozak/zhooks
+Aloxaf/fzf-tab
+MichaelAquilina/zsh-autoswitch-virtualenv
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+zdharma-continuum/fast-syntax-highlighting

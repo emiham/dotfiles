@@ -1,0 +1,465 @@
+set zle_bracketed_paste
+autoload -Uz bracketed-paste-magic url-quote-magic
+zle -N bracketed-paste bracketed-paste-magic
+zle -N self-insert url-quote-magic
+
+# This speeds up pasting w/ autosuggest
+# https://github.com/zsh-users/zsh-autosuggestions/issues/238
+pasteinit() {
+    OLD_SELF_INSERT=${${(s.:.)widgets[self-insert]}[2,3]}
+    zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+}
+
+pastefinish() {
+    zle -N self-insert $OLD_SELF_INSERT
+}
+zstyle :bracketed-paste-magic paste-init pasteinit
+zstyle :bracketed-paste-magic paste-finish pastefinish
+
+# Break at /.
+WORDCHARS='*?_-[]~=&;!#$%^(){}<>\'
+
+function my_backward_kill_word() {
+  local wordchars=$WORDCHARS
+
+  WORDCHARS='/'
+  WORDCHARS='*?_-.[]~=&;!#$%^(){}<>\ '
+
+  zle backward-kill-word
+
+  WORDCHARS=$wordchars
+}
+
+function zvm_after_init() {
+  zvm_define_widget my_backward_kill_word
+  zvm_bindkey viins '^[^W' my_backward_kill_word
+}
+
+function zvm_config() {
+    # https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+    ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    ZVM_INIT_MODE=sourcing
+}
+
+if [ -e '/usr/share/zsh-antidote/antidote.zsh' ]; then
+    source '/usr/share/zsh-antidote/antidote.zsh'
+elif [ -e "${ZDOTDIR}/.antidote" ]; then
+    source "${ZDOTDIR}/.antidote/antidote.zsh"
+else
+    git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR}/.antidote"
+    source "${ZDOTDIR}/.antidote/antidote.zsh"
+fi
+
+antidote load
+fast-theme XDG:seoul256 &> /dev/null
+
+HISTSIZE=10000
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+
+# vim bindings
+bindkey -v
+export KEYTIMEOUT=10
+bindkey 'jk' vi-cmd-mode
+bindkey -a 'gg' beginning-of-buffer-or-history
+bindkey -a G end-of-buffer-or-history
+
+# Edit line in vim with ctrl-e:
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
+autoload -U colors && colors
+
+zstyle :compinstall filename "$XDG_CONFIG_HOME/zsh/.zshrc"
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zcompcache"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit -d "$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
+_comp_options+=(globdots) # Include hidden files
+
+autoload -U promptinit; promptinit
+prompt pure
+zstyle :prompt:pure:git:stash show yes
+zstyle :prompt:pure:prompt:success color green
+zstyle :prompt:pure:suspended_jobs color 14
+
+# Aliases ▼
+alias sudo="sudo " # Allow using sudo with aliases
+alias tmux="tmux -2" # 256 color support
+alias vimdiff="vimdiff -u $HOME/.vimrc" # Use .vimrc with vimdiff
+alias pacman="pacman --color always"
+alias ls="ls --color"
+alias grep="grep --color --exclude=.tags"
+alias fgrep="grep --color"
+alias egrep="grep --color"
+alias zgrep="grep --color"
+alias sxiv="sxiv -ab"
+alias ncdu="ncdu -x --color=dark"
+alias mpc="mpc --host=192.168.1.127 -p 6600"
+alias mv="mv -i"
+alias cp="cp -i"
+alias mkdir="mkdir -p"
+alias df="df -h"
+alias du="du -h"
+
+alias sz="exec zsh"
+alias ez="nvim $XDG_CONFIG_HOME/zsh/.zshrc"
+alias ev="nvim $XDG_CONFIG_HOME/vim/vimrc"
+alias evp="nvim $XDG_CONFIG_HOME/vim/rc/plugins.vim"
+alias evpo="nvim $XDG_CONFIG_HOME/vim/rc/plugins-vimonly.vim"
+alias en="nvim $XDG_CONFIG_HOME/nvim/init.lua"
+alias enp="nvim $XDG_CONFIG_HOME/nvim/lua/plugins/everything_else.lua"
+if command -v eza >/dev/null 2>&1; then
+    alias l="eza -l --git --no-quotes"
+else
+    alias l="ls -lh"
+fi
+alias la="l -A"
+alias n="newsraft"
+alias y="newsraft -f $XDG_CONFIG_HOME/newsraft/feeds-youtube"
+alias c="ikhal && vdirsyncer sync &> /dev/null"
+alias ss="$HOME/code/smoked-salmon/.venv/bin/python3 ~/code/smoked-salmon/run.py"
+alias g="~/.local/scripts/git-st/git-st"
+alias gt='git log --graph --full-history --all --color \ --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+alias z="zi"
+alias zg='zoxide --basedir "$(git rev-parse --show-toplevel 2>/dev/null)"'
+alias tw='timew'
+
+alias htop="htop -t"
+alias svim="sudo -E vim" # Use .vimrc with sudo vim
+alias diary="nvim ~/docs/diary.md"
+alias irc="tmux new -s irc 'weechat'"
+alias weather="curl wttr.in/stockholm"
+alias mux="tmuxp load"
+alias wine32="WINEARCH=win32 WINEPREFIX=~/.win32 wine"
+alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
+alias gf='echo "\033[0;32m>tfw no gf"'
+alias my_ip="curl http://checkip.amazonaws.com"
+alias plants="topydo -t ~/sync/todo/plants.txt"
+alias cht='function _cht(){ curl cht.sh/$1; }; _cht'
+alias fkill="ps -ef | fzf --header-lines=1 | awk '{print \$2}' | xargs -r -o kill"
+alias tmpvim"nvim $(mktemp)"
+alias fpac="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
+alias fyay="pacman -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+
+# ▲
+
+function eac {
+    local wineprefix="$WINEPREFIX-eac"
+    local eacdir="${wineprefix}/drive_c/Program Files/Exact Audio Copy"
+    pushd "${eacdir}/Microsoft.VC80.CRT"
+    WINEPREFIX=$wineprefix WINEDEBUG=-all wine "${eacdir}/EAC.exe"
+    popd
+}
+
+function pkb {
+    nvim ~/docs/PKB/$(date +"%Y-%m-%d_")"$1".md;
+}
+
+function deadlines {
+    if [ $# -eq 0 ]; then
+	khal list -a Deadlines today 7d
+    else
+	khal list -a Deadlines today "$1"d
+    fi
+}
+
+function nextsuffix {
+    local name="$1.bak"
+    if [ ! -e "$name" ]; then
+        printf "%s" "$name"
+    else
+        local -i num=2
+        while [ -e "$name$num" ]; do
+            num+=1
+        done
+        printf "%s%d" "$name" "$num"
+    fi
+}
+
+function bak {
+    if [[ "$1" =~ .*.bak[0-9]*$ ]]; then
+	local ori=${1%.bak*}
+	local tmp="$(nextsuffix "$ori")"
+	if [ -e "$ori" ]; then
+	    mv "$ori" "$tmp"
+	    mv "$1" "$ori"
+	    mv "$tmp" "$(nextsuffix "$ori")"
+	else
+	    mv "$1" "$ori"
+	fi
+    else
+	mv "$1" "$(nextsuffix "$1")"
+    fi
+}
+
+function mkcd {
+  \mkdir -p "$1"
+  cd "$1"
+}
+
+function mktmp {
+  cd "$(mktemp -d)"
+  chmod -R 0700 .
+  if [[ $# -eq 1 ]]; then
+    \mkdir -p "$1"
+    cd "$1"
+    chmod -R 0700 .
+  fi
+}
+
+rrmdir() {
+  local OPTIND opt dry=0 verbose=0
+  while getopts "nv" opt; do
+    case "$opt" in
+      n) dry=1 ;;
+      v) verbose=1 ;;
+      *) return 2 ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  if [[ $# -eq 0 ]]; then
+    echo "Usage: rmdir_recursive [-n] [-v] dir..." >&2
+    return 2
+  fi
+
+  for target in "$@"; do
+    if [[ ! -e $target ]]; then
+      echo "rmdir_recursive: '$target' does not exist" >&2
+      continue
+    fi
+    if [[ ! -d $target ]]; then
+      echo "rmdir_recursive: '$target' is not a directory" >&2
+      continue
+    fi
+
+    # find directories bottom-up (-depth) and list only empty dirs (-type d -empty)
+    if [[ $dry -eq 1 ]]; then
+      if [[ $verbose -eq 1 ]]; then
+        echo "Dry-run: directories under '$target' that would be removed (deepest first):"
+      fi
+      find "$target" -depth -type d -empty -print
+      continue
+    fi
+
+    # Actually remove: iterate so we can print each action (if verbose) and ignore failures.
+    # Use a subshell pipeline to avoid word-splitting issues.
+    while IFS= read -r dir; do
+      if [[ $verbose -eq 1 ]]; then
+        printf "rmdir '%s'\n" "$dir"
+      fi
+      rmdir "$dir" 2>/dev/null || true
+    done < <(find "$target" -depth -type d -empty)
+  done
+}
+
+smart_ctrl_z() {
+  # Try to bring the most recent stopped job to foreground
+  fg 2>/dev/null && return
+
+  # If fg failed, fall back to the normal Ctrl+Z behavior
+  zle -M "No job to fg; sending suspend"
+  zle send-break
+}
+
+zle -N smart_ctrl_z
+bindkey '^Z' smart_ctrl_z
+
+zstyle ':completion:*' auto-description 'specify: %d'
+zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' menu select=2
+eval "$(dircolors -b)"
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
+zstyle ':completion:*' menu select=long
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' use-compctl false
+zstyle ':completion:*' verbose true
+
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
+zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:*:(vim|nvim):*' ignored-patterns '*.(aux|pdf|class|o|obj|hi|fls|fdb_latexmk|synctex.gz)'
+
+# Keys
+insert_sudo () { zle beginning-of-line; zle -U "sudo " }
+zle -N insert-sudo insert_sudo
+bindkey "^[s" insert-sudo
+
+bindkey '^H' backward-kill-word
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+
+function copy-last-command-widget() {
+    local last_command=$(fc -ln -1)
+    print -rn -- "$last_command" | wl-copy
+    zle reset-prompt
+}
+
+zle -N copy-last-command-widget
+bindkey '^[C' copy-last-command-widget
+
+# https://www.topbug.net/blog/2016/10/03/restore-the-previously-canceled-command-in-zsh/
+# Toggle with Ctrl+/
+function zle-line-init {
+  # Your other zle-line-init configuration ...
+
+  # Store the last non-empty aborted line in MY_LINE_ABORTED
+  if [[ -n $ZLE_LINE_ABORTED ]]; then
+    MY_LINE_ABORTED="$ZLE_LINE_ABORTED"
+  fi
+
+  # Restore aborted line on the first undo.
+  if [[ -n $MY_LINE_ABORTED ]]; then
+    local savebuf="$BUFFER" savecur="$CURSOR"
+    BUFFER="$MY_LINE_ABORTED"
+    CURSOR="$#BUFFER"
+    zle split-undo
+    BUFFER="$savebuf" CURSOR="$savecur"
+  fi
+  # _zsh_autosuggest_widget_clear
+}
+zle -N zle-line-init
+
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
+# Always enter tmux
+tmux-scratch-session
+# if ! systemctl --user is-active --quiet tmux.service; then
+#     systemctl --user start tmux.service
+# fi
+# exec tmux attach-session -d -t • >/dev/null 2>&1
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+(( $+commands[xremap] )) && eval "$(xremap --completions zsh)"
+(( $+commands[niri] )) && eval "$(niri completions zsh)"
+
+(( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
+
+# Dynamic window title
+autoload -Uz add-zsh-hook
+
+function xterm_title_precmd () {
+	print -Pn -- '\e]2;%n@%m %~\a'
+	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005\e\\'
+}
+
+function xterm_title_preexec () {
+	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
+	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005 %# ' && print -n -- "${(q)1}\e\\"; }
+}
+
+if [[ "$TERM" == (Eterm*|alacritty*|aterm*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|tmux*|xterm*|st*) ]]; then
+	add-zsh-hook -Uz precmd xterm_title_precmd
+	add-zsh-hook -Uz preexec xterm_title_preexec
+fi
+
+# foot
+foot_precmd() {
+    print -Pn "\e]133;A\e\\"
+}
+add-zsh-hook -Uz precmd foot_precmd
+
+function set_win_title(){
+}
+
+# yazi
+function yazi_cd() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+function zle_yazi {
+    yazi_cd <$TTY
+    zle redisplay
+    zle reset-prompt
+    xterm_title_precmd
+}
+
+zle -N zle_yazi
+bindkey "^[e" zle_yazi
+
+# History navigation
+function my-redraw-prompt() {
+  {
+    builtin echoti civis
+    builtin local f
+    for f in chpwd "${chpwd_functions[@]}" precmd "${precmd_functions[@]}"; do
+      (( ! ${+functions[$f]} )) || "$f" &>/dev/null || builtin true
+    done
+    builtin zle reset-prompt
+  } always {
+    builtin echoti cnorm
+  }
+}
+
+function my-cd-rotate() {
+  () {
+    builtin emulate -L zsh
+    while (( $#dirstack )) && ! builtin pushd -q $1 &>/dev/null; do
+      builtin popd -q $1
+    done
+    (( $#dirstack ))
+  } "$@" && my-redraw-prompt
+}
+
+function my-cd-up()      { builtin cd -q .. && my-redraw-prompt; }
+function my-cd-back()    { my-cd-rotate +1; }
+function my-cd-forward() { my-cd-rotate -0; }
+
+builtin zle -N my-cd-up
+builtin zle -N my-cd-back
+builtin zle -N my-cd-forward
+
+() {
+  builtin local keymap
+  for keymap in emacs viins vicmd; do
+    builtin bindkey '^[k' my-cd-up
+    builtin bindkey '^[h' my-cd-back
+    builtin bindkey '^[l' my-cd-forward
+  done
+}
+
+setopt auto_pushd
+setopt INTERACTIVE_COMMENTS
+setopt LONG_LIST_JOBS
+setopt NOTIFY
+unsetopt BG_NICE
+unsetopt CLOBBER # Don't overwrite files with >, use >| to force
+
+source $HOME/code/scripts/tmux/autocomplete-from-tmux
+zmodload zsh/zprof
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/usr/etc/profile.d/conda.sh" ]; then
+        . "/usr/etc/profile.d/conda.sh"
+    else
+        export PATH="/usr/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+export _ZO_FZF_OPTS="--select-1"
+(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+
+# vim:foldmethod=marker:foldlevel=0
