@@ -1,0 +1,88 @@
+# Set these first so they can be used later
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+# export XDG_CURRENT_DESKTOP=river
+# export XDG_DATA_DIRS=$HOME/.local/share:/usr/local/share/:/usr/share/
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_DESKTOP_DIR="$XDG_DATA_HOME/applications"
+export XDG_DOCUMENTS_DIR="$HOME/docs"
+export XDG_DOWNLOAD_DIR="$HOME/dl"
+export XDG_MUSIC_DIR="$HOME/music"
+export XDG_PICTURES_DIR="$HOME/pics"
+export XDG_PUBLICSHARE_DIR=""
+export XDG_RUNTIME_DIR="/run/user/$UID"
+export XDG_SCREENSHOTS_DIR="$HOME/pics/screenshots"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_TEMPLATES_DIR=""
+export XDG_VIDEOS_DIR="$HOME/vids"
+
+export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
+export AUTO_NOTIFY_IGNORE=("vim" "nvim" "less" "more" "man" "tig" "watch" "git" "commit" "top" "htop" "btm" "ssh" "nano" "fg" "tt" "te" "morning" "today" "journalctl" "beet" "yazi" "stig" "tmux" "mpv" "newsraft" "n" "y" "c" "m" "anki")
+export BUNDLE_USER_CACHE="$XDG_CACHE_HOME/bundle"
+export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME/bundle"
+export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME/bundle"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CM_LAUNCHER=rofi
+export DIFFPROG="nvim -d"
+export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
+export DefaultIMModule=fcitx
+export EDITOR=nvim
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export GHCUP_USE_XDG_DIRS=true
+export GLFW_IM_MODULE=fcitx
+export GOLDENDICT_FORCE_WAYLAND=1
+export GOPATH=~/.local/go
+# Should maybe be fcitx? xim seems to be required for Steam, but that can probably be set elsewhere
+# export GTK_IM_MODULE=fcitx
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc"
+export GTK_THEME=Adwaita:dark
+export GTK_USE_PORTAL=1
+export HISTFILE="$XDG_DATA_HOME/bash_history"
+export KERAS_HOME="$XDG_STATE_HOME/keras"
+export LC_ALL=en_US.UTF-8
+export LESS='-RX --quit-if-one-screen'
+export LYNX_CFG="$XDG_CONFIG_HOME/lynxrc"
+export MOZ_ENABLE_WAYLAND=1
+export MPD_HOST=192.168.1.127
+export MPD_PORT=6600
+export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
+# export NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY=1
+export NLTK_DATA=$HOME/code/nltk_data/
+export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
+export NUGET_PACKAGES="$XDG_CACHE_HOME/nuget"
+export NVM_DIR="$HOME/.nvm"
+export PATH="$PATH:$(find $HOME/code/scripts -type d -print | tr '\n' ':')$HOME/go/bin:${GOPATH//://bin:}/bin:$HOME/.local/bin:$HOME/.local/share/cargo/bin:$HOME/.local/scripts"
+export PLATFORMIO_CORE_DIR="$XDG_DATA_HOME/platformio"
+export PYTHON_HISTORY="$XDG_DATA_HOME/python_history"
+export QT4_IM_MODULE=fcitx
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_IM_MODULE=fcitx
+export QT_IM_MODULES="wayland;fcitx;ibus"
+export QT_PLUGIN_PATH=1
+export QT_QPA_PLATFORM=wayland
+export QT_SCREEN_SCALE_FACTORS=1 # 2 on X
+export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgreprc
+export RUSTUP_HOME="$XDG_CONFIG_HOME/rustup"
+export SDL_IM_MODULE=fcitx
+export STACK_XDG=1
+export STEAM_FORCE_DESKTOPUI_SCALING=1
+export SSH_AUTH_SOCK=$XDG_RUNTIME_DIR/ssh-agent.socket
+export SUDO_EDITOR=nvim
+export SUDO_PROMPT=$'\e]777;notify;sudo;password required\e\\'"[sudo] password for %p: "
+export SYSTEMD_EDITOR=nvim
+export TEXMFVAR="$XDG_CACHE_HOME/texlive/texmf-var"
+export VISUAL=nvim
+export W3M_DIR="$XDG_DATA_HOME"/w3m
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
+export WINEPREFIX="$XDG_DATA_HOME"/wine
+export XCURSOR_SIZE=16
+export XCURSOR_THEME=simple-and-soft-cursor
+export XKB_DEFAULT_LAYOUT=se
+export XMODIFIER="@im=fcitx"
+export XMODIFIERS="@im=fcitx"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+# This should hopefully fix games pausing when not in focus
+# If it doesn't work try just one or the other
+export MESA_VK_WSI_PRESENT_MODE=immediate
+export vk_xwayland_wait_ready=false

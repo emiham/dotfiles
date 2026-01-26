@@ -1,0 +1,43 @@
+[".config/mpv/scripts-git/ModernZ"]
+type = "git-repo"
+url = "git@github.com:Samillion/ModernZ.git"
+
+[".config/mpv/scripts-git/mpv-bookmarker"]
+type = "git-repo"
+url = "git@github.com:Fossu/mpv-bookmarker.git"
+
+[".config/mpv/scripts-git/mpv-mpris"]
+type = "git-repo"
+url = "git@github.com:hoyon/mpv-mpris.git"
+
+[".config/mpv/scripts-git/mpv-scripts"]
+type = "git-repo"
+url = "git@github.com:ObserverOfTime/mpv-scripts.git"
+
+[".config/mpv/scripts-git/mpv-toolbox"]
+type = "git-repo"
+url = "git@codeberg.org:NRK/mpv-toolbox.git"
+
+[".config/mpv/scripts-git/mpv_sponsorblock"]
+type = "git-repo"
+url = "git@github.com:po5/mpv_sponsorblock.git"
+
+[".config/mpv/scripts-git/mpv_websocket"]
+type = "git-repo"
+url = "git@github.com:kuroahna/mpv_websocket.git"
+
+[".config/mpv/scripts-git/mpvacious"]
+type = "git-repo"
+url = "git@github.com:Ajatt-Tools/mpvacious.git"
+
+[".config/mpv/scripts-git/occivink-mpv-scripts"]
+type = "git-repo"
+url = "git@github.com:occivink/mpv-scripts.git"
+
+[".config/mpv/scripts-git/thumbfast"]
+type = "git-repo"
+url = "git@github.com:po5/thumbfast.git"
+
+[".config/mpv/shaders/ArtCNN"]
+type = "git-repo"
+url = "git@github.com:Artoriuz/ArtCNN.git"
