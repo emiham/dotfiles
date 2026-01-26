@@ -1,0 +1,323 @@
+keymap:
+  - name: Global
+    exact_match: true
+    remap:
+      # Music
+      PlayPause:
+        launch: ["mpc", "toggle"]
+      Shift-PlayPause:
+        launch: ["playerctl", "play-pause"]
+      Alt-PlayPause:
+        launch: ["uwsm", "app", "--", "foot", "lyrics"]
+      Super-PlayPause:
+        launch: ["uwsm", "app", "--", "foot", "-T", "music", "rmpc"]
+      Super-Shift-PlayPause:
+        launch:
+          [
+            "uwsm",
+            "app",
+            "--",
+            "foot",
+            "-T",
+            "music ratings",
+            "python",
+            "/home/emil/code/music-ratings/player.py",
+          ]
+      Super-M:
+        remap:
+          Super-M:
+            launch: ["uwsm", "app", "--", "foot", "-T", "music", "rmpc"]
+          KEY_1:
+            launch: ["/home/emil/code/music-ratings/tag", "1"]
+          KEY_2:
+            launch: ["/home/emil/code/music-ratings/tag", "2"]
+          KEY_3:
+            launch: ["/home/emil/code/music-ratings/tag", "3"]
+          KEY_4:
+            launch: ["/home/emil/code/music-ratings/tag", "4"]
+          KEY_5:
+            launch: ["/home/emil/code/music-ratings/tag", "5"]
+          KEY_GRAVE:
+            launch: ["beets-rate-album"]
+          r:
+            launch: ["beets-rate-album"]
+          Shift-Minus:
+            launch: ["/home/emil/code/music-ratings/print"]
+          h:
+            launch: ["mpc", "prev"]
+          l:
+            launch: ["mpc", "next"]
+          p:
+            launch: ["mpc", "toggle"]
+          Shift-p:
+            launch: ["playerctl", "play-pause"]
+          c:
+            launch: ["mpc", "clear"]
+          a:
+            launch: ["dmenu-mpdmenu"]
+          y:
+            launch: ["dmenu-mpdmenu", "-y"]
+          q:
+            launch: ["dmenu-mpdmenu", "-q"]
+      PreviousSong:
+        launch: ["mpc", "prev"]
+      NextSong:
+        launch: ["mpc", "next"]
+
+      # Volume
+      VolumeUp:
+        launch: ["volume", "+2.5"]
+      VolumeDown:
+        launch: ["volume", "-2.5"]
+      Super-Alt-M:
+        launch: ["audio-outputs"]
+
+      # Picker
+      Super-D:
+        launch: ["rofi", "-show", "run", "-run-command", "uwsm app -- {cmd}"]
+      Super-Shift-D:
+        launch: ["rofi", "-show", "drun"]
+      Super-N:
+        remap:
+          y:
+            launch: ["dmenu-watchlater"]
+          b:
+            launch: ["dmenu-books"]
+          a:
+            launch:
+              [
+                "/home/emil/code/malpv/.venv/bin/python",
+                "/home/emil/code/malpv/main.py",
+              ]
+          g:
+            launch: ["rofi", "-modi", "games", "-show", "games"]
+      Super-Z:
+        launch: ["dmenu-system"]
+      Super-LeftBrace:
+        launch: ["dmenu-focus"]
+      Super-V:
+        launch: ["dmenu-paste"]
+      Super-U:
+        launch: ["rofimoji-meta"]
+      Super-T:
+        remap:
+          a:
+            launch: ["dmenu-task-add"]
+          d:
+            launch: ["dmenu-task-do"]
+          t:
+            launch: ["dmenu-task-today"]
+          e:
+            launch:
+              [
+                "uwsm",
+                "app",
+                "--",
+                "foot",
+                "-T",
+                "tasks - 浮",
+                "nvim",
+                "/home/emil/sync/todo/todo.txt",
+              ]
+          w:
+            launch:
+              [
+                "uwsm",
+                "app",
+                "--",
+                "foot",
+                "-T",
+                "tasks - 浮",
+                "nvim",
+                "/home/emil/sync/todo/done.txt",
+              ]
+          l:
+            launch: ["tasks-onclick"]
+          n:
+            launch: ["dmenu-napkin"]
+          g:
+            launch: ["dmenu-ha-groceries"]
+          c:
+            launch: ["dmenu-calendar-add"]
+      Super-P:
+        launch: ["keepmenu"]
+      Super-Shift-Enter:
+        launch: ["dmenu-sshmenu"]
+      Super-Shift-M:
+        remap:
+          c:
+            launch: ["dunstctl", "clear-all"]
+          a:
+            remap:
+              KEY_1:
+                launch: ["dunstctl", "action", "1"]
+              KEY_2:
+                launch: ["dunstctl", "action", "2"]
+              KEY_3:
+                launch: ["dunstctl", "action", "3"]
+              KEY_4:
+                launch: ["dunstctl", "action", "4"]
+              KEY_5:
+                launch: ["dunstctl", "action", "5"]
+              KEY_6:
+                launch: ["dunstctl", "action", "6"]
+              KEY_7:
+                launch: ["dunstctl", "action", "7"]
+              KEY_8:
+                launch: ["dunstctl", "action", "8"]
+              KEY_9:
+                launch: ["dunstctl", "action", "9"]
+
+      # Screenshots
+      SysRq:
+        launch: ["grimshot", "copy", "area"]
+      Shift-SysRq:
+        launch: ["grimshot", "copy", "screen"]
+      Alt-SysRq:
+        launch: ["dmenu-screenshot"]
+      Control-SysRq:
+        launch: ["wl-color-picker", "clipboard"]
+      Control-Shift-SysRq:
+        launch: ["transformers_ocr", "ocr"]
+      Super-SysRq:
+        launch: ["ames", "-s"]
+      Super-Shift-SysRq:
+        launch: ["ames", "-r"]
+
+      # Launch
+      Super-a:
+        remap:
+          w:
+            launch: ["uwsm", "app", "--", "firefox"]
+          Shift-w:
+            launch: ["uwsm", "app", "--", "firefox", "--private-window"]
+          e:
+            launch: ["uwsm", "app", "--", "foot", "yazi"]
+          a:
+            launch: ["uwsm", "app", "--", "anki"]
+          d:
+            # launch: ["gtk-launch", "discord"]
+            launch: ["uwsm", "app", "--", "equibop"]
+          c:
+            launch: ["uwsm", "app", "--", "foot", "-T", "calendar", "c"]
+          m:
+            launch: ["uwsm", "app", "--", "foot", "-T", "email", "alot"]
+          t:
+            launch: ["uwsm", "app", "--", "foot", "-T", "torrents", "stig"]
+
+      # Anki
+      # Back
+      # Super-BTN_SIDE:
+      #   launch: ["anki_bg", "2"]
+      # Super-Shift-BTN_SIDE:
+      #   launch: ["anki_bg", "1"]
+      # # Forward
+      # Super-BTN_EXTRA:
+      #   launch: ["anki_bg", "0"]
+      # Super-Shift-BTN_EXTRA:
+      #   launch: ["anki_bg", "4"]
+
+      # Game controller
+      # BTN_MODE:
+      #   held:
+
+      # Misc
+      Super-Shift-N:
+        launch:
+          ["uwsm", "app", "--", "foot", "nvim", "/home/emil/sync/napkin.txt"]
+      Super-ScrollLock:
+        launch: ["equibop", "--toggle-mic"]
+      Super-Shift-ScrollLock:
+        launch: ["equibop", "--toggle-deafen"]
+      # Super-M:
+      #   launch: ["mpvclip"]
+
+      # Goofy stuff
+      F22:
+        launch:
+          [
+            "uwsm",
+            "app",
+            "--",
+            "foot",
+            "-T",
+            "music ratings",
+            "python",
+            "/home/emil/code/music-ratings/player.py",
+          ]
+      F23:
+        launch:
+          [
+            "mqtt",
+            "pub",
+            "-t",
+            "desk",
+            "-h",
+            "homeassistant.local",
+            "-m",
+            "sit",
+          ]
+      F24:
+        launch:
+          [
+            "mqtt",
+            "pub",
+            "-t",
+            "desk",
+            "-h",
+            "homeassistant.local",
+            "-m",
+            "stand",
+          ]
+
+  - name: Wiimote global
+    device:
+      only: "Wii"
+    application:
+      not: ["anki", "mpv", "mpv-float"]
+    remap:
+      BTN_SOUTH:
+        launch: ["niri", "msg", "action", "focus-workspace", "anki"]
+
+  - name: Wiimote anki
+    device:
+      only: "Wii"
+    application:
+      only: "anki"
+    remap:
+      BTN_1: C-KEY_2
+      BTN_2: C-KEY_3
+      KEY_LEFT: u
+      KEY_DOWN: KEY_4
+      KEY_UP: KEY_2
+      KEY_RIGHT: KEY_3
+      BTN_SOUTH: space
+      BTN_EAST: KEY_1
+      KEY_PREVIOUS: KEY_SLASH
+      KEY_NEXT: q
+      BTN_MODE: y
+
+  - name: Wiimote mpv
+    device:
+      only: "Wii"
+    application:
+      only: ["mpv", "mpv-float"]
+    remap:
+      BTN_1: n
+      BTN_2: b
+      KEY_LEFT: h
+      KEY_DOWN: j
+      KEY_UP: k
+      KEY_RIGHT: l
+      BTN_SOUTH: space
+      BTN_EAST: KEY_1
+      KEY_PREVIOUS: KEY_SLASH
+      KEY_NEXT: q
+      BTN_MODE: y
+
+  - name: Firefox
+    application:
+      only: ["firefox", "waterfox"]
+    remap:
+      Control-Shift-P:
+        launch: ["firefox", "--private-window"]

@@ -1,0 +1,13 @@
+[Unit]
+Description=solaar
+; PartOf=graphical-session.target
+; After=graphical-session.target
+
+[Service]
+StandardOutput=journal
+StandardError=journal
+Restart=always
+ExecStart=solaar --restart-on-wake-up --window=hide config "PRO X Wireless" DPI 400
+
+[Install]
+WantedBy=graphical-session.target

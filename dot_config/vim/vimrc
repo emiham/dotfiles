@@ -1,0 +1,322 @@
+" GUI/Windows options ▼
+if has("gui_running")
+  let $HOME=$VIM
+  let $VIMDIR=$VIM . '/vimfiles'
+  set langmenu=en_US
+  let $LANG = 'en_US'
+  set guifont=Hack
+  set guioptions-=m  " remove menu bar
+  set guioptions-=T  " remove toolbar
+  set guioptions-=r  " remove right-hand scroll bar
+  set guioptions-=L  " remove left-hand scroll bar
+
+  " Fullscreen on Windows
+  map <F11> <Esc>:call libcallnr("gvimfullscreen.dll", "ToggleFullScreen", 0)<CR>
+else
+  let $VIMRC = $VIMDIR . '/vimrc'
+  let $VIMDIR = $XDG_CONFIG_HOME . '/vim'
+  let $DATA_DIR = $XDG_DATA_HOME . '/vim'
+  if !isdirectory($DATA_DIR)
+    call mkdir($DATA_DIR, 'p')
+  endif
+endif
+" ▲
+
+" vim specific settings ▼
+if !has('nvim')
+  set nocompatible
+  set encoding=utf-8
+
+  source $VIMDIR/rc/plugins.vim
+  source $VIMDIR/rc/plugins-vimonly.vim
+  set laststatus=2
+  let &viminfofile = $DATA_DIR . "/viminfo"
+  set foldmethod=syntax
+  " Remember folds
+  " Breaks with ufo.nvim
+  augroup AutoSaveFolds
+    autocmd!
+    autocmd BufWinLeave ?* mkview
+    autocmd BufWinEnter ?* silent! loadview
+  augroup END
+
+  function! NeatFoldText()
+    let line = substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+    let lines_count = v:foldend - v:foldstart + 1
+    let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+    let foldchar = matchstr(&fillchars, 'fold:\zs.')
+    let foldtextstart = strpart(line, 0, (winwidth(0)*2)/3)
+    let foldtextend = lines_count_text . repeat(foldchar, 8)
+    let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+    return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+  endfunction
+  set foldtext=NeatFoldText()
+  highlight Folded ctermbg=NONE ctermfg=NONE guibg=NONE
+
+  " Surround like delete/change surrounding function calls
+  nmap <silent> dsf ds)db
+  nnoremap <silent> csf [(cb
+
+  " Colorscheme
+  colorscheme seoul256-light
+  let g:seoul256_srgb = 1
+  autocmd ColorScheme * highlight Pmenu ctermbg=234 ctermfg=15 guibg=234 guifg=15
+  autocmd ColorScheme * highlight PmenuSel ctermbg=235 ctermfg=15 guibg=235 guifg=15
+  autocmd ColorScheme * highlight PmenuSbar ctermbg=233 ctermfg=15 guibg=233 guifg=15
+  autocmd ColorScheme * highlight PmenuThumb ctermbg=235 ctermfg=15 guibg=235 guifg=15
+
+  nmap <leader>f :FZF<CR>
+  nmap <leader>r :Rg<CR>
+  let g:cool_total_matches = 1
+  let g:UltiSnipsExpandTrigger="<c-e>"
+  let g:UltiSnipsJumpForwardTrigger="<c-j>"
+  let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+  let g:gutentags_ctags_tagfile = '.tags'
+
+  " In Neovim we set this in the plugin manager
+  let g:vimtex_view_method = 'zathura'
+  let g:vimtex_fold_enabled = 1
+  let g:vimtex_quickfix_enabled = 0
+  let g:tex_flavor = 'latex'
+  set conceallevel=2
+  let g:tex_conceal='abdmg'
+
+  let g:instant_markdown_autostart = 0
+  let g:instant_markdown_browser = "qutebrowser"
+
+  let g:clever_f_timeout_ms = 1
+  let g:clever_f_highlight_timeout_ms = 3000
+  let g:clever_f_across_no_line = 1
+
+  let g:suda_smart_edit = 1
+
+  " :q through Goyo
+  function! g:GoyoBefore()
+    let b:quitting = 0
+    let b:quitting_bang = 0
+    autocmd QuitPre <buffer> let b:quitting = 1
+    cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
+  endfunction
+
+  function! g:GoyoAfter()
+    " Quit Vim if this is the only remaining buffer
+    if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
+      if b:quitting_bang
+        qa!
+      else
+        qa
+      endif
+    endif
+  endfunction
+
+  let g:goyo_callbacks = [function('g:GoyoBefore'), function('g:GoyoAfter')]
+
+  let g:rainbow#pairs = [['(', ')'], ['[', ']']]
+
+  let g:vimade = {}
+  let g:vimade.lazy = 1
+  au WinEnter * ++once call vimade#Load()
+
+  " Toggle Goyo
+  nnoremap <F12> :Goyo<bar>:Limelight 0.8<CR>:echo<CR>
+
+  nnoremap <leader>u :UndotreeToggle<CR>
+
+  xmap ga <Plug>(EasyAlign)
+  nmap ga <Plug>(EasyAlign)
+
+  nnoremap <leader><Space> <Cmd>nohlsearch<CR>
+
+  " Toggle all folds
+  nmap <leader>z :call UnrolMe()<CR>
+
+  " Easy copy/paste
+  nnoremap <leader>y "+y
+  vnoremap <leader>y "+y
+  nnoremap <leader>Y "+Y
+  nnoremap <leader>d "+d
+  vnoremap <leader>d "+d
+  nnoremap <leader>D "+D
+  nnoremap <leader>c "+c
+  vnoremap <leader>c "+c
+  nnoremap <leader>C "+C
+
+  " Insert blank lines
+  nmap <silent><leader>o :set paste<CR>m`o<Esc>``:set nopaste<CR>
+  nmap <silent><leader>O :set paste<CR>m`O<Esc>``:set nopaste<CR>
+  endif
+" ▲
+
+" Behavior ▼
+set undofile undodir=$DATA_DIR/undo
+set swapfile dir=$DATA_DIR/swap
+let g:netrw_home=$DATA_DIR
+
+set tags='.tags,./.tags,tags,./tags'
+
+set history=500
+
+" Allow hidden buffers
+set hidden
+
+" Keep cursor position when navigating between lines
+set nostartofline
+
+set hlsearch incsearch ignorecase smartcase gdefault
+
+set scrolloff=7
+
+" Ask to write on :q
+set confirm
+
+" Make backspace work everywhere
+set backspace=indent,eol,start
+
+set timeoutlen=500 ttimeoutlen=0
+
+" Enable autocompletion list
+set wildmenu wildmode=longest:full,full wildignore=*.class,*.o,*.obj
+
+" Indentation
+filetype plugin indent on
+set autoindent smarttab
+
+if has("autocmd")
+  autocmd  BufReadPost        *                                 if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  autocmd  BufWritePost       *                                 if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
+  autocmd  BufNewFile         *                                 startinsert | norm GA
+  autocmd  BufRead            alot.*.eml                        execute "normal /^$/\n" | execute "normal /^$/\n" | execute ":startinsert"
+  autocmd  BufWritePost       ~/.config/mpv/mpv.conf            silent !echo load-config-file %:p | socat - /tmp/mpvsocket
+  autocmd  BufWritePost       ~/.config/mpv/input.conf          silent !echo load-input-conf %:p | socat - /tmp/mpvsocket
+  autocmd  BufWritePost       ~/.local/build/dwmblocks/config.h !cd ~/.local/build/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
+endif
+
+augroup indent
+  autocmd!
+  autocmd FileType python                                                               setlocal expandtab   shiftwidth=4 softtabstop=4 tabstop=4
+  autocmd FileType sh,bash,haskell,yaml,json,lua,text,markdown,tex,html,css,sql,vim,dts setlocal expandtab   shiftwidth=2 softtabstop=2 tabstop=2
+  autocmd FileType c,cpp,java                                                           setlocal expandtab   shiftwidth=4 softtabstop=4 tabstop=4
+  autocmd FileType go                                                                   setlocal noexpandtab shiftwidth=4 softtabstop=0 tabstop=4
+augroup end
+
+augroup spell
+  autocmd!
+  autocmd FileType text,markdown,tex setlocal spell spelllang=sv,en_us,cjk tw=79
+  autocmd FileType todo setlocal nospell
+augroup end
+
+augroup skeleton
+  autocmd!
+  autocmd BufNewFile * call s:LoadSkeleton()
+augroup end
+
+augroup whitespace
+  autocmd  BufWritePre        *\(.md\)\@<!        :%s/\s\+$//e
+  autocmd  BufWritePre        *.md                :%s/\(\([^ ]\) $\)\|\(   \+$\)/\2/e
+augroup end
+
+function! s:LoadSkeleton() abort
+  let l:ext = expand('%:e')
+
+  if l:ext == ''
+    return
+  endif
+
+  let l:skeleton = $VIMDIR . '/skeletons/skeleton.' . l:ext
+
+  if filereadable(l:skeleton)
+    execute '0r ' . fnameescape(l:skeleton)
+  endif
+endfunction
+
+let g:c_syntax_for_h = 1
+
+let $unrol=1
+function UnrolMe()
+  if $unrol==0
+    :exe "normal zR"
+    let $unrol=1
+  else
+    :exe "normal zM"
+    let $unrol=0
+  endif
+endfunction
+
+" Improve line joins
+set formatoptions+=j
+
+set signcolumn=yes
+
+set splitbelow splitright splitkeep=screen
+
+set path+=$HOME/code/scripts/**
+
+" Increment zero-padded
+set nrformats-=octal
+
+function TurnOffCaps()
+  let capsState = trim(system('cat /sys/class/leds/input*::capslock/brightness 2>/dev/null | head -1'))
+  if capsState == '1'
+    silent! execute ':!ydotool key 58:1 58:0'
+  endif
+endfunction
+au InsertLeave * call TurnOffCaps()
+
+" ▲
+
+" UI ▼
+syntax enable
+
+" Word wrap
+set wrap linebreak
+
+set showcmd
+set noshowmode
+
+set showmatch matchtime=2
+
+" Show invisible characters by default
+set list
+set listchars=tab:▸\ ,extends:›,precedes:‹,nbsp:·,trail:·
+
+" Line numbers
+set number relativenumber
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
+
+set inccommand=split
+
+set mouse=
+
+set title
+set titlestring=%t%(\ %M%)%(\ (%{expand(\"%:~:.:h\")})%)%(\ %a%)
+
+" " ▲
+
+" Mappings ▼
+" No benefit to moving these to Neovim since I don't need descriptions or
+" anything else
+let mapleader = " "
+
+let g:mapleader = " "
+let maplocalleader = ","
+
+inoremap jk <Esc>
+inoremap JK <Esc>
+nnoremap ö za
+nnoremap <C-I> <C-I>
+nnoremap <Tab> <C-6>
+nnoremap Y yg_
+
+command WQ wq
+command Wq wq
+command W w
+command Q q
+command Wm silent exec "!mkdir -p %:h" | w
+" ▲
+
+" vim:foldmethod=marker:foldlevel=0:foldmarker=▼,▲

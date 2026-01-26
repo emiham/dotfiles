@@ -1,0 +1,11 @@
+[Unit]
+Description=tmux session
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/tmux new-session -s • -d
+ExecStop=/usr/bin/tmux kill-session -t •
+
+[Install]
+# XXX Note that this makes tmux miss env set by the WM
+WantedBy=default.target

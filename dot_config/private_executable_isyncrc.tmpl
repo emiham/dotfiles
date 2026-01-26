@@ -1,0 +1,97 @@
+Create Both
+Expunge Both
+SyncState *
+
+###############
+#    Gmail    #
+###############
+
+IMAPAccount gmail
+Host imap.gmail.com
+User {{ (keepassxc "Google").UserName }}
+Pass {{ keepassxcAttribute "Google" "App password" }}
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-remote
+Account gmail
+
+MaildirStore gmail-local
+SubFolders Verbatim
+Path ~/.mail/gmail/
+Inbox ~/.mail/gmail/Inbox
+
+Channel gmail
+Far :gmail-remote:
+Near :gmail-local:
+Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+
+IMAPAccount gmail-trackers
+Host imap.gmail.com
+User {{ (keepassxc "Google (trackers)").UserName }}
+Pass {{ keepassxcAttribute "Google (trackers)" "App password" }}
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore gmail-trackers-remote
+Account gmail-trackers
+
+MaildirStore gmail-trackers-local
+SubFolders Verbatim
+Path ~/.mail/gmail-trackers/
+Inbox ~/.mail/gmail-trackers/Inbox
+
+Channel gmail-trackers
+Far :gmail-trackers-remote:
+Near :gmail-trackers-local:
+Patterns * ![Gmail]* "[Gmail]/Sent Mail" "[Gmail]/Starred" "[Gmail]/All Mail"
+
+###############
+# mailbox.org #
+###############
+
+IMAPAccount mailbox.org
+Host imap.mailbox.org
+User {{ (keepassxc "mailbox.org").UserName }}
+Pass {{ (keepassxc "mailbox.org").Password }}
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore mailbox.org-remote
+Account mailbox.org
+
+MaildirStore mailbox.org-local
+SubFolders Verbatim
+Path ~/.mail/mailbox.org/
+Inbox ~/.mail/mailbox.org/Inbox
+
+Channel mailbox.org
+Far :mailbox.org-remote:
+Near :mailbox.org-local:
+Patterns *
+
+###############
+#     KTH     #
+###############
+
+IMAPAccount kth
+Host webmail.kth.se
+User {{ (keepassxc "KTH").UserName }}
+Pass {{ (keepassxc "KTH").Password }}
+AuthMechs LOGIN
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore kth-remote
+Account kth
+
+MaildirStore kth-local
+SubFolders Verbatim
+Path ~/.mail/kth/
+Inbox ~/.mail/kth/Inbox
+
+Channel kth
+Far :kth-remote:
+Near :kth-local:
+Patterns Inbox ESV KTH Riksrevisionen Sent Trash "Sent Items" Drafts
+CopyArrivalDate yes

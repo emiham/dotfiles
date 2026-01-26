@@ -1,0 +1,15 @@
+[Unit]
+Description=Connect your computer to your smartphone or tablet
+OnFailure=noop.target
+
+[Service]
+Environment="QT_QPA_PLATFORM=xcb"
+Environment="QT_DEBUG_PLUGINS=1"
+ExecStart=/usr/bin/kdeconnectd
+BusName=org.kde.kdeconnect
+# Crashes a lot on Wayland, so just restart
+Restart=always
+RestartMode=direct
+
+[Install]
+WantedBy=graphical-session.target

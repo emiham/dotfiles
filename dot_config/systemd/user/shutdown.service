@@ -1,0 +1,11 @@
+[Unit]
+Description=Unmute iwakura Snapcast on shutdown
+Before=shutdown.target
+
+[Service]
+ExecStart=/bin/true
+ExecStop=snapcast_volume -c iwakura --mute
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

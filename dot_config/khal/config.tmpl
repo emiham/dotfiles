@@ -1,0 +1,62 @@
+[calendars]
+
+[[Default]]
+path = ~/.local/share/calendars/default/default/
+color = yellow
+
+[[Holidays]]
+path = ~/.local/share/calendars/default/holidays/
+color = light green
+
+[[Birthdays]]
+path = ~/.local/share/calendars/default/birthdays/
+color = dark cyan
+
+[[KTH]]
+path = ~/.local/share/calendars/default/kth/
+color = dark blue
+
+[[Deadlines]]
+path = ~/.local/share/calendars/default/deadlines/
+color = light red
+
+[[Facebook]]
+path = ~/.local/share/calendars/default/facebook/
+color = brown
+
+[[Work]]
+path = ~/.local/share/calendars/default/work/
+color = dark red
+
+[[SSBM]]
+path = ~/.local/share/calendars/default/ssbm/
+color = light green
+
+[[ゆかエミ]]
+path = ~/.local/share/calendars/default/{{ keepassxcAttribute "Google" "Yukaemi calendar" }}/
+color = "#E3A4B7"
+
+[[Other people]]
+path = ~/.local/share/calendars/default/1be7e955-342b-4c0c-b20b-84a32019bb94/
+color = dark green
+
+[default]
+show_all_days = false
+highlight_event_days = true
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+weeknumbers = left
+
+[view]
+agenda_event_format = {calendar-color}{cancelled}{start-end-time-style} {title}{repeat-symbol}{alarm-symbol}{reset}
+frame = color
+bold_for_light_color = false
+
+[keybindings]
+
+# vim: ft=config

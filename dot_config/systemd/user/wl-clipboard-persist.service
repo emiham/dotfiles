@@ -1,0 +1,9 @@
+[Unit]
+Description=Persist Wayland clipboard after application close
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wl-clip-persist --clipboard regular
+
+[Install]
+WantedBy=default.target

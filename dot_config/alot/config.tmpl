@@ -1,0 +1,93 @@
+theme = tomorrow
+quit_on_last_bclose = True
+editor_cmd = nvim
+initial_command = search tag:inbox
+search_statusbar = {querystring}, {input_queue} {result_count} / {total_messages}
+attachment_prefix = ~/dl
+
+[bindings]
+  m = compose --template default
+  R = shellescape --thread true get_mail
+
+  [[thread]]
+    a = untag inbox; untag new; tag archive; bclose; refresh
+    d = untag inbox; untag new; tag trash; bclose; refresh
+    v = pipeto urlscan 2>/dev/null
+    q = bclose; refresh
+    h = bclose; refresh
+    c = pipeto /home/emil/.local/scripts/khard-add-email
+  [[search]]
+    a = tag archive; untag new; untag inbox
+    d = tag trash; untag new; untag inbox
+    q = bclose
+    l = untag unread; select; fold *; unfold tag:unread; move last; unfold
+    enter = untag unread; select; fold *; unfold tag:unread; move last; unfold
+    / = refineprompt
+    f = forward
+
+[tags]
+  [[flagged]]
+    translated = 󰈻
+    normal = '','','light red','','light red',''
+    focus = '','','light red','','light red',''
+  [[unread]]
+    translated = 󰇮
+  [[replied]]
+    translated = 󰑚
+  [[encrypted]]
+    translated = 󰌆
+  [[inbox]]
+    translated =
+  [[attachment]]
+    translated = 󰁦
+  [[sent]]
+    translated = 󱃜
+  [[trash]]
+    translated = 󰩹
+  [[signed]]
+    translated = 󰷼
+  [[draft]]
+    translated = 󰇘
+  [[archive]]
+    translated = 󰀼
+  [[passed]]
+    translated = 󰊍
+  [[probably_trash]]
+    translated = 
+
+[accounts]
+  [[mailbox.org]]
+    realname = Emil Hammarberg
+    address = {{ (keepassxc "mailbox.org").UserName }}
+    sendmail_command = msmtp --account=mailbox.org -t
+    sent_box = maildir://~/.mail/mailbox.org/Sent
+    draft_box = maildir://~/.mail/mailbox.org/Drafts
+    [[[abook]]]
+      type = shellcommand
+      command = khard email --parsable
+      regexp = '^(?P<email>[^@]+@[^\t]+)\t+(?P<name>[^\t]+)'
+      ignorecase = True
+  [[gmail]]
+    realname = Emil Hammarberg
+    address = {{ (keepassxc "Google").UserName }}
+    sendmail_command = msmtp --account=gmail -t
+    sent_box = maildir://~/.mail/gmail/[Gmail]/Sent Mail
+    draft_box = maildir://~/.mail/gmail/[Gmail]/Drafts
+    [[[abook]]]
+      type = shellcommand
+      command = khard email --parsable
+      regexp = '^(?P<email>[^@]+@[^\t]+)\t+(?P<name>[^\t]+)'
+      ignorecase = True
+  [[kth]]
+    realname = Emil Hammarberg
+    address = {{ (keepassxc "KTH").UserName }}@kth.se
+    sendmail_command = msmtp --account=kth -t
+    sent_box = maildir://~/.mail/kth/Sent Items
+    draft_box = maildir://~/.mail/kth/Drafts
+    [[[abook]]]
+      type = shellcommand
+      command = khard email --parsable
+      regexp = '^(?P<email>[^@]+@[^\t]+)\t+(?P<name>[^\t]+)'
+      ignorecase = True
+
+# vim:ft=dosini

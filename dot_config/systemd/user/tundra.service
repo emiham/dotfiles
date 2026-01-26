@@ -1,0 +1,9 @@
+[Unit]
+Description=Automatically update MyAnimeList based on MPRIS
+
+[Service]
+Type=simple
+ExecStart=/home/emil/.local/share/cargo/bin/tundra daemon
+
+[Install]
+WantedBy=default.target

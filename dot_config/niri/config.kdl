@@ -1,0 +1,441 @@
+input {
+    keyboard {
+        xkb {
+            layout "se"
+            options "compose:menu"
+        }
+        repeat-delay 300
+        repeat-rate 60
+    }
+    mouse {
+        accel-profile "flat"
+    }
+}
+clipboard {
+ // disable-primary
+
+}
+gestures {
+    hot-corners {
+        off
+    }
+}
+cursor {
+    xcursor-theme "oreo_white_cursors"
+    xcursor-size 16
+    // hide-when-typing
+    hide-after-inactive-ms 1000
+}
+output "DP-1" {
+    mode "3840x2160"
+    scale 2
+    transform "normal"
+    position x=1920 y=0
+}
+overview {
+    zoom 0.5
+    backdrop-color "#3a3a3a"
+    workspace-shadow {
+        off
+        softness 40
+        spread 10
+        offset x=0 y=10
+        color "#00000050"
+    }
+}
+prefer-no-csd
+layout {
+    background-color "transparent"
+    gaps 8
+    center-focused-column "on-overflow"
+    always-center-single-column
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+ // fixed 1920
+    }
+    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
+    // preset-window-heights { }
+    default-column-width {
+        proportion 0.5
+    }
+    focus-ring {
+        off
+    }
+    border {
+        width 2
+        active-color "#d68787"
+        inactive-color "#4e4e4e"
+        urgent-color "#d75f87"
+    }
+    struts {
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
+}
+// Note that running niri as a session supports xdg-desktop-autostart
+spawn-at-startup "import-gsettings"
+spawn-at-startup "mpd-mpris"
+spawn-at-startup "gammastep"
+spawn-at-startup "/home/emil/code/scripts/mqtt/volume_get"
+spawn-at-startup "/home/emil/code/scripts/mqtt/volume_set"
+spawn-at-startup "/home/emil/code/scripts/mqtt/audio-outputs"
+spawn-at-startup "/home/emil/.local/scripts/mpd_sync"
+spawn-sh-at-startup "xrdb -load .Xresources"
+spawn-sh-at-startup "swayidle && pkill -SIGUSR1 swayidle"
+spawn-sh-at-startup "/home/emil/.local/scripts/iwakura-notifications &"
+spawn-at-startup "niriusd"
+spawn-sh-at-startup "niri-sticky --app-id '(fire|water)fox$' --title '^Picture-in-Picture$'"
+spawn-sh-at-startup "niri-sticky --app-id 'mpv-float'"
+spawn-at-startup "anki"
+spawn-at-startup "firefox"
+hotkey-overlay {
+    skip-at-startup
+}
+animations {
+    workspace-switch {
+ // off
+
+    }
+    slowdown 0.5
+}
+workspace "1"
+workspace "2"
+window-rule {
+    draw-border-with-background false
+}
+window-rule {
+    match app-id="^anki$" title="^Browse"
+    open-maximized-to-edges true
+}
+window-rule {
+    match at-startup=true app-id="^anki$" title="- Anki$"
+    open-maximized-to-edges true
+    open-focused false
+    open-on-workspace "2"
+}
+window-rule {
+    match at-startup=true app-id="^anki$"
+    open-focused false
+    open-on-workspace "2"
+}
+window-rule {
+    match app-id="^anki$" title="^Audio volume$"
+    match app-id="^anki$" title="^Rename$"
+    open-maximized-to-edges false
+    open-floating true
+}
+window-rule {
+    match app-id="^anki$" title="^(Syncing|Checking)...$"
+    open-maximized-to-edges false
+    open-focused false
+}
+window-rule {
+    match at-startup=true app-id="firefox$"
+    open-maximized-to-edges true
+    open-focused false
+}
+window-rule {
+    match app-id="(fire|water)fox$" app-id="chromium"
+    open-maximized-to-edges true
+    clip-to-geometry true
+}
+window-rule {
+    match app-id="(fire|water)fox$" title="^Picture-in-Picture$"
+    match app-id="mpv-float"
+    open-floating true
+    open-focused false
+    open-maximized-to-edges false
+    default-floating-position x=16 y=16 relative-to="bottom-right"
+    // NOTE This doesn't seem to work for mpv, so that is set in its own config
+    max-height 250
+}
+window-rule {
+    match app-id="^equibop|discord$"
+    open-maximized true
+}
+window-rule {
+    match app-id="^equibop$" title="^equibop$"
+    open-maximized false
+    open-focused false
+}
+window-rule {
+    match app-id="^org\\.keepassxc\\.KeePassXC$"
+    block-out-from "screen-capture"
+}
+window-rule {
+    match app-id="^org\\.keepassxc\\.KeePassXC$" title="pw.kdbx( \\[Locked\\])? - KeePassXC" at-startup=true
+}
+window-rule {
+    match app-id="^org\\.keepassxc\\.KeePassXC$" title="Generate Password"
+    open-floating true
+}
+layer-rule {
+    match namespace="^notifications$"
+    block-out-from "screencast"
+}
+window-rule {
+    match title="Steam Big Picture Mode"
+    match app-id="<NULL>" title=".*Steam.*"
+    open-fullscreen true
+}
+window-rule {
+    match app-id="steam" title="^notificationtoasts_\\d+_desktop$"
+    default-floating-position x=16 y=16 relative-to="top-right"
+    open-focused false
+}
+window-rule {
+    match app-id="foot" title="morning"
+    open-on-workspace "2"
+    default-column-width {
+        proportion 0.5
+    }
+    open-focused true
+}
+layer-rule {
+    match namespace="^.www-daemon$"
+    place-within-backdrop true
+}
+binds {
+    Mod+Return {
+        spawn "foot"
+    }
+    Mod+O repeat=false {
+        toggle-overview
+    }
+    Mod+Shift+C repeat=false {
+        close-window
+    }
+    Mod+Escape repeat=false {
+        close-window
+    }
+    Mod+H {
+        focus-column-left
+    }
+    Mod+J {
+        focus-window-or-workspace-down
+    }
+    Mod+K {
+        focus-window-or-workspace-up
+    }
+    Mod+L {
+        focus-column-right
+    }
+    Mod+WheelScrollDown cooldown-ms=50 {
+        focus-workspace-down
+    }
+    Mod+WheelScrollUp cooldown-ms=50 {
+        focus-workspace-up
+    }
+    Mod+MouseForward {
+        focus-column-right
+    }
+    Mod+MouseBack {
+        focus-column-left
+    }
+    // move-window is also available
+    Mod+Shift+H {
+        move-column-left
+    }
+    Mod+Shift+J {
+        move-window-down-or-to-workspace-down
+    }
+    Mod+Shift+K {
+        move-window-up-or-to-workspace-up
+    }
+    Mod+Shift+L {
+        move-column-right
+    }
+    Mod+G {
+        focus-column-first
+    }
+    Mod+Shift+G {
+        focus-column-last
+    }
+    Mod+Ctrl+G {
+        move-column-to-first
+    }
+    Mod+Ctrl+Shift+G {
+        move-column-to-last
+    }
+    Mod+Left {
+        focus-monitor-left
+    }
+    Mod+Down {
+        focus-monitor-down
+    }
+    Mod+Up {
+        focus-monitor-up
+    }
+    Mod+Right {
+        focus-monitor-right
+    }
+    Mod+Shift+Left {
+        move-column-to-monitor-left
+    }
+    Mod+Shift+Down {
+        move-column-to-monitor-down
+    }
+    Mod+Shift+Up {
+        move-column-to-monitor-up
+    }
+    Mod+Shift+Right {
+        move-column-to-monitor-right
+    }
+    // Mod+J {
+    //     spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "next" "-s" "-z" "scratch" "anki" "chat"
+    // }
+    // Mod+K {
+    //     spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "prev" "-s" "-z" "scratch" "anki" "chat"
+    // }
+    Mod+Shift+Ctrl+Left {
+        move-workspace-to-monitor-left
+    }
+    Mod+Shift+Ctrl+Down {
+        move-workspace-to-monitor-down
+    }
+    Mod+Shift+Ctrl+Up {
+        move-workspace-to-monitor-up
+    }
+    Mod+Shift+Ctrl+Right {
+        move-workspace-to-monitor-right
+    }
+    Mod+W {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "1"
+    }
+    Mod+E {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "2"
+    }
+    Mod+R {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "3"
+    }
+    Mod+1 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "4"
+    }
+    Mod+2 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "5"
+    }
+    Mod+3 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "6"
+    }
+    Mod+4 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "7"
+    }
+    Mod+5 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "8"
+    }
+    Mod+6 {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "9"
+    }
+    Mod+Shift+W {
+        move-column-to-workspace 1 focus=false
+    }
+    Mod+Shift+E {
+        move-column-to-workspace 2 focus=false
+    }
+    Mod+Shift+R {
+        move-column-to-workspace 3 focus=false
+    }
+    Mod+Shift+1 {
+        move-column-to-workspace 4 focus=false
+    }
+    Mod+Shift+2 {
+        move-column-to-workspace 5 focus=false
+    }
+    Mod+Shift+3 {
+        move-column-to-workspace 6 focus=false
+    }
+    Mod+Shift+4 {
+        move-column-to-workspace 7 focus=false
+    }
+    Mod+Shift+5 {
+        move-column-to-workspace 8 focus=false
+    }
+    Mod+Shift+6 {
+        move-column-to-workspace 9 focus=false
+    }
+    Mod+Alt+H {
+        consume-or-expel-window-left
+    }
+    Mod+Alt+L {
+        consume-or-expel-window-right
+    }
+    Mod+Shift+Alt+H {
+        consume-window-into-column
+    }
+    Mod+Shift+Alt+L {
+        expel-window-from-column
+    }
+    Mod+Tab {
+        switch-preset-column-width
+    }
+    Mod+Shift+Tab {
+        switch-preset-column-width-back
+    }
+    Mod+Alt+Tab {
+        toggle-column-tabbed-display
+    }
+    Mod+Ctrl+R {
+        reset-window-height
+    }
+    Mod+F {
+        maximize-column
+    }
+    Mod+Shift+F {
+        fullscreen-window
+    }
+    Mod+Alt+F {
+        expand-column-to-available-width
+    }
+    Mod+Ctrl+F {
+        maximize-window-to-edges
+    }
+    Mod+C {
+        center-column
+    }
+    Mod+Ctrl+C {
+        center-visible-columns
+    }
+    Mod+Minus {
+        set-column-width "-10%"
+    }
+    Mod+Plus {
+        set-column-width "+10%"
+    }
+    Mod+Shift+Minus {
+        set-window-height "-10%"
+    }
+    Mod+Shift+Plus {
+        set-window-height "+10%"
+    }
+    Mod+Shift+ADiaeresis {
+        toggle-window-floating
+    }
+    Mod+ADiaeresis {
+        switch-focus-between-floating-and-tiling
+    }
+    Mod+Ctrl+H {
+        spawn-sh "niri-move-floating left 4000"
+    }
+    Mod+Ctrl+J {
+        spawn-sh "niri-move-floating down 4000"
+    }
+    Mod+Ctrl+K {
+        spawn-sh "niri-move-floating up 4000"
+    }
+    Mod+Ctrl+L {
+        spawn-sh "niri-move-floating right 4000"
+    }
+    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+Ctrl+Alt+Q {
+        quit skip-confirmation=true
+    }
+    // TODO Rebind, not used very often so this could be something more useful / less annoying to accidcentaly press
+    Mod+S {
+        spawn "nirius" "toggle-follow-mode"
+    }
+}
+

@@ -1,0 +1,11 @@
+[Unit]
+Description=Fcitx5
+
+[Service]
+Type=dbus
+BusName=org.fcitx.Fcitx
+Environment=DefaultIMModule=fcitx GLFW_IM_MODULE=fcitx GTK_IM_MODULE=fcitx QT_IM_MODULE=fcitx XQT_IM_MODULES="wayland;fcitx;ibus" QT4_IM_MODULE=fcitx SDL_IM_MODULE=fcitx MODIFIERS=@im=fcitx XMODIFIER="@im=fcitx" XMODIFIERS="@im=fcitx"
+ExecStart=/usr/bin/fcitx5 -d
+
+[Install]
+WantedBy=multi-user.target

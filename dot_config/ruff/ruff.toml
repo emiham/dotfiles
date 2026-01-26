@@ -1,0 +1,3 @@
+[lint]
+# Ambiguous variable names
+ignore = ["E741"]

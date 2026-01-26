@@ -1,0 +1,137 @@
+[general]
+mode = viewer
+sigusr1 = reload
+sigusr2 = next_file
+app_id = swayimg
+
+[viewer]
+window = #3a3a3aff
+transparency = grid
+
+# Default image scale (optimal/fit/width/height/fill/real)
+scale = optimal
+antialiasing = none
+
+history = 3
+preload = 3
+
+[gallery]
+size = 300
+cache = 0
+aspect = fill
+antialiasing = none
+
+window = #3a3a3aff
+background = #3a3a3aff
+select = #404040ff
+border_color = #3a3a3aff
+
+[list]
+order = alpha
+recursive = no
+all = yes
+
+[font]
+name = monospace
+size = 14
+color = #d0d0d0ff
+shadow = #00000000
+
+[info]
+show = no
+info_timeout = 5
+status_timeout = 3
+
+# Display scheme for viewer mode (position = content)
+[info.viewer]
+top_left = +name,+format,+filesize,+imagesize,+exif
+top_right = index
+bottom_left = scale,frame
+bottom_right = status
+
+# Display scheme for gallery mode (position = content)
+[info.gallery]
+top_left = none
+top_right = none
+bottom_left = none
+bottom_right = name,status
+
+[keys.viewer]
+j                = next_file
+k                = prev_file
+n                = next_file
+p                = prev_file
+d                = exec trash-put "%"; skip_file
+g                = first_file
+Shift+g          = last_file
+q                = exit
+
+F1               = help
+Space            = next_file
+Shift+d          = prev_dir
+d                = next_dir
+Shift+o          = prev_frame
+o                = next_frame
+c                = skip_file
+s                = animation
+f                = fullscreen
+Return           = mode
+Escape           = mode
+Left             = step_left 10
+Right            = step_right 10
+Up               = step_up 10
+Down             = step_down 10
+Equal            = zoom +10
+Plus             = zoom +10
+Minus            = zoom -10
+w                = zoom width
+Shift+w          = zoom height
+z                = zoom fit
+Shift+z          = zoom fill
+0                = zoom real
+BackSpace        = zoom optimal
+r                = rotate_left
+Shift+r          = rotate_right
+m                = flip_vertical
+Shift+m          = flip_horizontal
+a                = antialiasing
+Ctrl+r           = reload
+i                = info
+
+ScrollLeft       = step_right 5
+ScrollRight      = step_left 5
+ScrollUp         = step_up 5
+ScrollDown       = step_down 5
+Ctrl+ScrollUp    = zoom +10
+Ctrl+ScrollDown  = zoom -10
+Shift+ScrollUp   = prev_file
+Shift+ScrollDown = next_file
+Alt+ScrollUp     = prev_frame
+Alt+ScrollDown   = next_frame
+
+[keys.gallery]
+F1           = help
+g            = first_file
+Shift+g      = last_file
+h            = step_left
+l            = step_right
+k            = step_up
+j            = step_down
+Ctrl+u       = page_up
+Ctrl+d       = page_down
+c            = skip_file
+f            = fullscreen
+Return       = mode
+Escape       = mode
+a            = antialiasing
+Ctrl+r       = reload
+i            = info
+Shift+d      = exec trash-put "%"
+q            = exit
+
+ScrollLeft   = step_right
+ScrollRight  = step_left
+ScrollUp     = step_up
+ScrollDown   = step_down
+
+# vim:ft=dosini

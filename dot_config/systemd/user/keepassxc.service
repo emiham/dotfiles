@@ -1,0 +1,13 @@
+[Unit]
+Description=KeepassXC
+After=graphical-session.target
+After=niri.service
+After=ssh-agent.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/keepassxc
+
+[Install]
+WantedBy=graphical-session.target
+

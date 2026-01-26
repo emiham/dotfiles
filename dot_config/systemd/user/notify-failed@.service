@@ -1,0 +1,6 @@
+[Unit]
+Description=Send notifications when other services fail
+
+[Service]
+Type=simple
+ExecStart=notify-send -u normal "%I failed"

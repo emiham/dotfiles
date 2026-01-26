@@ -1,0 +1,146 @@
+@define-color background   #3a3a3a;
+@define-color foreground   #d0d0d0;
+@define-color color0       #4e4e4e;
+@define-color color1       #d68787;
+@define-color color2       #5f865f;
+@define-color color3       #d8af5f;
+@define-color color4       #85add4;
+@define-color color5       #d7afaf;
+@define-color color6       #87afaf;
+@define-color color7       #d0d0d0;
+@define-color color8       #626262;
+@define-color color9       #d75f87;
+@define-color color10      #87af87;
+@define-color color11      #ffd787;
+@define-color color12      #add4fb;
+@define-color color13      #ffafaf;
+@define-color color14      #87d7d7;
+@define-color color15      #e4e4e4;
+@define-color cursorColor  #d0d0d0;
+@define-color cursorColor2 #3a3a3a;
+
+* {
+  border: none;
+  padding: 2px 2px 1px 0px;
+  margin-top: -1px;
+  border-radius: 0;
+  font-family: Monospace;
+  font-size: 10px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: @background;
+  border-bottom: 2px solid @color8;
+  color: @foreground;
+}
+
+#workspaces button {
+  padding: 6px 0px 5px 0px;
+  /* min-width: 16px; */
+}
+
+#workspaces button.empty {
+  color: @color8;
+}
+
+#workspaces button.focused {
+  color: @color1;
+}
+
+#workspaces button.urgent {
+  color: @color9;
+}
+
+#window {
+  padding-left: 8px;
+}
+
+tooltip {
+  background: @background;
+  border: 2px solid @color8;
+  text-shadow: unset;
+}
+
+tooltip label {
+  color: @foreground;
+}
+
+label {
+  padding: 0px;
+}
+
+label.module {
+  padding: 0px 3px;
+}
+
+box.module {
+  padding: 0px;
+}
+
+.modules-left {
+  padding-top: 0px;
+  padding-bottom: 1px;
+}
+
+.modules-right {
+  padding-top: 0px;
+  padding-bottom: 1px;
+}
+
+#mode {
+  background: @color8;
+  border-bottom: 3px solid transparent;
+}
+
+#battery.charging {
+  color: @foreground;
+  background-color: #26a65b;
+}
+
+#custom-tasks {
+  color: @color3;
+}
+
+#custom-anki {
+  color: @color4;
+}
+
+#custom-rating,
+#mpd {
+  padding-right: 4px;
+}
+
+#custom-rating {
+  padding-top: 2px;
+}
+
+@keyframes blink {
+  to {
+    background-color: #ffffff;
+    color: black;
+  }
+}
+
+#battery.warning:not(.charging) {
+  background: #f53c3c;
+  color: @foreground;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(12);
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#memory,
+#cpu {
+  padding-top: 2px;
+}
+
+#systemd-failed-units.ok {
+  color: @color10;
+}
+
+#systemd-failed-units.degraded {
+  color: @color9;
+}

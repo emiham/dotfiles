@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync Google %i calendar hourly
+
+[Service]
+Type=simple
+ExecStart=vdirsyncer sync gcal/%i
+
+[Install]
+WantedBy=
+

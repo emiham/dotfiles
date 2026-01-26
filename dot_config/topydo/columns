@@ -1,0 +1,38 @@
+[Current]
+title = Current
+filterexpr = due:<=today -hygiene -chore -bike -review
+sortexpr = desc:importance
+groupexpr = project
+show_all = 0
+
+[Hygiene]
+title = Hygiene
+filterexpr = +hygiene
+show_all = 0
+
+[Chores]
+title = Chores
+filterexpr = +chore
+show_all = 0
+
+[Bike]
+title = Bike
+filterexpr = +bike
+show_all = 0
+
+[Media]
+title = Media
+filterexpr = +media
+show_all = 0
+
+[Gaming]
+title = Gaming
+filterexpr = +gaming
+show_all = 0
+
+[Waiting]
+title = Waiting
+filterexpr = waiting:
+show_all = 0
+
+# vim: ft=dosini

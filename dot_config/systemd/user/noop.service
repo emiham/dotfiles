@@ -1,0 +1,6 @@
+[Unit]
+Description=No-Op Service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/true

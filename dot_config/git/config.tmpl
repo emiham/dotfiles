@@ -1,0 +1,120 @@
+[core]
+	excludesfile = ~/.config/git/.gitignore
+
+[user]
+	email = {{ (keepassxc "mailbox.org").UserName }}
+	name = Emil Hammarberg
+
+[includeIf "gitdir/i:~/*/kth/**"]
+	path = ~/.config/git/kth
+
+[includeIf "gitdir/i:/home/emha/**"]
+	path = ~/.config/git/esv
+
+[diff]
+	tool = nvimdiff
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+	context = 3
+
+[difftool]
+	prompt = true
+	cmd = nvimdiff
+
+[alias]
+	d = difftool
+	staash = stash --all
+	lg = "!f() { \
+	      git log --graph --abbrev-commit --decorate --date=relative --color=always \
+	      --format=format:'%C(auto)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %C(reset)%x00%G?%x00%an%x00%C(bold yellow)%d%C(reset)' --all -n 15 \"$@\"| \
+	      awk -F'\\0' '{ \
+		      color=\"\\033[31m\"; \
+			      if ($2==\"G\") color=\"\\033[32m\"; \
+			      else if ($2==\"U\") color=\"\\033[33m\"; \
+			      else if ($2==\"X\" || $2==\"Y\") color=\"\\033[36m\"; \
+			      else if ($2==\"R\") color=\"\\033[35m\"; \
+			      else if ($2==\"E\") color=\"\\033[34m\"; \
+			      else if ($2==\"B\") color=\"\\033[1;31m\"; \
+				      printf \"%s%s%s\\033[0m%s\\n\", $1, color, $3, $4 \
+	      }'; \
+	      }; f"
+	wdiff = "diff --color-words=."
+	browse = !git-browse
+
+[commit]
+	template = ~/.config/git/gitmessage
+	verbose = true
+
+[protocol "file"]
+	allow = always
+
+[init]
+	defaultBranch = master
+
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[rerere]
+	enabled = true
+
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+
+[pull]
+	rebase = false
+
+[merge]
+	tool = nvimdiff
+	conflictstyle = zdiff3
+
+[safe]
+	directory = /home/emil/code/work/esv/*
+
+[help]
+	autocorrect = prompt
+
+[rerere]
+	enabled = true
+	autoupdate = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
+
+[color]
+	ui = auto
+	status = auto
+	branch = auto
+	diff = auto
+
+[color "diff"]
+	context = brightblack
+	meta = cyan
+	frag = blue
+
+[advice]
+statusHints = false
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+
+# vim: ft=gitconfig

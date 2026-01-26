@@ -1,0 +1,130 @@
+[flavor]
+dark = "seoul256"
+
+# [mgr]
+# cwd = { fg = "#87afaf" }
+#
+# # Hovered
+# hovered = { reversed = true }
+# preview_hovered = { underline = true }
+#
+# # Find
+# find_keyword = { fg = "#ffd787", bold = true, italic = true, underline = true }
+# find_position = { fg = "#d7afaf", bg = "reset", bold = true, italic = true }
+#
+# # Marker
+# marker_copied = { fg = "#5f865f", bg = "#5f865f" }
+# marker_cut = { fg = "#d68787", bg = "#d68787" }
+# marker_marked = { fg = "#87afaf", bg = "#87afaf" }
+# marker_selected = { fg = "#ffd787", bg = "#ffd787" }
+#
+# # Tab
+# tab_active = { reversed = true }
+# tab_inactive = {}
+# tab_width = 1
+#
+# # Count
+# count_copied = { fg = "#626262", bg = "#5f865f" }
+# count_cut = { fg = "#626262", bg = "#d68787" }
+# count_selected = { fg = "#626262", bg = "#ffd787" }
+#
+# # Border
+# border_symbol = "│"
+# border_style = { fg = "#4e4e4e" }
+#
+# [status]
+# separator_open = ""
+# separator_close = ""
+# separator_style = { fg = "#4e4e4e", bg = "#4e4e4e" }
+#
+# # Mode
+# mode_normal = { fg = "#3a3a3a", bg = "#87afaf", bold = true }
+# mode_select = { fg = "#3a3a3a", bg = "#5f865f", bold = true }
+# mode_unset = { fg = "#3a3a3a", bg = "#d7afaf", bold = true }
+#
+# # Progress
+# progress_label = { fg = "#d0d0d0", bold = true }
+# progress_normal = { fg = "#87afaf", bg = "#4e4e4e" }
+# progress_error = { fg = "#d68787", bg = "#4e4e4e" }
+#
+# # Permissions
+# permissions_t = { fg = "#87afaf" }
+# permissions_r = { fg = "#ffd787" }
+# permissions_w = { fg = "#d68787" }
+# permissions_x = { fg = "#5f865f" }
+# permissions_s = { fg = "#4e4e4e" }
+#
+# [select]
+# border = { fg = "#87afaf" }
+# active = { fg = "#d7afaf", bold = true }
+# inactive = {}
+#
+# [input]
+# border = { fg = "#87afaf" }
+# title = {}
+# value = {}
+# selected = { reversed = true }
+#
+# [completion]
+# border = { fg = "#87afaf" }
+#
+# [tasks]
+# border = { fg = "#87afaf" }
+# title = {}
+# hovered = { fg = "#d7afaf", underline = true }
+#
+# [which]
+# mask = { bg = "#4e4e4e" }
+# cand = { fg = "#87afaf" }
+# rest = { fg = "#d0d0d0" }
+# desc = { fg = "#d7afaf" }
+# separator = "  "
+# separator_style = { fg = "#4e4e4e" }
+#
+# [help]
+# on = { fg = "#87afaf" }
+# run = { fg = "#d7afaf" }
+# hovered = { reversed = true, bold = true }
+# footer = { fg = "#4e4e4e", bg = "#d0d0d0" }
+#
+# [notify]
+# title_info = { fg = "#5f865f" }
+# title_warn = { fg = "#ffd787" }
+# title_error = { fg = "#d68787" }
+#
+# [filetype]
+# rules = [
+# 	# Images
+# 	{ mime = "image/*", fg = "#87afaf" },
+#
+# 	# Media
+# 	{ mime = "{audio,video}/*", fg = "#ffd787" },
+#
+# 	# Archives
+# 	{ mime = "application/*zip", fg = "#d7afaf" },
+# 	{ mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#d7afaf" },
+#
+# 	# Documents
+# 	{ mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#5f865f" },
+#
+# 	# Fallback
+# 	{ name = "*", fg = "#d0d0d0" },
+# 	{ name = "*/", fg = "#85add4" },
+# ]
+#
+# # [icon]
+# # prepend_exts = [{ name = "json", text = "" }]
+# # vim:fileencoding=utf-8:foldmethod=marker
+#
+# [icon]
+# prepend_dirs = [
+# 	{ name = "code", text = "󰅴" },
+# 	{ name = "dl", text = "󰇚" },
+# 	{ name = "docs", text = "󰈙" },
+# 	{ name = "games", text = "󰊖" },
+# 	{ name = "iwakura", text = "󰣀" },
+# 	{ name = "music", text = "󰝚" },
+# 	{ name = "pics", text = "󰈟" },
+# 	{ name = "sync", text = "󱈖" },
+# 	{ name = "vids", text = "󰕧" },
+# ]

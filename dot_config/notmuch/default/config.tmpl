@@ -1,0 +1,18 @@
+[database]
+path=/home/emil/.mail
+
+[new]
+tags=new
+ignore=.uidvalidity;.mbsyncstate
+
+[search]
+
+[maildir]
+synchronize_flags=true
+
+[user]
+name=Emil Hammarberg
+primary_email={{ (keepassxc "mailbox.org").UserName }}
+other_email={{ (keepassxc "Google").UserName }};{{ (keepassxc "KTH").UserName }}@kth.se;{{ (keepassxc "Google (trackers)").UserName }};
+
+# vim: ft=conf

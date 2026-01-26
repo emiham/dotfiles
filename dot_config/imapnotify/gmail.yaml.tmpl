@@ -1,0 +1,11 @@
+host: imap.gmail.com
+port: 993
+tls: true
+tlsOptions:
+  rejectUnauthorized: false
+username: {{ (keepassxc "Google").UserName }}
+password: {{ keepassxcAttribute "Google" "App password" }}
+onNewMail: mbsync gmail
+onNewMailPost: ~/.local/scripts/mail_notify
+boxes:
+  - INBOX

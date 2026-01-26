@@ -1,0 +1,10 @@
+[Unit]
+Description=river session
+PartOf=river-session.target
+Wants=river-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+Restart=on-failure

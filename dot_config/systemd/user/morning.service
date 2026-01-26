@@ -1,0 +1,12 @@
+[Unit]
+Description=Run morning routine on first boot of the day
+After=morning-flag.service
+After=graphical-session.target
+After=niri.service
+Requires=morning-flag.service
+Requires=niri.service
+
+[Service]
+Type=oneshot
+ExecStart=foot -T morning %h/code/scripts/morning
+RemainAfterExit=true

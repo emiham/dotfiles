@@ -1,0 +1,197 @@
+{
+	"layer": "top",
+	"modules-left": ["niri/workspaces", "niri/window"],
+	"modules-center": [],
+	"modules-right": [
+		"custom/rating",
+		"mpd",
+		"pulseaudio",
+		"custom/disk",
+		"custom/disk#media",
+		"cpu",
+		"memory",
+		"systemd-failed-units",
+		"battery",
+		// "custom/anki",
+		"custom/tasks",
+		"custom/weather",
+		"clock"
+	],
+	"mpris": {
+		"format": "{artist} - {title}",
+		"max-length": 40
+	},
+	"disk": {
+		"interval": 10,
+		"format": "<span color='#85add4'></span> {specific_free:0.0f}G",
+		"path": "/",
+		"unit": "GB"
+	},
+	"disk#media": {
+		"interval": 10,
+		"format": "<span color='#85add4'>󰣳</span> {specific_free:0.0f}G",
+		"path": "/mnt/media",
+		"unit": "GB"
+	},
+	"cpu": {
+		"interval": 2,
+		"format": "{icon}",
+		"format-icons": [
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>"
+		],
+		"max-length": 10
+	},
+	"memory": {
+		"interval": 30,
+		"format": "{icon}",
+		"format-icons": [
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>"
+		],
+		"max-length": 10
+	},
+	"pulseaudio": {
+		"format": "{icon} {volume}%",
+		"format-bluetooth": "{icon} {volume}%",
+		"format-muted": "<span color='#d75f87' size='6pt'></span>",
+		"format-icons": {
+			"alsa_output.pci-0000_00_1f.3.analog-stereo": "<span color='#d75f87' size='6pt'></span>",
+			"alsa_output.pci-0000_00_1f.3.analog-stereo-muted": " ",
+			"headphone": "<span color='#d75f87' size='6pt'></span>",
+			"hands-free": "<span color='#d75f87' size='6pt'></span>",
+			"headset": "<span color='#d75f87' size='6pt'></span>",
+			"phone": "<span color='#d75f87' size='6pt'></span>",
+			"phone-muted": "<span color='#d75f87' size='6pt'></span>",
+			"portable": "<span color='#d75f87' size='6pt'></span>",
+			"car": "<span color='#d75f87' size='6pt'></span>",
+			"default": [
+				"<span color='#87af87' size='6pt'></span>",
+				"<span color='#87af87' size='6pt'></span>",
+				"<span color='#87af87' size='6pt'></span>",
+				"<span color='#87af87' size='6pt'></span>",
+				"<span color='#87af87' size='6pt'></span>",
+				"<span color='#ffd787' size='6pt'></span>",
+				"<span color='#ffd787' size='6pt'></span>",
+				"<span color='#ffd787' size='6pt'></span>",
+				"<span color='#d75f87' size='6pt'></span>",
+				"<span color='#d75f87' size='6pt'></span>"
+			]
+		},
+		"scroll-step": 1,
+		"on-click": "pavucontrol",
+		"ignored-sinks": ["Easy Effects Sink"]
+	},
+	"battery": {
+		"format": "{icon} {capacity}%",
+		"format-icons": ["", "", "", "", ""]
+	},
+	"clock": {
+		"format": "<span color='#87af87' size='6pt'></span> {:%H:%M}",
+		"tooltip": false,
+		"format-alt": "{:%a, %d. %b  %H:%M}"
+	},
+	"niri/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"firefox": "",
+			"terminal": "",
+			"chat": "",
+			"anki": "",
+			"empty": "·",
+			"scratch": ""
+		}
+	},
+	"niri/window": {
+		"format": "{}",
+		"rewrite": {
+			"(.*) — Mozilla Firefox( Private Browsing)?": "$1"
+		}
+	},
+	"custom/rating": {
+		"exec": "~/code/music-ratings/sb-music-rating"
+	},
+	"custom/tasks": {
+		"exec": "sb-tasks",
+		"interval": 60,
+		"format": "<span size='6pt'></span> <span color='#d0d0d0'>{}</span>"
+	},
+	"custom/anki": {
+		"exec": "sb-anki",
+		"interval": 60,
+		"format": "<span size='6pt'></span> <span color='#d0d0d0'>{}</span>"
+	},
+	"mpd": {
+		"format": "{artist} - {title}",
+		"format-stopped": "",
+		"tooltip-format": "{album}\n{elapsedTime}/{totalTime}",
+		"format-disconnected": "",
+		"on-click": "mpc toggle"
+	},
+	"systemd-failed-units": {
+		"format": "✗ {nr_failed}",
+		"format-ok": "✓",
+		"hide-on-ok": true
+	},
+	"custom/weather": {
+		"exec": "waybar-weather",
+		"restart-interval": 60,
+		"return-type": "json",
+		"hide-empty-text": true,
+		"on-click": "pkill -USR1 waybar-weather"
+	},
+	"custom/disk": {
+		"exec": "sb-disk /",
+		"interval": 10,
+		"return-type": "json",
+		"hide-empty-text": true,
+		"format": "{icon} {alt}G",
+		"format-icons": [
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#87af87' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#ffd787' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>",
+			"<span color='#d75f87' size='6pt'></span>"
+		]
+	},
+	"custom/disk#media": {
+		"exec": "sb-disk /mnt/media",
+		"interval": 10,
+		"return-type": "json",
+		"hide-empty-text": true,
+		"format": "{icon} {alt}G",
+		"format-icons": [
+			"<span color='#87af87' size='6pt'>󰣳</span>",
+			"<span color='#87af87' size='6pt'>󰣳</span>",
+			"<span color='#87af87' size='6pt'>󰣳</span>",
+			"<span color='#87af87' size='6pt'>󰣳</span>",
+			"<span color='#87af87' size='6pt'>󰣳</span>",
+			"<span color='#ffd787' size='6pt'>󰣳</span>",
+			"<span color='#ffd787' size='6pt'>󰣳</span>",
+			"<span color='#ffd787' size='6pt'>󰣳</span>",
+			"<span color='#d75f87' size='6pt'>󰣳</span>",
+			"<span color='#d75f87' size='6pt'>󰣳</span>"
+		]
+	}
+}

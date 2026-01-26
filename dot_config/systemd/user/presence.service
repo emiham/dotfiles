@@ -1,0 +1,15 @@
+[Unit]
+Description=Send MQTT messages to Home Assistant when at/away from computer
+After=network.target
+
+[Service]
+Type=simple
+; Environment=DISPLAY=:0
+Environment=XIDLEHOOK_SOCK=%t/xidlehook.socket
+; ExecStartPre=mqtt pub -t kusanagi-presence -m '1' -h homeassistant.local
+ExecStart=xidlehook --not-when-fullscreen --timer 300 'mqtt pub -t kusanagi-presence -m 0 -h homeassistant.local' 'mqtt pub -t kusanagi-presence -m 1 -h homeassistant.local'
+; ExecStop=mqtt pub -t kusanagi-presence -m '0' -h homeassistant.local
+
+[Install]
+; WantedBy=default.target
+WantedBy=graphical.target

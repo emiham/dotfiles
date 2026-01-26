@@ -1,0 +1,12 @@
+set connect.host 192.168.1.127
+set connect.user {{ (keepassxc "Transmission").UserName }}
+set connect.password {{ (keepassxc "Transmission").Password }}
+
+set tui.theme my.theme
+
+tab --title downloading ls leeching
+tab --title move ls path=/mnt/media/torrents
+tab --title stopped ls stopped&ratio<10
+tab --title all ls all
+tab --title isolated ls isolated
+tab --focus 1

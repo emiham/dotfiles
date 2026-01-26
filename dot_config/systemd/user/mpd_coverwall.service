@@ -1,0 +1,13 @@
+[Unit]
+Description=Change wallpaper to mpd album art
+PartOf=graphical-session.target
+After=awww.service network-online.target graphical-session.target
+BindsTo=awww.service
+
+[Service]
+Type=simple
+ExecStart=/home/emil/code/mpd/mpd_coverwall/mpd_coverwall_wayland
+Restart=always
+
+[Install]
+WantedBy=graphical-session.target

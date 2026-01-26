@@ -1,0 +1,9 @@
+[Unit]
+Description=Update RSS feeds
+
+[Service]
+Type=oneshot
+ExecStart=newsraft -e reload-all
+
+[Install]
+WantedBy=default.target

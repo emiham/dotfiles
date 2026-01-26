@@ -1,0 +1,14 @@
+[Unit]
+Description=xremap
+After=niri.service
+Requires=niri.service
+
+[Service]
+StandardOutput=journal
+StandardError=journal
+Restart=always
+; Environment=RUST_LOG=DEBUG
+ExecStart=xremap --watch .config/xremap/config.yml --device 'USB Keyboard','Logitech','Wii','Corne' --ignore 'USB Keyboard System Control','USB Keyboard Consumer Control'
+
+[Install]
+WantedBy=graphical-session.target

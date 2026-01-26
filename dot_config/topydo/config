@@ -1,0 +1,20 @@
+[topydo]
+filename=/home/emil/sync/todo/todo.txt
+archive_filename=/home/emil/sync/todo/done.txt
+colors=256
+
+[colorscheme]
+focus_background_color = black
+priority_colors = A:light-red,B:red,C:light-yellow,D:yellow,E:light-green,F:gray
+context_color = cyan
+project_color = blue
+
+[column_keymap]
+Space = cmd do {}
+q = cmd quit
+
+[ls]
+list_format = |%I| %x %{(}p{)} %s %k
+hide_tags = id,p,ical,url,t,rec
+
+# vim: ft=dosini

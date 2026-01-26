@@ -1,0 +1,10 @@
+[Unit]
+Description=Reset morning flag daily
+
+[Service]
+Type=oneshot
+ExecStart=/bin/rm -f /tmp/morning
+
+[Install]
+WantedBy=default.target
+

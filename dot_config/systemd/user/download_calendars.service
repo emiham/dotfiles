@@ -1,0 +1,10 @@
+[Unit]
+Description=Update shared calendars
+
+[Service]
+Type=simple
+ExecStart=python /home/emil/.local/scripts/download_calendars.py
+ExecStartPost=/home/emil/.local/scripts/post_download_calendars
+
+[Install]
+WantedBy=multi-user.target

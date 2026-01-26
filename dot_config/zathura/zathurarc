@@ -1,0 +1,41 @@
+set guioptions none
+set recolor-keephue
+set recolor-lightcolor \#3a3a3a
+set recolor-darkcolor \#d0d0d0
+set default-bg \#3a3a3a
+set recolor true
+
+set completion-bg \#3a3a3a
+set completion-fg \#d0d0d0
+set completion-group-bg \#3a3a3a
+set completion-group-fg \#d8af5f
+set completion-highlight-bg \#d0d0d0
+set completion-highlight-fg \#3a3a3a
+
+set recolor-lightcolor \#3a3a3a
+set recolor-darkcolor \#d0d0d0
+set default-bg \#3a3a3a
+
+set inputbar-bg \#3a3a3a
+set inputbar-fg \#d0d0d0
+set notification-bg \#3a3a3a
+set notification-fg \#d0d0d0
+set notification-error-bg \#d68787
+set notification-error-fg \#d0d0d0
+set notification-warning-bg \#d68787
+set notification-warning-fg \#d0d0d0
+set statusbar-bg \#3a3a3a
+set statusbar-fg \#d0d0d0
+set index-bg \#3a3a3a
+set index-fg \#d0d0d0
+set index-active-bg \#d0d0d0
+set index-active-fg \#3a3a3a
+set render-loading-bg \#3a3a3a
+set render-loading-fg \#d0d0d0
+
+#map <C-o> feedkeys ":exec zathura-annotate $FILE<Return>"
+map <C-v> feedkeys ":set vertical-center true<Return>"
+set selection-clipboard clipboard
+set window-title-home-tilde true
+
+set database sqlite

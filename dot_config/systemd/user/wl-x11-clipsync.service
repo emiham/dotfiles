@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync Wayland and X11 clipboards
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python /home/emil/code/wl-x11-clipsync/clipsync.py
+
+[Install]
+WantedBy=default.target
+

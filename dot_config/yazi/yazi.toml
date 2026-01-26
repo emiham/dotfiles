@@ -1,0 +1,28 @@
+[plugin]
+prepend_previewers = [
+	# HEIC previewer
+	{ mime = "image/heic", run = "heic" },
+]
+
+append_previewers = [
+	# My fallback previewer
+	{ name = "*", run = "binary" },
+]
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*"
+run = "git"
+
+[[plugin.prepend_fetchers]]
+id = "git"
+name = "*/"
+run = "git"
+
+[preview]
+max_width = 2000
+max_height = 2000
+
+[mgr]
+sort_by = "alphabetical"
+title_format = "yazi - {cwd}"

@@ -1,0 +1,15 @@
+{
+  "Neovim Autocommand": {
+    "prefix": "autocmd",
+    "body": [
+      "vim.api.nvim_create_autocmd(\"${1:BufRead}\", {",
+      "  group = vim.api.nvim_create_augroup(\"${2:MyGroup}\", { clear = true }),",
+      "  pattern = \"${3:*}\",",
+      "  callback = function(args)",
+      "    ${4:-- TODO: callback code}",
+      "  end,",
+      "})"
+    ],
+    "description": "Create a Neovim autocommand (Lua API)"
+  }
+}

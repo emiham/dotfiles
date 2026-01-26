@@ -1,0 +1,11 @@
+host: imap.mailbox.org
+port: 993
+tls: true
+tlsOptions:
+  rejectUnauthorized: false
+username: {{ (keepassxc "mailbox.org").UserName }}
+password: {{ (keepassxc "mailbox.org").Password }}
+onNewMail: mbsync mailbox.org
+onNewMailPost: ~/.local/scripts/mail_notify
+boxes:
+  - INBOX

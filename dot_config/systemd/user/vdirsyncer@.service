@@ -1,0 +1,10 @@
+[Unit]
+Description=Sync %i calendar hourly
+
+[Service]
+Type=simple
+ExecStart=vdirsyncer sync personal_calendar/%i
+
+[Install]
+WantedBy=
+

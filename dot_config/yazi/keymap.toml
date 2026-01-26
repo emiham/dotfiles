@@ -1,0 +1,55 @@
+[[mgr.prepend_keymap]]
+on = ["l"]
+run = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on = ["d"]
+run = "yank --cut"
+
+[[mgr.prepend_keymap]]
+on = ["D"]
+run = 'shell -- trash-put "$@"'
+
+[[input.prepend_keymap]]
+on = ["<Esc>"]
+run = "close"
+desc = "Cancel input"
+
+[[mgr.prepend_keymap]]
+on = ["<C-n>"]
+run = '''
+    shell 'ripdrag "$@" -x 2>/dev/null &' --confirm
+'''
+
+[[mgr.prepend_keymap]]
+on = ["g", "H"]
+run = "cd ~"
+
+[[mgr.prepend_keymap]]
+on = ["g", "h"]
+run = "hidden toggle"
+
+[[mgr.prepend_keymap]]
+on = "f"
+run = "plugin jump-to-char"
+desc = "Jump to char"
+
+[[mgr.prepend_keymap]]
+on = ["å"]
+run = '''
+    shell --confirm /usr/bin/kdeconnect-cli -d fded4ed5_4b14_4801_8b1f_baf90fd01aa0 --share "$@"
+'''
+
+[[mgr.prepend_keymap]]
+on = ["g", "l"]
+run = "link --relative"
+desc = "symlink to yanked file(s)"
+
+[[mgr.prepend_keymap]]
+on = ["g", "t"]
+run = "tasks_show"
+
+[[mgr.prepend_keymap]]
+on = ["m"]
+run = "create --dir"

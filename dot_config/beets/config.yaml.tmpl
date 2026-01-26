@@ -1,0 +1,236 @@
+# Required packages:
+# - flac
+# - mp3val
+
+directory: ~/music/
+library: ~/music/.musiclibrary.db
+log: /var/log/beets.log
+
+asciify_paths: no
+bell: yes
+per_disc_numbering: yes
+artist_credit: yes
+ignore_hidden: no
+art_filename: cover
+oritinal_year: yes
+sort_item:
+  artist+ original_year+ original_month+ original_day+ album+ disc+ track+
+sort_album: original_year+ original_month+ original_day+ albumartist+ album+
+
+import:
+  timid: yes
+  copy: no
+  write: yes
+  move: yes
+  detail: yes
+
+match:
+  preferred:
+    # countries: ['US', 'GB|UK']
+    media: [CD, "Digital Media|File"]
+  distance_weights:
+    status: 99.0
+    media: 1.0
+    medium: 1.0
+
+musicbrainz:
+  search_limit: 10
+  extra_tags: [year, catalognum, country, media, label]
+
+pluginpath:
+  - ~/code/beets/beets-filetote/beetsplug/
+  - ~/code/beets/beets-originquery/beetsplug/
+
+plugins:
+  - musicbrainz
+  - mbsync
+  - mbsubmit
+  # - copyartifacts
+  - filetote
+  - types
+  - fetchart
+  - embedart
+  - thumbnails
+  - lyrics
+  - badfiles
+  - inline
+  - mpdupdate
+  - subsonicupdate
+  - missing
+  # - discogs
+  - chroma
+  - unimported
+  # - convert
+  - parentwork
+  - duplicates
+  # - permissions
+  - replaygain
+  - originquery
+  - play
+  - edit
+  - lastgenre
+  # TODO: https://github.com/mistwyrm/BeetsPlugins/
+  - playlist
+
+# copyartifacts:
+#   # extensions: .cue .log .jpg .png .m3u .m3u8 .lrc .md5 .nfo .accurip */*
+#   extensions: .* */*
+#   print_ignored: yes
+
+chroma:
+  auto: no
+
+filetote:
+  # TODO https://github.com/gtronset/beets-filetote?tab=readme-ov-file#subpath-renaming-example
+  extensions: .* "*"
+
+types:
+  rating: int
+
+lyrics:
+  sources: lrclib genius google tekstowo
+
+badfiles:
+  check_on_import: yes
+  # commands:
+  # TODO
+
+fetchart:
+  max_filesize: 16777215 # Max size writable by Mutagen
+  lastfm_key: {{ keepassxcAttribute "Last.fm" "API key" }}
+  google_key: {{ keepassxcAttribute "Google" "API key (beets)" }}
+  store_source: yes
+  high_resolution: yes
+  sources:
+    - filesystem
+    - coverart
+    - wikipedia
+    - itunes
+    - amazon
+    - albumart
+    - fanarttv
+    - spotify
+    - lastfm
+    - google
+
+embedart:
+  ifempty: yes
+  maxwidth: 640
+  quality: 100
+
+aunique:
+  keys: albumartist album
+  disambiguators: albumtype label albumdisambig releasegroupdisambig
+  bracket: "()"
+
+item_fields:
+  disctrack: |
+    import math
+    if albumartist:
+      if tracktotal > 0: tracks = int(math.log10(tracktotal)) + 1
+      else: tracks = 1
+      if disctotal > 1:
+        return str(disc) + '-' + str(track).zfill(tracks)
+      else:
+        return str(track).zfill(tracks)
+    else: return ''
+
+  sortartist: |
+    if albumartist_sort: return albumartist_sort
+    elif albumartist: return albumartist
+    elif artist_sort: return artist_sort
+    elif sortartist: return sortartist
+    else: return artist
+
+  albumyear: |
+    if albumartist:
+      if original_year: return '(' + str(original_year) + ')'
+      else: return ''
+
+  albumfolder: |
+    if albumartist and album:
+      return album
+    else:
+      return ''
+
+  catnoandformat: |
+    if albumartist:
+      info = []
+      if format: info.append('[' + format + ']')
+      if catalognum: info.append('{' + catalognum + '}')
+      return ' '.join(info)
+    else:
+      return ''
+
+paths:
+  default:
+    $sortartist/%if{$albumyear$albumfolder$catnoandformat,$albumyear
+    $albumfolder%aunique{} $catnoandformat/}$disctrack $title
+  singleton: $sortartist/$title/$title
+  comp:
+    Various Artists/%if{$albumfolder,$albumyear $albumfolder%aunique{}
+    $catnoandformat/}$disctrack $title
+
+acoustid:
+  apikey: SrHwYM0Qmk
+
+unimported:
+  # ignore_extensions: jpg png
+  ignore_subdirectories: NonMusic data temp
+
+# convert:
+#   auto: yes
+#   format: dff
+#   formats:
+#     flac: dff2dsf $source $dest
+
+parentwork:
+  auto: yes
+
+duplicates:
+  album: yes
+
+# permissions:
+#   file: 755
+#   dir: 755
+#
+replaygain:
+  auto: yes
+  backend: ffmpeg
+  overwrite: yes
+
+originquery:
+  origin_file: origin.yaml
+  tag_patterns:
+    media: "$.Media"
+    year: '$."Edition year"'
+    # original_year: '$."Original year"'
+    label: '$."Record label"'
+    catalognum: '$."Catalog number"'
+    albumdisambig: "$.Edition"
+    country: "$.Country"
+
+play:
+  command: mpc -q add $args
+  raw: yes
+  relative_to: /home/emil/music
+
+edit:
+  itemfields: disc
+
+subsonic:
+  url: https://music.emilhammarberg.com/
+  user: {{ (keepassxc "gonic").UserName }}
+  pass: {{ (keepassxc "gonic").Password }}
+  auth: password
+
+lastgenre:
+  force: yes
+  keep_existing: no
+  whitelist: ~/.config/beets/whitelist.yaml
+  canonical: ~/.config/beets/canonical.yaml
+
+playlist:
+  auto: yes
+  relative_to: ~/music
+  playlist_dir: /mnt/media/mpd/playlists

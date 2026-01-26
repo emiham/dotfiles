@@ -1,0 +1,56 @@
+* {
+	background-color: #3a3a3a;
+	text-color:       #d0d0d0;
+	font:             "Monospace 10px";
+	border-bottom-style: "solid";
+	border-bottom-width: 2px;
+	border-bottom-color: red;
+}
+
+window {
+	anchor:           north;
+	location:         north;
+	y-offset:         -25;
+	width:            100%;
+	height:           23;
+	children:         [ horibox ];
+}
+
+horibox {
+	orientation:      horizontal;
+	children:         [ prompt, entry, listview ];
+}
+
+listview {
+	layout:           horizontal;
+	spacing:          100px;
+	lines:            100;
+	padding:          0px 100px 0px 0px;
+}
+
+entry {
+	expand:           false;
+	width:            10em;
+	padding:          4px 0px 0px 0px;
+}
+
+element {
+	padding:          4px 0px 2px 0px;
+}
+
+element selected {
+	text-color:       #d68787;
+}
+
+element-text {
+	background-color: inherit;
+	text-color:       inherit;
+}
+
+prompt {
+	padding:          4px 1px 0px 6px;
+}
+
+icon {
+	theme: "tela";
+}

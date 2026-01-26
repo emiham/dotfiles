@@ -1,0 +1,13 @@
+[Unit]
+Description=Yambar
+PartOf=graphical-session.target
+After=graphical-session.target
+Requisite=graphical-session.target
+
+[Service]
+ExecStart=/usr/local/bin/yambar
+ExecReload=kill $MAINPID
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target
