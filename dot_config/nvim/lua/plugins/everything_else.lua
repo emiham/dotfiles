@@ -295,6 +295,21 @@ return {
     priority = 10, -- Needs to be a really low priority, to catch others plugins keybindings.
     config = true,
   },
+  {
+    "andre-kotake/nvim-chezmoi",
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+    opts = {
+      -- Show extra debug messages.
+      edit = {
+        -- Automatically apply file on save. Can be one of: "auto", "confirm" or "never"
+        apply_on_save = "auto",
+      },
+    },
+    config = function(_, opts) require("nvim-chezmoi").setup(opts) end,
+  },
 
   -- Vim plugins
   { "simeji/winresizer" },
