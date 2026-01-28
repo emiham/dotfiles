@@ -17,5 +17,33 @@
       "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
     ],
     "description": "Put the date in (Y-m-D) format"
+  },
+  "Chezmoi field": {
+    "prefix": "chezmoi",
+    "body": [
+      "{{ (keepassxc \"${1:Entry}\").${2:Field} }}"
+    ],
+    "description": "Chezmoi KeePassXC template"
+  },
+  "Chezmoi username": {
+    "prefix": "chezmoi-user",
+    "body": [
+      "{{ (keepassxc \"${1:Entry}\").UserName }}"
+    ],
+    "description": "Chezmoi KeePassXC username template"
+  },
+  "Chezmoi password": {
+    "prefix": "chezmoi-password",
+    "body": [
+      "{{ (keepassxc \"${1:Entry}\").Password }}"
+    ],
+    "description": "Chezmoi KeePassXC password template"
+  },
+  "Chezmoi attribute": {
+    "prefix": "chezmoi-attribute",
+    "body": [
+      "{{ keepassxcAttribute \"${1:Entry}\" \"${2:Attribute}\" }}"
+    ],
+    "description": "Chezmoi KeePassXC attribute template"
   }
 }
