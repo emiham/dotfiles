@@ -39,7 +39,7 @@
         trace: (fg: "magenta", bg: "black"),
     ),
     progress_bar: (
-        symbols: ["", "🬋", "", "🬋", ""],
+        symbols: ["🬋", "🬋", "", "🬋", ""],
         track_style: (fg: "black"),
         elapsed_style: (fg: "white"),
         thumb_style: (fg: "blue", bg: "#1e2030"),
