@@ -377,6 +377,5 @@ return {
       vim.g.instant_markdown_browser = "qutebrowser"
     end,
   },
-  { "FilipHarald/aw-watcher-vim" },
   { "https://github.com/tommcdo/vim-exchange" },
 }
