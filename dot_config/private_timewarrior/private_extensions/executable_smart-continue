@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+threshold=${TIMEW_SMART_THRESHOLD:-1}
+
+last_end=$(timew get dom.tracked.1.end)
+
+if [ -n "$last_end" ]; then
+  elapsed=$(( $(date +%s) - $(date -d "$last_end" +%s) ))
+  if [ $elapsed -le $((threshold * 60)) ]; then
+    timew continue
+  else
+    echo "No recent timer to continue (last ended more than $threshold minutes ago)."
+  fi
+else
+  echo "No previous timer found."
+fi
+

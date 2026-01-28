@@ -1,0 +1,8 @@
+[Unit]
+Description=Automount SSHFS blog
+
+[Automount]
+Where=/home/emil/docs/blog
+
+[Install]
+WantedBy=default.target

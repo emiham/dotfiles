@@ -1,0 +1,12 @@
+#!/usr/bin/env chezmoi_modify_manager
+
+source auto
+
+set "api" "serverurl" "https://{{ (keepassxc "Wallabag").URL }}"
+set "api" "username" "{{ (keepassxc "Wallabag").UserName }}"
+set "api" "password" "{{ keepassxcAttribute "Wallabag" "Some other password" }}"
+
+set "oauth2" "client" "{{ keepassxcAttribute "Wallabag" "Client ID" }}"
+set "oauth2" "secret" "{{ keepassxcAttribute "Wallabag" "Client secret" }}"
+
+ignore section "token"

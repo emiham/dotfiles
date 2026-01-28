@@ -1,0 +1,13 @@
+[Unit]
+Description=SSHFS mount for data
+After=default.target
+
+[Mount]
+What=emil@iwakura:/home/emil/blog
+Where=/home/emil/docs/blog
+Type=fuse.sshfs
+Options=IdentityAgent=/run/user/1000/ssh-agent.socket,ssh_command=/usr/bin/ssh,ServerAliveInterval=15,ServerAliveCountMax=3,reconnect
+
+
+[Install]
+WantedBy=default.target

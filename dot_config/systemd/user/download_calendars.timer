@@ -1,0 +1,9 @@
+[Unit]
+Description=Download shared calendars
+
+[Timer]
+OnCalendar=00/2:00
+Persistent=True
+
+[Install]
+WantedBy=timers.target

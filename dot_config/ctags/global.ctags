@@ -1,0 +1,10 @@
+-f .tags
+--exclude=*.json
+--exclude=node_modules
+
+--exclude=bin
+--exclude=etc
+--exclude=include
+--exclude=lib
+--exclude=lib64
+--exclude=share

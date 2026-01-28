@@ -1,0 +1,34 @@
+defaults
+auth           on
+tls            on
+tls_starttls   on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        /var/log/msmtp.log
+
+# Gmail
+account        gmail
+host           smtp.gmail.com
+port           587
+from           {{ (keepassxc "Google").UserName }}
+user           {{ keepassxcAttribute "Google" "Username (not email)" }}
+password       {{ keepassxcAttribute "Google" "App password" }}
+
+# mailbox.org
+account        mailbox.org
+host           smtp.mailbox.org
+port           587
+from           {{ (keepassxc "mailbox.org").UserName }}
+user           {{ (keepassxc "mailbox.org").UserName }}
+password       {{ (keepassxc "mailbox.org").Password }}
+
+# mailbox.org
+account        kth
+auth           plain
+host           smtp.kth.se
+port           587
+from           {{ (keepassxc "KTH").UserName }}@kth.se
+user           {{ (keepassxc "KTH").UserName }}
+password       {{ (keepassxc "KTH").Password }}
+
+# Set a default account
+account default : mailbox.org

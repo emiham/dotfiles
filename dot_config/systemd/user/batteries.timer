@@ -1,0 +1,10 @@
+[Unit]
+Description=Notify when mouse has low battery
+
+[Timer]
+OnCalendar=*-*-* 00,12:00:00
+Persistent=True
+
+[Install]
+WantedBy=timers.target
+

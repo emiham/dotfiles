@@ -1,0 +1,10 @@
+[Unit]
+Description=Remove morning flag daily
+After=timers.target
+
+[Timer]
+OnCalendar=*-*-* 5:50:00
+Persistent=True
+
+[Install]
+WantedBy=timers.target

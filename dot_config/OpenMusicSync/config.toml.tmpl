@@ -1,0 +1,11 @@
+[MPD]
+
+[Subsonic]
+host = "https://{{ (keepassxc "gonic").URL }}"
+user = "{{ (keepassxc "gonic").UserName }}"
+password = "{{ (keepassxc "gonic").Password }}"
+
+[Jellyfin]
+host = "https://{{ (keepassxc "Jellyfin").URL }}"
+token = "{{ keepassxcAttribute "Jellyfin" "API token (OMS)" }}")
+music_directory = "/mnt/media2/music"

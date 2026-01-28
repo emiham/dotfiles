@@ -1,0 +1,4 @@
+--glob
+!*/py3nvim/*
+--glob
+!lazy-lock.json

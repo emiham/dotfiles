@@ -1,0 +1,7 @@
+# Player options
+player=mpv
+player-args=--cache 2048
+player-no-close
+twitch-disable-ads
+
+default-stream=best

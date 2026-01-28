@@ -1,0 +1,5 @@
+auto_activate_base: false
+envs_dirs:
+  - $HOME/code/.conda
+
+# vim: set ft=yaml

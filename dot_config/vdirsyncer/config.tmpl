@@ -1,0 +1,57 @@
+[general]
+status_path = "~/.local/share/vdirsyncer/"
+
+[pair emil_contacts]
+a = "emil_contacts_local"
+b = "emil_contacts_remote"
+conflict_resolution = ["command", "nvim", "-d"]
+collections = ["from a", "from b"]
+metadata = ["displayname"]
+
+[storage emil_contacts_local]
+type = "filesystem"
+path = "~/.local/share/contacts/"
+fileext = ".vcf"
+
+[storage emil_contacts_remote]
+type = "carddav"
+url = "https://{{ (keepassxc "Baikal").URL }}/dav.php/addressbooks/emil/default/"
+username = "{{ (keepassxc "Baikal").UserName }}"
+# The password can also be fetched from the system password storage, netrc or a
+# custom command. See https://vdirsyncer.pimutils.org/en/stable/keyring.html
+password = "{{ (keepassxc "Baikal").Password }}"
+
+[pair personal_calendar]
+a = "personal_calendar_local"
+b = "personal_calendar_remote"
+collections = ["from a", "from b"]
+metadata = ["displayname", "color"]
+conflict_resolution = ["command", "nvim", "-d"]
+
+[storage personal_calendar_local]
+type = "filesystem"
+path = "~/.local/share/calendars/default"
+fileext = ".ics"
+
+[storage personal_calendar_remote]
+type = "caldav"
+url = "https://{{ (keepassxc "Baikal").URL }}/dav.php/calendars/emil/"
+username = "{{ (keepassxc "Baikal").UserName }}"
+password = "{{ (keepassxc "Baikal").Password }}"
+
+[pair gcal]
+a = "personal_calendar_local"
+b = "google"
+collections = ["{{ keepassxcAttribute "Google" "Yukaemi calendar" }}"]
+metadata = ["displayname", "color"]
+conflict_resolution = ["command", "nvim", "-d"]
+
+# If this breaks you probably have to delete the token file
+[storage google]
+type = "google_calendar"
+token_file = "~/.local/share/calendars/token"
+client_id = "{{ keepassxcAttribute "Google" "Calendar sync client ID" }}"
+# Make sure to publish app if this expires
+client_secret = "{{ keepassxcAttribute "Google" "Calendar sync secret" }}"
+
+# vim: ft=conf

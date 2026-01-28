@@ -1,0 +1,6 @@
+[NetworkShares]
+NextID=1
+nfs://192.168.1.127//mnt/media:/mnt/media=0
+
+[Status]
+Empty=false
