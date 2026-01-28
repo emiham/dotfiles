@@ -159,6 +159,9 @@ window-rule {
 }
 window-rule {
     match app-id="^equibop$" title="^equibop$"
+    border {
+        off
+    }
     open-maximized false
     open-focused false
 }
