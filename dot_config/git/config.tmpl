@@ -42,6 +42,7 @@
 	      }; f"
 	wdiff = "diff --color-words=."
 	browse = !git-browse
+	add-untracked = !git status --porcelain -z | grep -z "^??" | cut -z -c4- | xargs -0 git add
 
 [commit]
 	template = ~/.config/git/gitmessage
