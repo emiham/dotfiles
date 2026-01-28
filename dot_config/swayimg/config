@@ -12,7 +12,7 @@ transparency = grid
 scale = optimal
 antialiasing = none
 
-history = 3
+history = 1
 preload = 3
 
 [gallery]
