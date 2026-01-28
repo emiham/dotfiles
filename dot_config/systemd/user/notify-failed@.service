@@ -1,6 +1,8 @@
 [Unit]
 Description=Send notifications when other services fail
+ConditionUnitActive=dunst.service
 
 [Service]
 Type=simple
+ExecCondition=/usr/bin/busctl --user --quiet status org.freedesktop.Notifications
 ExecStart=notify-send -u normal "%I failed"
