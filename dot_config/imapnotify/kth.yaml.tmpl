@@ -4,7 +4,7 @@ tls: true
 tlsOptions:
   rejectUnauthorized: false
 username: {{ (keepassxc "KTH").UserName }}
-password: {{ (keepassxc "KTH").Password }}
+password: "{{ (keepassxc "KTH").Password }}"
 onNewMail: mbsync kth
 onNewMailPost: ~/.local/scripts/mail_notify
 boxes:
