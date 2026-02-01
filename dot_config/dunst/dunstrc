@@ -430,6 +430,10 @@
    summary = *Switch group*
    format = ""
 
+[niri]
+   summary = *Screenshot captured*
+   format = ""
+
 # [fcitx]
 #    summary = kdeconnectd failed
 #    format = ""
