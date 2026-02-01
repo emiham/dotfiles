@@ -3,6 +3,7 @@ Description=Update RSS feeds
 
 [Service]
 Type=oneshot
+ExecCondition=/usr/bin/bash -c '! pgrep -x newsraft >/dev/null'
 ExecStart=newsraft -e reload-all
 
 [Install]
