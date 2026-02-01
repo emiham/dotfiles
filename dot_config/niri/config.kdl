@@ -43,6 +43,7 @@ overview {
         color "#00000050"
     }
 }
+screenshot-path "~/pics/screenshots/%Y-%m-%d_%H-%M-%S.png"
 prefer-no-csd
 layout {
     background-color "transparent"
