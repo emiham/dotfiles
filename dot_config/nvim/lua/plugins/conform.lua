@@ -17,6 +17,13 @@ return {
           ),
         },
       },
+      beautysh = {
+        args = {
+          "--indent-size",
+          "2",
+          "$FILENAME",
+        },
+      },
     },
     formatters_by_ft = {
       lua = { "stylua" },
