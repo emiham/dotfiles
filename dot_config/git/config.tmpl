@@ -43,6 +43,7 @@
 	wdiff = "diff --color-words=."
 	browse = !git-browse
 	add-untracked = !git status --porcelain -z | grep -z "^??" | cut -z -c4- | xargs -0 git add
+	fork = "!f() { \\\n  gh repo fork --remote --remote-name fork --clone=false; \\\n}; f"
 
 [commit]
 	template = ~/.config/git/gitmessage
