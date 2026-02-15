@@ -310,6 +310,11 @@ return {
     },
     config = function(_, opts) require("nvim-chezmoi").setup(opts) end,
   },
+  {
+    "nemanjamalesija/smart-paste.nvim",
+    event = "VeryLazy",
+    config = true,
+  },
 
   -- Vim plugins
   { "simeji/winresizer" },
