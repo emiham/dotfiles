@@ -81,13 +81,13 @@ layout {
 spawn-at-startup "import-gsettings"
 spawn-at-startup "mpd-mpris"
 spawn-at-startup "gammastep"
-spawn-at-startup "/home/emil/code/scripts/mqtt/volume_get"
-spawn-at-startup "/home/emil/code/scripts/mqtt/volume_set"
-spawn-at-startup "/home/emil/code/scripts/mqtt/audio-outputs"
-spawn-at-startup "/home/emil/.local/scripts/mpd_sync"
+spawn-at-startup "mqtt-volume_get"
+spawn-at-startup "mqtt-volume_set"
+spawn-at-startup "mqtt-audio-outputs"
+spawn-at-startup "mpd_sync"
 spawn-sh-at-startup "xrdb -load .Xresources"
 spawn-sh-at-startup "swayidle && pkill -SIGUSR1 swayidle"
-spawn-sh-at-startup "/home/emil/.local/scripts/iwakura-notifications &"
+spawn-sh-at-startup "iwakura-notifications"
 spawn-at-startup "niriusd"
 spawn-sh-at-startup "niri-sticky --app-id '(fire|water)fox$' --title '^Picture-in-Picture$'"
 spawn-sh-at-startup "niri-sticky --app-id 'mpv-float'"
@@ -151,8 +151,6 @@ window-rule {
     open-focused false
     open-maximized-to-edges false
     default-floating-position x=16 y=16 relative-to="bottom-right"
-    // NOTE This doesn't seem to work for mpv, so that is set in its own config
-    max-height 250
 }
 window-rule {
     match app-id="^equibop|discord$"

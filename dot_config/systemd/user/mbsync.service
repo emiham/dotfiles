@@ -4,7 +4,7 @@ Description=Mailbox synchronization service
 [Service]
 Type=oneshot
 ExecStart=/usr/bin/mbsync -Va
-ExecStartPost=/home/emil/.local/scripts/mail_notify
+ExecStartPost=/home/emil/code/scripts/mail_notify
 
 [Install]
 WantedBy=default.target

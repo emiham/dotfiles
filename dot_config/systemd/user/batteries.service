@@ -3,7 +3,7 @@ Description=Notify when mouse batteries are low
 
 [Service]
 Type=simple
-ExecStart=/home/emil/.local/scripts/batteries
+ExecStart=/home/emil/code/scripts/batteries
 
 [Install]
 WantedBy=default.target

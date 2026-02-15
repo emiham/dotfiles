@@ -8,5 +8,5 @@ Requires=niri.service
 
 [Service]
 Type=oneshot
-ExecStart=foot -T morning %h/code/scripts/morning
+ExecStart=foot -T morning morning
 RemainAfterExit=true
