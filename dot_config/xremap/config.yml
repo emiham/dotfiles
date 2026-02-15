@@ -74,9 +74,9 @@ keymap:
 
       # Picker
       Super-D:
-        launch: ["rofi", "-show", "run", "-run-command", "uwsm app -- {cmd}"]
-      Super-Shift-D:
         launch: ["rofi", "-show", "drun"]
+      Super-Shift-D:
+        launch: ["rofi", "-show", "run", "-run-command", "uwsm app -- {cmd}"]
       Super-N:
         remap:
           y:
@@ -183,27 +183,6 @@ keymap:
         launch: ["ames", "-s"]
       Super-Shift-SysRq:
         launch: ["ames", "-r"]
-
-      # Launch
-      Super-a:
-        remap:
-          w:
-            launch: ["uwsm", "app", "--", "firefox"]
-          Shift-w:
-            launch: ["uwsm", "app", "--", "firefox", "--private-window"]
-          e:
-            launch: ["uwsm", "app", "--", "foot", "yazi"]
-          a:
-            launch: ["uwsm", "app", "--", "anki"]
-          d:
-            # launch: ["gtk-launch", "discord"]
-            launch: ["uwsm", "app", "--", "equibop"]
-          c:
-            launch: ["uwsm", "app", "--", "foot", "-T", "calendar", "c"]
-          m:
-            launch: ["uwsm", "app", "--", "foot", "-T", "email", "alot"]
-          t:
-            launch: ["uwsm", "app", "--", "foot", "-T", "torrents", "stig"]
 
       # Anki
       # Back
