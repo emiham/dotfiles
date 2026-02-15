@@ -442,8 +442,4 @@
    appname = todo.txt
    script = /home/emil/.local/scripts/todo.txt/do-from-notification
 
-# [yt-queue]
-#    stack_tag = *youtube.com*
-#    action = /home/emil/.local/scripts/dunst/stop-yt-queue
-
 # vim: ft=cfg
