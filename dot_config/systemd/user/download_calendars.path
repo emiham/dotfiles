@@ -1,0 +1,17 @@
+[Unit]
+Description=Update calendars when vdir is updated
+
+[Path]
+PathModified=%D/calendars/1be7e955-342b-4c0c-b20b-84a32019bb94
+PathModified=%D/calendars/birthdays
+PathModified=%D/calendars/ca0ad367550ec47cfbc580f1605be9c44c60f9551dc621d78b8afea8dcfea162@group.calendar.google.com
+PathModified=%D/calendars/deadlines
+PathModified=%D/calendars/default
+PathModified=%D/calendars/facebook
+PathModified=%D/calendars/holidays
+PathModified=%D/calendars/kth
+PathModified=%D/calendars/ssbm
+PathModified=%D/calendars/work
+
+[Install]
+WantedBy=default.target
