@@ -1,3 +1,37 @@
+-- Automatically set filetype and start LSP for systemd and Podman Quadlet unit files
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = {
+    -- systemd unit files
+    "*.service",
+    "*.socket",
+    "*.timer",
+    "*.mount",
+    "*.automount",
+    "*.swap",
+    "*.target",
+    "*.path",
+    "*.slice",
+    "*.scope",
+    "*.device",
+    -- Podman Quadlet files
+    "*.container",
+    "*.volume",
+    "*.network",
+    "*.kube",
+    "*.pod",
+    "*.build",
+    "*.image",
+  },
+  callback = function()
+    vim.bo.filetype = "systemd"
+    vim.lsp.start({
+      name = "systemd_ls",
+      cmd = { "systemd-lsp" },
+      root_dir = vim.fn.getcwd(),
+    })
+  end,
+})
+
 return {
   {
     "neovim/nvim-lspconfig",
