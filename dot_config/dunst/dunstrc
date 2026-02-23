@@ -440,6 +440,6 @@
 
 [tasks]
    appname = todo.txt
-   script = /home/emil/.local/scripts/todo.txt/do-from-notification
+   script = /home/emil/code/scripts/todo.txt/do-from-notification
 
 # vim: ft=cfg
