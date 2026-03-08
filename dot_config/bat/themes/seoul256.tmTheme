@@ -1,0 +1,687 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Seoul256 for TextMate / Sublime Text
+  Ported from junegunn/seoul256.vim (https://github.com/junegunn/seoul256.vim)
+  Dark variant — default background 237 (iTerm2 / sRGB=0 color map)
+  License: MIT  Copyright (c) 2017 Junegunn Choi
+-->
+<plist version="1.0">
+<dict>
+  <key>name</key>
+  <string>seoul256</string>
+  <key>settings</key>
+  <array>
+
+    <!-- ─── Global / editor chrome ─── -->
+    <dict>
+      <key>settings</key>
+      <dict>
+        <!-- Normal: fg=252=#D9D9D9  bg=237=#4B4B4B -->
+        <key>background</key>
+        <string>#4B4B4B</string>
+        <key>foreground</key>
+        <string>#D9D9D9</string>
+
+        <!-- Caret / cursor -->
+        <key>caret</key>
+        <string>#D9D9D9</string>
+
+        <!-- CursorLine bg=236=#3F3F3F -->
+        <key>lineHighlight</key>
+        <string>#3F3F3F</string>
+
+        <!-- Visual bg=23=#007173 -->
+        <key>selection</key>
+        <string>#007173</string>
+        <key>selectionForeground</key>
+        <string>#D9D9D9</string>
+
+        <!-- Search bg=24=#007299  fg=252=#D9D9D9 -->
+        <key>findHighlight</key>
+        <string>#007299</string>
+        <key>findHighlightForeground</key>
+        <string>#D9D9D9</string>
+
+        <!-- MatchParen bg=240=#6B6B6B -->
+        <key>bracketsForeground</key>
+        <string>#D9D9D9</string>
+        <key>bracketsBackground</key>
+        <string>#6B6B6B</string>
+        <key>bracketsOptions</key>
+        <string>underline</string>
+
+        <!-- IncSearch fg=220=#FFDD00  bg=238=#565656 -->
+        <key>activeGuide</key>
+        <string>#FFDD00</string>
+
+        <!-- VertSplit / gutter divider bg=235=#333233 -->
+        <key>gutterForeground</key>
+        <string>#999872</string>
+        <!-- LineNr fg=101=#999872  bg=238=#565656 -->
+        <key>gutter</key>
+        <string>#565656</string>
+
+        <!-- Invisible / NonText fg=59=#727272 -->
+        <key>invisibles</key>
+        <string>#727272</string>
+
+        <!-- Guide lines -->
+        <key>guide</key>
+        <string>#565656</string>
+        <key>stackGuide</key>
+        <string>#6B6B6B</string>
+
+        <!-- Shadow -->
+        <key>shadow</key>
+        <string>#333233</string>
+        <key>shadowWidth</key>
+        <string>4</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Comment  fg=65=#719872 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Comment</string>
+      <key>scope</key>
+      <string>comment, punctuation.definition.comment</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#719872</string>
+      </dict>
+    </dict>
+
+    <!-- ─── String  fg=109=#98BCBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>String</string>
+      <key>scope</key>
+      <string>string, string.quoted, string.template</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BCBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── String delimiter  fg=137=#BE9873 ─── -->
+    <dict>
+      <key>name</key>
+      <string>String Delimiter</string>
+      <key>scope</key>
+      <string>punctuation.definition.string, string.quoted punctuation</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#BE9873</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Constant  fg=73=#6FBCBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Constant</string>
+      <key>scope</key>
+      <string>constant, constant.language, constant.other, support.constant</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#6FBCBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Number / Float  fg=222=#FFDE99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Number</string>
+      <key>scope</key>
+      <string>constant.numeric, constant.numeric.float</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFDE99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Boolean  fg=103=#999ABD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Boolean</string>
+      <key>scope</key>
+      <string>constant.language.boolean</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#999ABD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Character  fg=174=#E09B99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Character</string>
+      <key>scope</key>
+      <string>constant.character</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E09B99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Statement / Keyword (general)  fg=108=#98BC99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Statement</string>
+      <key>scope</key>
+      <string>keyword, keyword.control, keyword.operator.word, storage, storage.type, storage.modifier</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BC99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Conditional  fg=110=#98BEDE ─── -->
+    <dict>
+      <key>name</key>
+      <string>Conditional</string>
+      <key>scope</key>
+      <string>keyword.control.conditional, keyword.control.if, keyword.control.else, keyword.control.switch, keyword.control.case, keyword.control.when, keyword.control.unless</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BEDE</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Repeat  fg=68=#719CDF ─── -->
+    <dict>
+      <key>name</key>
+      <string>Repeat</string>
+      <key>scope</key>
+      <string>keyword.control.loop, keyword.control.for, keyword.control.while, keyword.control.do, keyword.control.each</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#719CDF</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Keyword (special: super, yield, …)  fg=168=#E17899 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Keyword Special</string>
+      <key>scope</key>
+      <string>keyword.other, keyword.control.return, keyword.control.yield, keyword.control.import, keyword.control.from, keyword.control.as, keyword.control.pass, keyword.control.break, keyword.control.continue</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E17899</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Exception  fg=161=#E12672 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Exception</string>
+      <key>scope</key>
+      <string>keyword.control.exception, keyword.control.raise, keyword.control.try, keyword.control.except, keyword.control.catch, keyword.control.finally, keyword.control.throw</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E12672</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Function  fg=187=#DFDEBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Function</string>
+      <key>scope</key>
+      <string>entity.name.function, entity.name.method, support.function, entity.other.attribute-name.pseudo-class, meta.function-call entity.name.function</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DFDEBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Identifier  fg=217=#FFBFBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Identifier</string>
+      <key>scope</key>
+      <string>variable, variable.other, variable.language, meta.definition.variable variable.other</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFBFBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Type  fg=179=#DFBC72 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Type</string>
+      <key>scope</key>
+      <string>entity.name.type, entity.name.class, entity.name.struct, entity.name.enum, entity.name.trait, entity.name.interface, support.type, support.class</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DFBC72</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Structure / Namespace  fg=116=#97DDDF ─── -->
+    <dict>
+      <key>name</key>
+      <string>Structure / Namespace</string>
+      <key>scope</key>
+      <string>entity.name.namespace, entity.name.module, entity.name.package</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#97DDDF</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Operator  fg=186=#DEDD99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Operator</string>
+      <key>scope</key>
+      <string>keyword.operator</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DEDD99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Delimiter  fg=137=#BE9873 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Delimiter</string>
+      <key>scope</key>
+      <string>punctuation.separator, punctuation.terminator, punctuation.accessor, meta.brace.curly, meta.brace.round, meta.brace.square</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#BE9873</string>
+      </dict>
+    </dict>
+
+    <!-- ─── PreProc / Macro / Include  fg=143=#BDBB72 (PreProc fg)
+         Note: Define/Macro/Include use fg=173=#E19972  ─── -->
+    <dict>
+      <key>name</key>
+      <string>Preprocessor</string>
+      <key>scope</key>
+      <string>meta.preprocessor, keyword.control.import.include, keyword.control.directive</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#BDBB72</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Define / Macro / Include  fg=173=#E19972 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Define / Macro / Include</string>
+      <key>scope</key>
+      <string>keyword.control.import, keyword.other.import, keyword.other.include, entity.name.function.preprocessor, meta.preprocessor.macro</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E19972</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Special  fg=216=#FFBD98 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Special</string>
+      <key>scope</key>
+      <string>constant.character.escape, constant.other.placeholder, constant.other.color</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFBD98</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Error  fg=252=#D9D9D9  bg=52=#730B00 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Error</string>
+      <key>scope</key>
+      <string>invalid, invalid.illegal, invalid.deprecated</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#D9D9D9</string>
+        <key>background</key>
+        <string>#730B00</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Underlined  fg=181=#E0BEBC ─── -->
+    <dict>
+      <key>name</key>
+      <string>Underlined</string>
+      <key>scope</key>
+      <string>markup.underline, markup.underline.link</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E0BEBC</string>
+        <key>fontStyle</key>
+        <string>underline</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Todo  fg=161=#E12672  bg=235=#333233 ─── -->
+    <dict>
+      <key>name</key>
+      <string>TODO / FIXME</string>
+      <key>scope</key>
+      <string>comment.line.todo, comment.block.todo, keyword.other.todo, keyword.other.fixme</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E12672</string>
+        <key>background</key>
+        <string>#333233</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Title / Heading  fg=181=#E0BEBC ─── -->
+    <dict>
+      <key>name</key>
+      <string>Title / Heading</string>
+      <key>scope</key>
+      <string>entity.name, markup.heading, markup.heading.setext, punctuation.definition.heading, entity.name.section</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E0BEBC</string>
+        <key>fontStyle</key>
+        <string>bold</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Bold  fg=222=#FFDE99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Bold</string>
+      <key>scope</key>
+      <string>markup.bold, punctuation.definition.bold</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFDE99</string>
+        <key>fontStyle</key>
+        <string>bold</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Italic  fg=109=#98BCBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Italic</string>
+      <key>scope</key>
+      <string>markup.italic, punctuation.definition.italic</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BCBD</string>
+        <key>fontStyle</key>
+        <string>italic</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Inline Code  fg=73=#6FBCBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Inline Code</string>
+      <key>scope</key>
+      <string>markup.inline.raw, markup.raw.block</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#6FBCBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Inserted (diff)  fg=108=#98BC99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Inserted</string>
+      <key>scope</key>
+      <string>markup.inserted, diff.inserted</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BC99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Deleted (diff)  fg=174=#E09B99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Deleted</string>
+      <key>scope</key>
+      <string>markup.deleted, diff.deleted</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E09B99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Markup Changed (diff)  bg=240=#6B6B6B ─── -->
+    <dict>
+      <key>name</key>
+      <string>Markup Changed</string>
+      <key>scope</key>
+      <string>markup.changed, diff.changed</string>
+      <key>settings</key>
+      <dict>
+        <key>background</key>
+        <string>#6B6B6B</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Tag  fg=173=#E19972 ─── -->
+    <dict>
+      <key>name</key>
+      <string>HTML Tag</string>
+      <key>scope</key>
+      <string>entity.name.tag, punctuation.definition.tag</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E19972</string>
+      </dict>
+    </dict>
+
+    <!-- ─── HTML Attribute  fg=217=#FFBFBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>HTML Attribute</string>
+      <key>scope</key>
+      <string>entity.other.attribute-name</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFBFBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── CSS Property Name  fg=186=#DEDD99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>CSS Property</string>
+      <key>scope</key>
+      <string>support.type.property-name.css, support.type.property-name.scss, support.type.property-name.less</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DEDD99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── CSS Property Value  fg=109=#98BCBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>CSS Property Value</string>
+      <key>scope</key>
+      <string>support.constant.property-value.css, meta.property-value.css</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#98BCBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── CSS Selector  fg=179=#DFBC72 ─── -->
+    <dict>
+      <key>name</key>
+      <string>CSS Selector</string>
+      <key>scope</key>
+      <string>entity.other.attribute-name.class.css, entity.other.attribute-name.id.css, entity.other.attribute-name.pseudo-class.css, entity.other.attribute-name.pseudo-element.css</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DFBC72</string>
+      </dict>
+    </dict>
+
+    <!-- ─── JSON Key  fg=217=#FFBFBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>JSON Key</string>
+      <key>scope</key>
+      <string>support.type.property-name.json, meta.structure.dictionary.json string.quoted.double.json</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFBFBD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Class  fg=31=#0099BD ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Class</string>
+      <key>scope</key>
+      <string>source.ruby entity.name.type.class, source.ruby keyword.control.class</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#0099BD</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Regexp  fg=186=#DEDD99 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Regexp</string>
+      <key>scope</key>
+      <string>source.ruby string.regexp</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DEDD99</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Regexp Delimiter  fg=168=#E17899 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Regexp Delimiter</string>
+      <key>scope</key>
+      <string>source.ruby punctuation.definition.string.begin.ruby, source.ruby punctuation.definition.string.end.ruby, source.ruby string.regexp punctuation.definition.string</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#E17899</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Array Delimiter  fg=67=#7299BC ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Array Delimiter</string>
+      <key>scope</key>
+      <string>source.ruby punctuation.section.array</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#7299BC</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Curly Block Delimiter  fg=144=#BDBC98 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Curly Block Delimiter</string>
+      <key>scope</key>
+      <string>source.ruby punctuation.section.scope</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#BDBC98</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Ruby Predefined Identifier  fg=230=#FFFFDF ─── -->
+    <dict>
+      <key>name</key>
+      <string>Ruby Predefined Identifier</string>
+      <key>scope</key>
+      <string>source.ruby variable.language.ruby, source.ruby support.variable</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#FFFFDF</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Directory / URL  fg=187=#DFDEBD ─── -->
+    <dict>
+      <key>name</key>
+      <string>URL / Path</string>
+      <key>scope</key>
+      <string>markup.underline.link, string.other.link.title.markdown</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DFDEBD</string>
+        <key>fontStyle</key>
+        <string>underline</string>
+      </dict>
+    </dict>
+
+    <!-- ─── Question / Warning  fg=179=#DFBC72 ─── -->
+    <dict>
+      <key>name</key>
+      <string>Warning</string>
+      <key>scope</key>
+      <string>message.error, keyword.control.debug</string>
+      <key>settings</key>
+      <dict>
+        <key>foreground</key>
+        <string>#DFBC72</string>
+      </dict>
+    </dict>
+
+  </array>
+  <key>uuid</key>
+  <string>4B4B4B00-DEAD-BEEF-8000-SEOUL256DARK0</string>
+</dict>
+</plist>
