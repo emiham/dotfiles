@@ -182,6 +182,7 @@ layer-rule {
 window-rule {
     match title="Steam Big Picture Mode"
     match app-id="<NULL>" title=".*Steam.*"
+    match app-id="gamescope"
     open-fullscreen true
 }
 window-rule {
