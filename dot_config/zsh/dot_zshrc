@@ -165,7 +165,6 @@ alias la="l -A"
 alias n="newsraft"
 alias y="newsraft -f $XDG_CONFIG_HOME/newsraft/feeds-youtube"
 alias c="ikhal && vdirsyncer sync &> /dev/null"
-alias ss="$HOME/code/smoked-salmon/.venv/bin/python3 ~/code/smoked-salmon/run.py"
 alias g="git-st"
 alias gt='git log --graph --full-history --all --color \ --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
 alias z="zi"
