@@ -4,4 +4,4 @@ Description=Starts game mode when a Dualsense controller connects
 [Service]
 ; Environment="DISPLAY=:0"
 Type=simple
-ExecStart=/home/emil/.local/scripts/game_mode
+ExecStart=/home/emil/code/scripts/game_mode
