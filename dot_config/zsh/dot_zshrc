@@ -300,6 +300,37 @@ rrmdir() {
   done
 }
 
+preview() {
+  local input="$1"
+  local ext="${input:e}"
+
+  local -A fmt_map
+  fmt_map=(
+    rst  html
+    md   html
+    tex  pdf
+    docx html
+    odt  html
+    csv  html
+  )
+
+  local -A opener_map
+  opener_map=(
+    html qutebrowser
+    pdf  zathura
+  )
+
+  local dest_fmt="${fmt_map[$ext]}"
+  if [[ -z "$dest_fmt" ]]; then
+    echo "preview: unsupported file type '$ext'" >&2
+    return 1
+  fi
+
+  local opener="${opener_map[$dest_fmt]:-xdg-open}"
+  local tmpfile=$(mktemp --suffix=".$dest_fmt")
+  pandoc "$input" -o "$tmpfile" && "$opener" "$tmpfile"
+}
+
 smart_ctrl_z() {
   # Try to bring the most recent stopped job to foreground
   fg 2>/dev/null && return
