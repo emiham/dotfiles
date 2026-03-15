@@ -8,5 +8,6 @@ Requires=niri.service
 
 [Service]
 Type=oneshot
+ExecStartPre=/usr/bin/sleep 20
 ExecStart=foot -T morning morning
 RemainAfterExit=true
