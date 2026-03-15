@@ -13,7 +13,7 @@ export XDG_PUBLICSHARE_DIR=""
 export XDG_RUNTIME_DIR="/run/user/$UID"
 export XDG_SCREENSHOTS_DIR="$HOME/pics/screenshots"
 export XDG_STATE_HOME="$HOME/.local/state"
-export XDG_TEMPLATES_DIR=""
+export XDG_TEMPLATES_DIR="$HOME/docs/templates"
 export XDG_VIDEOS_DIR="$HOME/vids"
 
 export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
