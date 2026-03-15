@@ -263,6 +263,7 @@ image/jpeg=swayimg.desktop;gimp.desktop;
 image/png=swayimg.desktop;gimp.desktop;
 image/vnd.dxf=org.inkscape.Inkscape.desktop;
 image/webp=swayimg.desktop;
+image/bmp=swayimg.desktop;gimp.desktop;
 r-scheme-handler/chrome=firefox.desktop;
 text/calendar=nvim.desktop;
 text/plain=nvim.desktop;
