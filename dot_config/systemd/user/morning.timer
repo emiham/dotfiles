@@ -2,7 +2,6 @@
 Description=Run morning routine on first boot of day
 
 [Timer]
-OnBootSec=0
 OnCalendar=06:00
 Persistent=true
 
