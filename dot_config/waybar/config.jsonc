@@ -14,6 +14,7 @@
 		"battery",
 		// "custom/anki",
 		"custom/tasks",
+		"custom/mail",
 		"custom/weather",
 		"clock"
 	],
@@ -193,5 +194,15 @@
 			"<span color='#d75f87' size='6pt'>󰣳</span>",
 			"<span color='#d75f87' size='6pt'>󰣳</span>"
 		]
+	},
+	"custom/mail": {
+		"exec": "sb-mail",
+		"return-type": "json",
+		"format-icons": {
+			"0": "",
+			"default": "󰇰"
+		},
+		"interval": 30,
+		"format": "<span color='#add4fb' size='6pt'>{icon}</span> <span color='#d0d0d0'>{text}</span>"
 	}
 }
