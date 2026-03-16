@@ -1,0 +1,9 @@
+[Unit]
+Description=Send clipboard to phone via kdeconnect-cli
+
+[Service]
+Type=simple
+ExecStart=wl-paste -t text --watch bash -c 'kdeconnect-cli -d fded4ed5_4b14_4801_8b1f_baf90fd01aa0 --share-text "$(</dev/stdin)"'
+
+[Install]
+WantedBy=default.target
