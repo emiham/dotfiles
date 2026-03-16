@@ -6,6 +6,6 @@ tlsOptions:
 username: {{ (keepassxc "Google").UserName }}
 password: {{ keepassxcAttribute "Google" "App password" }}
 onNewMail: mbsync gmail
-onNewMailPost: mail_notify
+onNewMailPost: ~/code/scripts/mail/mail_notify
 boxes:
   - INBOX

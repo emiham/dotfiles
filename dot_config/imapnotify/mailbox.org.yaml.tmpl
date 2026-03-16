@@ -6,6 +6,6 @@ tlsOptions:
 username: {{ (keepassxc "mailbox.org").UserName }}
 password: {{ (keepassxc "mailbox.org").Password }}
 onNewMail: mbsync mailbox.org
-onNewMailPost: mail_notify
+onNewMailPost: ~/code/scripts/mail/mail_notify
 boxes:
   - INBOX

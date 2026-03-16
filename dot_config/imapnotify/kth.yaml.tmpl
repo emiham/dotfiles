@@ -6,6 +6,6 @@ tlsOptions:
 username: {{ (keepassxc "KTH").UserName }}
 password: "{{ (keepassxc "KTH").Password }}"
 onNewMail: mbsync kth
-onNewMailPost: mail_notify
+onNewMailPost: ~/code/scripts/mail/mail_notify
 boxes:
   - INBOX
