@@ -74,23 +74,41 @@ keymap:
 
       # Picker
       Super-D:
-        launch: ["rofi", "-show", "drun"]
+        launch:
+          - "rofi"
+          - "-show"
+          - "drun"
+          - "-drun-match-fields"
+          - "name,generic"
+          - "-drun-show-actions"
+          - "-run-command"
+          - "uwsm app -- {cmd}"
       Super-Shift-D:
-        launch: ["rofi", "-show", "run", "-run-command", "uwsm app -- {cmd}"]
+        launch:
+          - "rofi"
+          - "-show"
+          - "run"
+          - "-run-command"
+          - "uwsm app -- {cmd}"
       Super-N:
         remap:
           y:
-            launch: ["dmenu-watchlater"]
+            launch:
+              - "dmenu-watchlater"
           b:
-            launch: ["dmenu-books"]
+            launch:
+              - "dmenu-books"
           a:
             launch:
-              [
-                "/home/emil/code/malpv/.venv/bin/python",
-                "/home/emil/code/malpv/main.py",
-              ]
+              - "/home/emil/code/malpv/.venv/bin/python"
+              - "/home/emil/code/malpv/main.py"
           g:
-            launch: ["rofi", "-modi", "games", "-show", "games"]
+            launch:
+              - "rofi"
+              - "-modi"
+              - "games"
+              - "-show"
+              - "games"
       Super-Z:
         launch: ["dmenu-system"]
       Super-LeftBrace:
