@@ -21,7 +21,7 @@ return {
         args = {
           "--indent-size",
           "2",
-          "$FILENAME",
+          "-",
         },
       },
     },
