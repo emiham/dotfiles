@@ -10,7 +10,7 @@
 		"custom/disk#media",
 		"cpu",
 		"memory",
-		"systemd-failed-units",
+		// "systemd-failed-units",
 		"battery",
 		// "custom/anki",
 		"custom/tasks",
