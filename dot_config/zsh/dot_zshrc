@@ -148,6 +148,7 @@ alias cp="cp -i"
 alias mkdir="mkdir -p"
 alias df="df -h"
 alias du="du -h"
+alias restart-failed="systemctl --user --failed --no-legend | awk '{print $2}' | xargs -r systemctl --user restart"
 
 alias sz="exec zsh"
 alias ez="nvim $XDG_CONFIG_HOME/zsh/.zshrc"
