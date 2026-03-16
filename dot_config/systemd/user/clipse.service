@@ -1,0 +1,13 @@
+[Unit]
+Description=Clipse Clipboard Manager
+Documentation=https://github.com/savedra1/clipse
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/usr/bin/clipse -listen
+
+[Install]
+WantedBy=default.target
