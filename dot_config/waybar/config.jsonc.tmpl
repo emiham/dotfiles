@@ -11,8 +11,10 @@
 		"cpu",
 		"memory",
 		// "systemd-failed-units",
+		{{- if eq .chezmoi.hostname "aisaka" }}
 		"battery",
 		"network",
+		{{- end }}
 		// "custom/anki",
 		"custom/tasks",
 		"custom/mail",
