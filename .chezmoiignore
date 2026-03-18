@@ -20,6 +20,7 @@
 .config/mozc # Mostly log/db, but does seem to have keybinds which I'm not sure if I've changed or not
 .config/nvim/.luarc.json
 .config/nvim/spell
+.config/nvim/lazy-lock.json
 .config/systemd/user/*.wants
 .config/tmux/plugins
 .config/unity3d # Saves should be saved elsewhere, config could be added for some games
