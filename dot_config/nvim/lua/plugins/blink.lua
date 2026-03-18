@@ -1,7 +1,7 @@
 return {
   "saghen/blink.cmp",
   lazy = false, -- lazy loading handled internally
-  version = "*",
+  version = "1.*", -- wait for stable v2
   dependencies = {
     "Kaiser-Yang/blink-cmp-git",
     "rafamadriz/friendly-snippets",
