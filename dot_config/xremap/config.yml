@@ -318,3 +318,9 @@ keymap:
     remap:
       Control-Shift-P:
         launch: ["firefox", "--private-window"]
+
+modmap:
+  - name: Laptop
+    remap:
+      RightCtrl: 102ND
+
