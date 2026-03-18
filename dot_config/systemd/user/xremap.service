@@ -8,7 +8,7 @@ StandardOutput=journal
 StandardError=journal
 Restart=always
 ; Environment=RUST_LOG=DEBUG
-ExecStart=xremap --watch .config/xremap/config.yml --device 'USB Keyboard','Logitech','Wii','Corne' --ignore 'USB Keyboard System Control','USB Keyboard Consumer Control'
+ExecStart=xremap --watch .config/xremap/config.yml --device 'USB Keyboard','Logitech','Wii','Corne','AT Translated Set 2 keyboard' --ignore 'USB Keyboard System Control','USB Keyboard Consumer Control'
 
 [Install]
 WantedBy=graphical-session.target
