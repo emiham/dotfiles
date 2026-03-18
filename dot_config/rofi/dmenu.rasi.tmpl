@@ -1,7 +1,7 @@
 * {
 	background-color: #3a3a3a;
 	text-color:       #d0d0d0;
-	font:             "Monospace 10px";
+	font:             "Monospace {{ .font_size_px }}px";
 	border-bottom-style: "solid";
 	border-bottom-width: 2px;
 	border-bottom-color: red;
@@ -11,8 +11,9 @@ window {
 	anchor:           north;
 	location:         north;
 	y-offset:         -25;
+	y-offset:         -{{ add .font_size_px 15 }};
 	width:            100%;
-	height:           23;
+	height:           {{ add .font_size_px 13 }};
 	children:         [ horibox ];
 }
 
