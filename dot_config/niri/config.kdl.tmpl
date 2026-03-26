@@ -22,7 +22,7 @@ gestures {
 }
 cursor {
     xcursor-theme "oreo_white_cursors"
-    xcursor-size 16
+    xcursor-size {{ .cursor_size }}
     // hide-when-typing
     hide-after-inactive-ms 1000
 }
@@ -107,6 +107,9 @@ workspace "1"
 workspace "2"
 window-rule {
     draw-border-with-background false
+}
+window-rule {
+    open-maximized-to-edges true
 }
 window-rule {
     match app-id="^anki$" title="^Browse"
