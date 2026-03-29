@@ -108,9 +108,11 @@ workspace "2"
 window-rule {
     draw-border-with-background false
 }
+{{- if eq .chezmoi.hostname "aisaka" }}
 window-rule {
     open-maximized-to-edges true
 }
+{{- end }}
 window-rule {
     match app-id="^anki$" title="^Browse"
     open-maximized-to-edges true
