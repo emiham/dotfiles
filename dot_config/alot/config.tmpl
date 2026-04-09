@@ -3,7 +3,8 @@ quit_on_last_bclose = True
 editor_cmd = nvim
 initial_command = search tag:inbox
 search_statusbar = {querystring}, {input_queue} {result_count} / {total_messages}
-attachment_prefix = ~/dl
+attachment_prefix = $XDG_DOWNLOAD_DIR
+hooksfile = $XDG_CONFIG_HOME/alot/hooks.py
 
 [bindings]
   m = compose --template default
@@ -11,19 +12,25 @@ attachment_prefix = ~/dl
 
   [[thread]]
     a = untag inbox; untag new; tag archive; bclose; refresh
-    d = untag inbox; untag new; tag trash; bclose; refresh
+    d = untag inbox; untag new; tag trash; call github_mark_read; bclose; refresh
     v = pipeto urlscan 2>/dev/null
     q = bclose; refresh
     h = bclose; refresh
     c = pipeto /home/emil/.local/scripts/khard-add-email
+    U = call hooks.unsubscribe(ui)
   [[search]]
     a = tag archive; untag new; untag inbox
-    d = tag trash; untag new; untag inbox
+    d = tag trash; untag new; call github_mark_read; untag inbox
     q = bclose
     l = untag unread; select; fold *; unfold tag:unread; move last; unfold
+    U = call hooks.unsubscribe(ui)
     enter = untag unread; select; fold *; unfold tag:unread; move last; unfold
     / = refineprompt
     f = forward
+    S = call hooks.schedule(ui)
+  [[envelope]]
+    q = bclose; refresh
+
 
 [tags]
   [[flagged]]
@@ -54,6 +61,8 @@ attachment_prefix = ~/dl
     translated = 󰊍
   [[probably_trash]]
     translated = 
+  [[sendat-.*]]
+    translated = 󰥔
 
 [accounts]
   [[mailbox.org]]
