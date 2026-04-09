@@ -111,8 +111,6 @@ keymap:
               - "games"
       Super-Z:
         launch: ["dmenu-system"]
-      Super-LeftBrace:
-        launch: ["dmenu-focus"]
       Super-V:
         launch: ["dmenu-paste"]
       Super-U:
@@ -323,4 +321,3 @@ modmap:
   - name: Laptop
     remap:
       RightCtrl: 102ND
-
