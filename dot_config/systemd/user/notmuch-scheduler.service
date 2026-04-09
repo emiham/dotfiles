@@ -1,0 +1,10 @@
+[Unit]
+Description=Check notmuch for scheduled drafts and send them
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/emil/code/scripts/mail/mail_schedule
+
+[Install]
+WantedBy=default.target
