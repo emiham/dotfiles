@@ -44,6 +44,8 @@
 	browse = !git-browse
 	add-untracked = !git status --porcelain -z | grep -z "^??" | cut -z -c4- | xargs -0 git add
 	fork = "!f() { \\\n  gh repo fork --remote --remote-name fork --clone=false; \\\n}; f"
+	most-changed = !git log --format=format: --name-only --since=\"1 year ago\" | sort | uniq -c | sort -nr | head -20
+	contributors = !git shortlog -sn --no-merges
 
 [commit]
 	template = ~/.config/git/gitmessage
