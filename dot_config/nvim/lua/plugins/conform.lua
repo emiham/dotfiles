@@ -45,6 +45,7 @@ return {
       rust = { "rustfmt" },
       java = { "google-java-format" },
       kdl = { "kdlfmt" },
+      go = { "gofmt" },
     },
     format_on_save = function(bufnr)
       local bufname = vim.api.nvim_buf_get_name(bufnr)
