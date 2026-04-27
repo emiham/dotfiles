@@ -12,7 +12,7 @@ hooksfile = $XDG_CONFIG_HOME/alot/hooks.py
 
   [[thread]]
     a = untag inbox; untag new; tag archive; bclose; refresh
-    d = untag inbox; untag new; tag trash; call github_mark_read; bclose; refresh
+    d = untag inbox; untag new; tag trash; call hooks.github_mark_read(ui); bclose; refresh
     v = pipeto urlscan 2>/dev/null
     q = bclose; refresh
     h = bclose; refresh
@@ -20,7 +20,7 @@ hooksfile = $XDG_CONFIG_HOME/alot/hooks.py
     U = call hooks.unsubscribe(ui)
   [[search]]
     a = tag archive; untag new; untag inbox
-    d = tag trash; untag new; call github_mark_read; untag inbox
+    d = tag trash; untag new; call hooks.github_mark_read(ui); untag inbox
     q = bclose
     l = untag unread; select; fold *; unfold tag:unread; move last; unfold
     U = call hooks.unsubscribe(ui)

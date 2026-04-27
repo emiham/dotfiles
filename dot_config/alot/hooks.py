@@ -70,7 +70,8 @@ def preview_attachments(ui=None):
 
 
 def github_mark_read(ui):
-    if "notifications@github.com" in ui.current_buffer.envelope.get_all("From")[0]:
+    authors = ui.current_buffer.get_selected_thread().get_authors_string()
+    if "notifications@github.com" in authors:
         msg = ui.current_buffer.get_selected_message()
         msgtext = str(msg.get_email())
         r = r"img src='(https://github.com/notifications/beacon/.*.gif)'"
