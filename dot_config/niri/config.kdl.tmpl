@@ -259,30 +259,36 @@ binds {
     Mod+Shift+L {
         move-column-right
     }
-    Mod+G {
+    Mod+dead_diaeresis {
         focus-column-first
     }
-    Mod+Shift+G {
+    Mod+Dollar {
         focus-column-last
     }
-    Mod+Ctrl+G {
+    Mod+Shift+dead_circumflex {
         move-column-to-first
     }
-    Mod+Ctrl+Shift+G {
+    Mod+Shift+Dollar {
         move-column-to-last
     }
-    Mod+Left {
-        focus-monitor-left
+    Mod+G {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "-s" "first"
     }
-    Mod+Down {
-        focus-monitor-down
+    Mod+Shift+G {
+        spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "-s" "last"
     }
-    Mod+Up {
-        focus-monitor-up
-    }
-    Mod+Right {
-        focus-monitor-right
-    }
+    // Mod+Left {
+    //     focus-monitor-left
+    // }
+    // Mod+Down {
+    //     focus-monitor-down
+    // }
+    // Mod+Up {
+    //     focus-monitor-up
+    // }
+    // Mod+Right {
+    //     focus-monitor-right
+    // }
     Mod+Shift+Left {
         move-column-to-monitor-left
     }
@@ -301,6 +307,12 @@ binds {
     // Mod+K {
     //     spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "prev" "-s" "-z" "scratch" "anki" "chat"
     // }
+    Mod+Down {
+        move-workspace-down
+    }
+    Mod+Up {
+        move-workspace-up
+    }
     Mod+Shift+Ctrl+Left {
         move-workspace-to-monitor-left
     }
@@ -448,4 +460,3 @@ binds {
         spawn "nirius" "toggle-follow-mode"
     }
 }
-
