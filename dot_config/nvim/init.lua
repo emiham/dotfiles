@@ -8,31 +8,6 @@ vim.o.foldexpr = "nvim_treesitter#foldexpr()"
 
 vim.o.winborder = "single"
 
--- Bootstrap Lazy
--- TODO 0.12 We can do this with vim.pack.add({ 'https://github.com/folke/lazy.nvim' }) now!
--- Or just move away from Lazy
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
-end
-vim.opt.rtp:prepend(lazypath)
-
-require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-  },
-  change_detection = {
-    enabled = false,
-  },
-})
-
 vim.g.did_load_filetypes = 1
 
 vim.diagnostic.config({
@@ -101,21 +76,9 @@ vim.keymap.set(
 vim.api.nvim_create_user_command("UpdateEverything", function()
   local headless = #vim.api.nvim_list_uis() == 0
 
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "MasonUpdateAllComplete",
-    once = true,
-    callback = function()
-      require("lazy").sync({
-        wait = true,
-        show = false,
-      })
-      vim.cmd("TSUpdate")
-      vim.api.nvim_echo({ { "\n" } }, false, {})
-      if headless then vim.cmd("qa") end
-    end,
-  })
-
-  vim.cmd("MasonUpdateAll")
+  vim.pack.update()
+  if headless then vim.cmd("qa") end
+  vim.cmd("TSUpdate")
 end, {})
 
 require("autocommands")
@@ -266,6 +229,11 @@ vim.keymap.del("n", "gO")
 vim.keymap.del("i", "<C-S>")
 
 require("niri_maximizer").setup()
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<leader>u", require("undotree").open)
+
+vim.cmd("packadd nohlsearch")
 
 vim.keymap.set(
   "v",
