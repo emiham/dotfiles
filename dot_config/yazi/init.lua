@@ -34,3 +34,5 @@ require("mime-ext.local"):setup({
   -- then fallback to Yazi's preset `mime.local` plugin, which uses `file(1)`
   fallback_file1 = false,
 })
+
+require("recycle-bin"):setup()
