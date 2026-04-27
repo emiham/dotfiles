@@ -529,6 +529,14 @@ builtin zle -N my-cd-forward
   done
 }
 
+function _alt_tab() {
+  cd - >/dev/null
+  zle reset-prompt
+}
+
+zle -N _alt_tab
+bindkey '\e\t' _alt_tab
+
 setopt auto_pushd
 setopt INTERACTIVE_COMMENTS
 setopt LONG_LIST_JOBS
