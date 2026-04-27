@@ -96,6 +96,23 @@ __git_other_files () {
 
 antidote load
 fast-theme XDG:seoul256 &> /dev/null
+source /home/emil/.cache/antidote/github.com/junegunn/fzf-git.sh/fzf-git.sh
+
+fzf-git-add-completion() {
+    if [[ $LBUFFER == "git add "* ]]; then
+        local files=$(_fzf_git_files)
+
+        if [[ -n $files ]]; then
+            LBUFFER="${LBUFFER}${files}"
+        fi
+        zle redisplay
+    else
+        zle expand-or-complete
+    fi
+}
+
+zle -N fzf-git-add-completion
+bindkey '^I' fzf-git-add-completion
 
 HISTSIZE=10000
 SAVEHIST=10000
