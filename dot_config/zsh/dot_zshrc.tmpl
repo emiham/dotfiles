@@ -316,6 +316,8 @@ rrmdir() {
       fi
       rmdir "$dir" 2>/dev/null || true
     done < <(find "$target" -depth -type d -empty)
+
+    rmdir "$target"
   done
 }
 
