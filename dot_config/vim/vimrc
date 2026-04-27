@@ -319,6 +319,8 @@ syntax enable
 " Word wrap
 set wrap linebreak
 
+set breakindent breakindentopt=list:-1
+
 set showcmd
 set noshowmode
 
