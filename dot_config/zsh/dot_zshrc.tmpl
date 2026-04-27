@@ -187,8 +187,6 @@ alias y="newsraft -f $XDG_CONFIG_HOME/newsraft/feeds-youtube"
 alias c="ikhal && vdirsyncer sync &> /dev/null"
 alias g="git-st"
 alias gt='git log --graph --full-history --all --color \ --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
-alias z="zi"
-alias zg='zoxide --basedir "$(git rev-parse --show-toplevel 2>/dev/null)"'
 alias tw='timew'
 
 alias htop="htop -t"
@@ -554,7 +552,11 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export _ZO_FZF_OPTS="--select-1" _ZO_EXCLUDE_DIRS="$HOME/dl/torrents"
-(( $+commands[zoxide] )) && eval "$(zoxide init zsh)"
+if (( $+commands[zoxide] )); then
+  export _ZO_FZF_OPTS="--select-1" _ZO_EXCLUDE_DIRS="$HOME/dl/torrents"
+  eval "$(zoxide init zsh)"
+  alias z="zi"
+  alias zg='zoxide --basedir "$(git rev-parse --show-toplevel 2>/dev/null)"'
+fi
 
 # vim:foldmethod=marker:foldlevel=0
