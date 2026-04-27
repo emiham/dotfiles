@@ -49,6 +49,7 @@ export MPD_PORT=6600
 export MYPY_CACHE_DIR="$XDG_CACHE_HOME/mypy"
 # export NIRI_DISABLE_SYSTEM_MANAGER_NOTIFY=1
 export NLTK_DATA=$HOME/code/nltk_data/
+export NOTMUCH_CONFIG=$XDG_CONFIG_HOME/notmuch/default/config
 export NPM_CONFIG_USERCONFIG="$XDG_CONFIG_HOME/npmrc"
 export NUGET_PACKAGES="$XDG_CACHE_HOME/nuget"
 export NVM_DIR="$HOME/.nvm"
