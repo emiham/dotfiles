@@ -206,14 +206,14 @@ augroup spell
   autocmd FileType todo setlocal nospell
 augroup end
 
-augroup skeleton
-  autocmd!
-  autocmd BufNewFile * call s:LoadSkeleton()
-augroup end
-
 augroup whitespace
   autocmd  BufWritePre        *\(.md\)\@<!        :%s/\s\+$//e
   autocmd  BufWritePre        *.md                :%s/\(\([^ ]\) $\)\|\(   \+$\)/\2/e
+augroup end
+
+augroup skeleton
+  autocmd!
+  autocmd BufNewFile * call s:LoadSkeleton()
 augroup end
 
 function! s:LoadSkeleton() abort
@@ -229,6 +229,54 @@ function! s:LoadSkeleton() abort
     execute '0r ' . fnameescape(l:skeleton)
   endif
 endfunction
+
+function! s:LoadSkeleton() abort
+  let l:filename = expand('%:t')
+  let l:ext = expand('%:e')
+
+  " 1. Sanitize the path (remove $HOME to keep the skeleton dir clean)
+  let l:relative_path = substitute(expand('%:p:h'), expand($HOME), 'home', '')
+  let l:parts = split(l:relative_path, '/')
+  let l:found = 0
+
+  " 2. Walk up the directory tree
+  while len(l:parts) > 0
+    let l:current_subpath = join(l:parts, '/')
+    let l:base_path = $VIMDIR . '/skeletons/' . l:current_subpath . '/'
+
+    " Check for exact filename match (e.g., .../skeletons/home/proj/Makefile)
+    let l:skel_file = l:base_path . l:filename
+    " Check for extension match in this path (e.g., .../skeletons/home/proj/skeleton.py)
+    let l:skel_ext = (l:ext != '') ? (l:base_path . 'skeleton.' . l:ext) : ''
+
+    if filereadable(l:skel_file)
+      execute '0r ' . fnameescape(l:skel_file)
+      let l:found = 1
+      break
+    elseif l:skel_ext != '' && filereadable(l:skel_ext)
+      execute '0r ' . fnameescape(l:skel_ext)
+      let l:found = 1
+      break
+    endif
+
+    call remove(l:parts, -1)
+  endwhile
+
+  " 3. Final Global Fallback (only if extension exists and nothing found yet)
+  if !l:found && l:ext != ''
+    let l:gen_skeleton = $VIMDIR . '/skeletons/skeleton.' . l:ext
+    if filereadable(l:gen_skeleton)
+      execute '0r ' . fnameescape(l:gen_skeleton)
+    endif
+  endif
+
+  " Cleanup trailing newline
+  if line('$') > 1 && getline('$') == ''
+    $delete _
+  endif
+endfunction
+
+command! CreateSkeleton execute 'edit ' . $VIMDIR . '/skeletons/' . substitute(expand('%:p:h'), expand($HOME), 'home', '') . '/skeleton.' . expand('%:e')
 
 let g:c_syntax_for_h = 1
 
