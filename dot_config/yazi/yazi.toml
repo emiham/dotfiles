@@ -40,3 +40,6 @@ url   = "remote://*"
 run   = "mime-ext.remote"
 prio  = "high"
 group = "mime"
+
+[tasks]
+suppress_preload = true
