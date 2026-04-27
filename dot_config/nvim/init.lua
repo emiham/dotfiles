@@ -266,3 +266,10 @@ vim.keymap.del("n", "gO")
 vim.keymap.del("i", "<C-S>")
 
 require("niri_maximizer").setup()
+
+vim.keymap.set(
+  "v",
+  "//",
+  [[y:%s/<C-r>0//g<Left><Left>]],
+  { desc = "Replace selection" }
+)
