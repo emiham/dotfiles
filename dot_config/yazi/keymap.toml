@@ -54,6 +54,11 @@ on = ["m"]
 run = "create --dir"
 
 [[mgr.prepend_keymap]]
+on = ["z"]
+run = "plugin zoxide"
+desc = "Jump to a directory via zoxide"
+
+[[mgr.prepend_keymap]]
 on = ["R","b"]
 run = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
