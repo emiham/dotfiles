@@ -6,7 +6,7 @@ BindsTo=awww.service
 
 [Service]
 Type=simple
-ExecStart=/home/emil/code/mpd/mpd_coverwall/mpd_coverwall_wayland
+ExecStart=python /home/emil/code/mpd/mpd_coverwall/mpd_coverwall.py
 Restart=always
 
 [Install]
