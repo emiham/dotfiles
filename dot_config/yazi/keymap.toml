@@ -36,10 +36,9 @@ run = "plugin jump-to-char"
 desc = "Jump to char"
 
 [[mgr.prepend_keymap]]
-on = ["å"]
-run = '''
-    shell --confirm /usr/bin/kdeconnect-cli -d fded4ed5_4b14_4801_8b1f_baf90fd01aa0 --share "$@"
-'''
+on   = [ "å" ]
+run  = "plugin kdeconnect-send"
+desc = "Send selected files via KDE Connect"
 
 [[mgr.prepend_keymap]]
 on = ["g", "l"]
