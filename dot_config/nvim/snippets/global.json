@@ -11,13 +11,6 @@
     ],
     "description": "Bash script template with strict mode"
   },
-  "today": {
-    "prefix": "today",
-    "body": [
-      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"
-    ],
-    "description": "Put the date in (Y-m-D) format"
-  },
   "Chezmoi field": {
     "prefix": "chezmoi",
     "body": [
