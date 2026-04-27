@@ -19,15 +19,6 @@ return {
           enable = true,
           disable = { "yaml", "python" },
         },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "<leader>si",
-            scope_incremental = "<C-s>",
-            node_incremental = "<C-j>",
-            node_decremental = "<C-k>",
-          },
-        },
         disable = function(lang, buf)
           local max_filesize = 100 * 1024
           local ok, stats =
