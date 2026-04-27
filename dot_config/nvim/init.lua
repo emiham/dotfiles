@@ -1,6 +1,3 @@
-vim.g.python3_host_prog =
-  vim.fn.expand("$XDG_DATA_HOME/nvim/py3nvim/bin/python3")
-
 vim.cmd("source ~/.config/vim/vimrc")
 
 -- vimrc overrides
