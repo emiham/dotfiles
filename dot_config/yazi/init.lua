@@ -6,11 +6,12 @@ require("git"):setup()
 
 Status:children_add(function()
   local h = cx.active.current.hovered
-  if not h then return nil
+  if not h then
+    return nil
   else
     return ui.Line({
       ui.Span(os.date("%Y-%m-%d %H:%M", tostring(h.cha.mtime):sub(1, 10)))
-      :fg("blue"),
+        :fg("blue"),
       ui.Span(" "),
     })
   end
