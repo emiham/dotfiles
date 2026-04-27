@@ -7,3 +7,4 @@ MichaelAquilina/zsh-autoswitch-virtualenv
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zdharma-continuum/fast-syntax-highlighting
+sindresorhus/pure
