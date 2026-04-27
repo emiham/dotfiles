@@ -9,7 +9,7 @@ run = "yank --cut"
 
 [[mgr.prepend_keymap]]
 on = ["D"]
-run = 'shell -- trash-put "$@"'
+run = "shell -- trash-put %s"
 
 [[input.prepend_keymap]]
 on = ["<Esc>"]
