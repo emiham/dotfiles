@@ -274,3 +274,6 @@ filters = [
 	"workspace",
 	"directory",
 ]
+
+[ai]
+enabled = false
