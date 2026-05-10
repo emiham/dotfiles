@@ -165,6 +165,7 @@ x-scheme-handler/mailto=alot-compose.desktop
 x-scheme-handler/mspa=unofficial-homestuck-collection.desktop
 x-scheme-handler/msteams=teams.desktop
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop
+message/rfc822=nvim.desktop;
 
 [Added Associations]
 application/json=nvim.desktop;
@@ -308,5 +309,6 @@ video/x-sgi-movie=mpv.desktop;
 video/x-theora+ogg=mpv.desktop;
 video/x-theora=mpv.desktop;
 x-scheme-handler/ftp=firefox.desktop;
+message/rfc822=nvim.desktop;
 
 [Removed Associations]
