@@ -181,6 +181,7 @@ set wildmenu wildmode=longest:full,full wildignore=*.class,*.o,*.obj
 " Indentation
 filetype plugin indent on
 set autoindent smarttab
+autocmd BufNewFile,BufRead *rc if &ft == '' | setfiletype dosini | endif
 
 if has("autocmd")
   autocmd  BufReadPost        *                                 if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
