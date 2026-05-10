@@ -229,6 +229,7 @@ vim.keymap.del("n", "gO")
 vim.keymap.del("i", "<C-S>")
 
 require("niri_maximizer").setup()
+require("sticky_g").setup()
 
 vim.cmd("packadd nvim.undotree")
 vim.keymap.set("n", "<leader>u", require("undotree").open)
