@@ -9,6 +9,10 @@
       {
         "language": "lua",
         "path": "./neovim.json"
+      },
+      {
+        "language": "mail",
+        "path": "./mail.json"
       }
     ]
   }
