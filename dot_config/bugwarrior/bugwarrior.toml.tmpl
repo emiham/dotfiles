@@ -1,0 +1,30 @@
+[general]
+targets = ["gh_personal", "gh_beets", "gh_mpvacious"]
+inline_links = false
+description_length = 0
+annotation_length = 0
+
+[gh_personal]
+service = "github"
+login = "emiham"
+token = '{{ keepassxcAttribute "GitHub" "Bugwarrior token" }}'
+username = "emiham"
+description_template = "{{"{{githubtitle}}"}}"
+
+[gh_beets]
+service = "github"
+login = "emiham"
+token = '{{ keepassxcAttribute "GitHub" "Bugwarrior token" }}'
+query = "repo:beetbox/beets is:issue state:open author:@emiham"
+include_user_issues = false
+include_user_repos = false
+description_template = "{{"{{githubtitle}}"}}"
+
+[gh_mpvacious]
+service = "github"
+login = "emiham"
+token = '{{ keepassxcAttribute "GitHub" "Bugwarrior token" }}'
+query = "repo:Ajatt-Tools/mpvacious is:issue state:open author:@emiham"
+include_user_issues = false
+include_user_repos = false
+description_template = "{{"{{githubtitle}}"}}"
