@@ -1,7 +1,6 @@
 vim.pack.add({
   "https://github.com/mfussenegger/nvim-jdtls",
   "https://github.com/saghen/blink.cmp",
-  "https://github.com/nvim-telescope/telescope.nvim",
   { src = "https://github.com/neovim/nvim-lspconfig" },
 })
 
@@ -46,13 +45,13 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration", unpack(opts) })
 
     vim.keymap.set("n", "gd", function()
-      require("telescope.builtin").lsp_definitions({ reuse_win = true })
+      require("mini.extra").pickers.lsp({ scope = "definition" })
     end, { desc = "LSP: Go to definition", unpack(opts) })
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Hover documentation", unpack(opts) })
 
     vim.keymap.set("n", "gi", function()
-      require("telescope.builtin").lsp_implementations({ reuse_win = true })
+      require("mini.extra").pickers.lsp({ scope = "implementation" })
     end, { desc = "LSP: Go to implementation", unpack(opts) })
 
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature help", unpack(opts) })
@@ -66,27 +65,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end, { desc = "LSP: List workspace folders", unpack(opts) })
 
     vim.keymap.set("n", "<leader>D", function()
-      require("telescope.builtin").lsp_type_definitions({ reuse_win = true })
+      require("mini.extra").pickers.lsp({ scope = "type_definition" })
     end, { desc = "LSP: Go to type definition", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "LSP: Rename symbol", unpack(opts) })
+    vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "Rename symbol", unpack(opts) })
 
-    vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Code action", unpack(opts) })
+    vim.keymap.set({ "n", "v" }, "<leader>lc", vim.lsp.buf.code_action, { desc = "Code actions", unpack(opts) })
 
     vim.keymap.set("n", "gr", function()
-      require("telescope.builtin").lsp_references({ reuse_win = true })
+      require("mini.extra").pickers.lsp({ scope = "references" })
     end, { desc = "LSP: Find references", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "LSP: Format buffer", unpack(opts) })
+    vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format buffer", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>ci", function() require("telescope.builtin").lsp_incoming_calls({ reuse_win = true }) end, { desc = "LSP: Incoming Calls", unpack(opts) })
-    vim.keymap.set("n", "<leader>lh", function()
-      if vim.lsp.inlay_hint.is_enabled() then
-        vim.lsp.inlay_hint.enable(false, nil)
-      else
-        vim.lsp.inlay_hint.enable(true, nil)
-      end
-    end, { desc = "Toggle type hints", unpack(opts) })
+    vim.keymap.set("n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle type hints", unpack(opts) })
     -- stylua: ignore end
   end,
 })
@@ -204,7 +196,19 @@ local lsps = {
       },
     },
   },
-  { "typescript-language-server" },
+  {
+    "typescript-language-server",
+    {
+      compilerOptions = {
+        module = "commonjs",
+        target = "es6",
+        checkJs = false,
+      },
+      exclude = {
+        "node_modules",
+      },
+    },
+  },
   {
     "harper_ls",
     {
@@ -253,6 +257,7 @@ local lsps = {
       },
     },
   },
+  { "svelte" },
 }
 
 for _, lsp in pairs(lsps) do
