@@ -181,6 +181,7 @@ set wildmenu wildmode=longest:full,full wildignore=*.class,*.o,*.obj
 " Indentation
 filetype plugin indent on
 set autoindent smarttab
+setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 autocmd BufNewFile,BufRead *rc if &ft == '' | setfiletype dosini | endif
 
 if has("autocmd")
@@ -192,20 +193,6 @@ if has("autocmd")
   autocmd  BufWritePost       ~/.config/mpv/input.conf          silent !echo load-input-conf %:p | socat - /tmp/mpvsocket
   autocmd  BufWritePost       ~/.local/build/dwmblocks/config.h !cd ~/.local/build/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
 endif
-
-augroup indent
-  autocmd!
-  autocmd FileType python                                                               setlocal expandtab   shiftwidth=4 softtabstop=4 tabstop=4
-  autocmd FileType sh,bash,haskell,yaml,json,lua,text,markdown,tex,html,css,sql,vim,dts setlocal expandtab   shiftwidth=2 softtabstop=2 tabstop=2
-  autocmd FileType c,cpp,java                                                           setlocal expandtab   shiftwidth=4 softtabstop=4 tabstop=4
-  autocmd FileType go                                                                   setlocal noexpandtab shiftwidth=4 softtabstop=0 tabstop=4
-augroup end
-
-augroup spell
-  autocmd!
-  autocmd FileType text,markdown,tex setlocal spell spelllang=sv,en_us,cjk tw=79
-  autocmd FileType todo setlocal nospell
-augroup end
 
 augroup whitespace
   autocmd  BufWritePre        *\(.md\)\@<!        :%s/\s\+$//e
