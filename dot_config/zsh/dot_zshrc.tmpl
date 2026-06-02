@@ -124,7 +124,13 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zcompcache"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-compinit -d "$XDG_CACHE_HOME/zcompdump-$ZSH_VERSION"
+local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
+local plugins_txt="${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
+if [[ "$plugins_txt" -nt "$zcompdump" || "${ZDOTDIR:-$HOME}/.zshrc" -nt "$zcompdump" ]]; then
+  compinit
+else
+  compinit -C
+fi
 _comp_options+=(globdots) # Include hidden files
 
 autoload -U promptinit; promptinit
@@ -452,8 +458,23 @@ zle -N fzf-task-widget _fzf_taskwarrior_ids
 bindkey '^T' fzf-task-widget
 bindkey '^F' fzf-file-widget
 
+load_completion_cache() {
+    local cmd=$1
+    local cache_file="$XDG_CACHE_HOME/$cmd.zsh"
+    if (( $+commands[$cmd] )); then
+        [[ ! -f "$cache_file" ]] && ${(k)commands[$cmd]} completions zsh > "$cache_file"
+        source "$cache_file"
+    fi
+}
+
+load_completion_cache xremap
+load_completion_cache niri
 
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
+if (( $+commands[atuin] )); then
+    [[ ! -f "$XDG_CACHE_HOME/atuin.zsh" ]] && atuin init zsh --disable-up-arrow > "$XDG_CACHE_HOME/atuin.zsh"
+    source "$XDG_CACHE_HOME/atuin.zsh"
+fi
 
 # Dynamic window title
 autoload -Uz add-zsh-hook
