@@ -98,6 +98,19 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "<leader>lf", function() vim.lsp.buf.format({ async = true }) end, { desc = "Format buffer", unpack(opts) })
 
+    vim.keymap.set("v", "<leader>lf", function()
+      local esc = vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+      vim.api.nvim_feedkeys(esc, "x", false)
+
+      vim.lsp.buf.format({
+        async = true,
+        range = {
+          ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+          ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+        },
+      })
+    end, { desc = "Format selection", unpack(opts) })
+
     vim.keymap.set("n", "<leader>lh", function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end, { desc = "Toggle type hints", unpack(opts) })
     -- stylua: ignore end
   end,
