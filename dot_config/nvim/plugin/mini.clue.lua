@@ -36,8 +36,9 @@ miniclue.setup({
   },
 
   clues = {
-    { mode = "n", keys = "<Leader>f", desc = "+Telescope" },
+    { mode = "n", keys = "<Leader>f", desc = "+Pick" },
     { mode = "n", keys = "<Leader>g", desc = "+Git" },
+    { mode = "n", keys = "<Leader>l", desc = "+LSP" },
     {
       mode = "n",
       keys = "<Leader>s",
