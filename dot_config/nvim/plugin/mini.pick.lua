@@ -29,7 +29,7 @@ vim.keymap.set(
 )
 vim.keymap.set(
   "n",
-  "<leader>fr",
+  "<leader>fR",
   function() require("mini.pick").builtin.resume() end,
   { desc = "Resume Last Search" }
 )
@@ -62,4 +62,16 @@ vim.keymap.set(
   "<leader>fd",
   function() require("mini.extra").pickers.diagnostic() end,
   { desc = "Diagnostics" }
+)
+vim.keymap.set(
+  "n",
+  "<leader>fr",
+  function() require("mini.extra").pickers.lsp({ scope = "references" }) end,
+  { desc = "References" }
+)
+vim.keymap.set(
+  "n",
+  "z=",
+  function() require("mini.extra").pickers.spellsuggest() end,
+  { desc = "Spelling suggestions" }
 )
