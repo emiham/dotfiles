@@ -62,3 +62,8 @@ desc = "Jump to a directory via zoxide"
 on = ["R","b"]
 run = "plugin recycle-bin"
 desc = "Open Recycle Bin menu"
+
+[[mgr.prepend_keymap]]
+on = ["<Tab>"]
+run = "cd $OLDPWD"
+desc = "Jump to last directory"
