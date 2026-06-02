@@ -73,14 +73,6 @@ vim.keymap.set(
   { desc = "Toggle Diagnostics" }
 )
 
-vim.api.nvim_create_user_command("UpdateEverything", function()
-  local headless = #vim.api.nvim_list_uis() == 0
-
-  vim.pack.update()
-  if headless then vim.cmd("qa") end
-  vim.cmd("TSUpdate")
-end, {})
-
 require("autocommands")
 
 local function split_quotes()
