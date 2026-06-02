@@ -79,7 +79,7 @@ error = 'dark red'
 [global]
     footer = 'standout','default','%(16_alternate)s','%(16_gray_bg)s','%(256_alternate)s','%(256_gray_bg)s'
     body = 'default','default','%(16_text_fg)s','%(16_text_bg)s','%(256_text_fg)s','%(256_text_bg)s'
-    notify_error = 'standout','default','%(16_text_fg)s','%(error)s','%(256_text_fg)s','%(error)s'
+    notify_error = 'standout','default','%(16_focus_fg)s','%(error)s','%(256_focus_fg)s','%(error)s'
     notify_normal = 'default','default','%(16_text_fg)s','%(16_gray_bg)s','%(256_text_fg)s','%(256_gray_bg)s'
     prompt = 'default','default','%(16_text_fg)s','%(16_gray_bg)s','%(256_text_fg)s','%(256_gray_bg)s'
     tag = 'default','default','%(16_tags_fg)s','%(16_tags_bg)s','%(256_tags_fg)s','%(256_tags_bg)s'
