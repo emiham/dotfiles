@@ -2,11 +2,14 @@
 Description=Idle manager for Wayland
 Documentation=man:swayidle(1)
 PartOf=graphical-session.target
+After=niri.service
+Requires=niri.service
 
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle
+ExecStartPost=pkill -SIGUSR1 swayidle
 Restart=always
 
 [Install]
-WantedBy=river-session.target
+WantedBy=graphical-session.target
