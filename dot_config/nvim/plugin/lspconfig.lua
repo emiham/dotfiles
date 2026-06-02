@@ -45,8 +45,28 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "LSP: Go to declaration", unpack(opts) })
 
     vim.keymap.set("n", "gd", function()
-      require("mini.extra").pickers.lsp({ scope = "definition" })
-    end, { desc = "LSP: Go to definition", unpack(opts) })
+      local clients = vim.lsp.get_clients({ bufnr = 0 })
+      local offset_encoding = (clients[1] and clients[1].offset_encoding) or "utf-8"
+
+      local params = vim.lsp.util.make_position_params(0, offset_encoding)
+
+      vim.lsp.buf_request(0, "textDocument/definition", params, function(err, result, ctx)
+        if err or not result or vim.tbl_isempty(result) then
+          require("mini.extra").pickers.lsp({ scope = "definition" })
+          return
+        end
+
+        local locations = vim.islist(result) and result or { result }
+
+        if #locations == 1 then
+          local client = vim.lsp.get_client_by_id(ctx.client_id)
+          local encoding = client and client.offset_encoding or "utf-8"
+          vim.lsp.util.show_document(locations[1], encoding, {focus = true})
+        else
+          require("mini.extra").pickers.lsp({ scope = "definition" })
+        end
+      end)
+    end, { desc = "Go to definition" })
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Hover documentation", unpack(opts) })
 
