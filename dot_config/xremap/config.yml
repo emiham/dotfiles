@@ -291,6 +291,17 @@ keymap:
       Control-Shift-P:
         launch: ["firefox", "--private-window"]
 
+  - name: Homestuck
+    exact_match: true
+    application:
+      only:
+        - "unofficial-homestuck-collection"
+    remap:
+      h: LEFT
+      j: DOWN
+      k: UP
+      l: RIGHT
+
 modmap:
   - name: Laptop
     remap:
