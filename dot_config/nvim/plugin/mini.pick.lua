@@ -3,7 +3,11 @@ vim.pack.add({
   "https://github.com/nvim-mini/mini.extra",
 })
 
-require("mini.pick").setup()
+require("mini.pick").setup({
+  mappings = {
+    choose_marked = "<C-CR>",
+  },
+})
 
 vim.keymap.set(
   "n",
