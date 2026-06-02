@@ -90,27 +90,8 @@ keymap:
           - "run"
           - "-run-command"
           - "uwsm app -- {cmd}"
-      Super-N:
-        remap:
-          y:
-            launch:
-              - "dmenu-watchlater"
-          b:
-            launch:
-              - "dmenu-books"
-          a:
-            launch:
-              - "/home/emil/code/malpv/.venv/bin/python"
-              - "/home/emil/code/malpv/main.py"
-          g:
-            launch:
-              - "rofi"
-              - "-modi"
-              - "games"
-              - "-show"
-              - "games"
       Super-Z:
-        launch: ["dmenu-system"]
+        launch: ["uwsm", "app", "--", "dmenu-system"]
       Super-V:
         launch: ["dmenu-paste"]
       Super-U:
