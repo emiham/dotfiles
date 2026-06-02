@@ -188,6 +188,19 @@ keymap:
       # Super-M:
       #   launch: ["mpvclip"]
 
+      # Browser
+      Super-W:
+        remap:
+          t:
+            launch:
+              [
+                "rofi",
+                "-modi",
+                "brotab:~/code/scripts/dmenu/rofi-brotab",
+                "-show",
+                "brotab",
+              ]
+
       # Goofy stuff
       F22:
         launch:
