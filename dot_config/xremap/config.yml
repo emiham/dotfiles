@@ -100,34 +100,14 @@ keymap:
         remap:
           a:
             launch: ["dmenu-task-add"]
+          Shift-a:
+            launch: ["dmenu-task-annotate-latest"]
           d:
             launch: ["dmenu-task-do"]
-          t:
-            launch: ["dmenu-task-today"]
-          e:
-            launch:
-              [
-                "uwsm",
-                "app",
-                "--",
-                "foot",
-                "-T",
-                "tasks - 浮",
-                "nvim",
-                "/home/emil/sync/todo/todo.txt",
-              ]
           w:
-            launch:
-              [
-                "uwsm",
-                "app",
-                "--",
-                "foot",
-                "-T",
-                "tasks - 浮",
-                "nvim",
-                "/home/emil/sync/todo/done.txt",
-              ]
+            launch: ["task-add-from-browser"]
+          e:
+            launch: ["uwsm", "app", "--", "foot", "taskwarrior-tui"]
           l:
             launch: ["tasks-onclick"]
           n:
