@@ -50,7 +50,7 @@ vim.keymap.set(
 
 vim.keymap.set(
   { "n", "v" },
-  "<leader>gitsigns",
+  "<leader>gs",
   ":Gitsigns stage_hunk<CR>",
   { desc = "Stage Hunk" }
 )
