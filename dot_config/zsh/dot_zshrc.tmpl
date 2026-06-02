@@ -547,20 +547,12 @@ unsetopt CLOBBER # Don't overwrite files with >, use >| to force
 
 source $HOME/code/scripts/tmux/autocomplete-from-tmux
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-  eval "$__conda_setup"
-else
-  if [ -f "/usr/etc/profile.d/conda.sh" ]; then
-    . "/usr/etc/profile.d/conda.sh"
-  else
-    export PATH="/usr/bin:$PATH"
-  fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+conda() {
+    unset -f conda
+    __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+    eval "$__conda_setup"
+    conda "$@"
+}
 
 if (( $+commands[zoxide] )); then
   export _ZO_FZF_OPTS="--select-1" _ZO_EXCLUDE_DIRS="$HOME/dl/torrents"
