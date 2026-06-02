@@ -36,3 +36,18 @@ require("mime-ext.local"):setup({
 })
 
 require("recycle-bin"):setup()
+
+rt.plugin.previewers:insert(1, {
+  mime = "image/heic",
+  run = "heic",
+})
+
+rt.plugin.previewers:insert(1, {
+  url = "**/*.svelte",
+  run = "code",
+})
+
+-- rt.plugin.previewers:insert(-1, {
+--   url = "*",
+--   run = "binary",
+-- })
