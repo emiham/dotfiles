@@ -260,17 +260,17 @@ rrmdir() {
   shift $((OPTIND - 1))
 
   if [[ $# -eq 0 ]]; then
-    echo "Usage: rmdir_recursive [-n] [-v] dir..." >&2
+    echo "Usage: rrmdir [-n] [-v] dir..." >&2
     return 2
   fi
 
   for target in "$@"; do
     if [[ ! -e $target ]]; then
-      echo "rmdir_recursive: '$target' does not exist" >&2
+      echo "rrmdir: '$target' does not exist" >&2
       continue
     fi
     if [[ ! -d $target ]]; then
-      echo "rmdir_recursive: '$target' is not a directory" >&2
+      echo "rrmdir: '$target' is not a directory" >&2
       continue
     fi
 
@@ -289,10 +289,10 @@ rrmdir() {
       if [[ $verbose -eq 1 ]]; then
         printf "rmdir '%s'\n" "$dir"
       fi
-      rmdir "$dir" 2>/dev/null || true
+      rmdir --ignore-fail-on-non-empty "$dir" 2>/dev/null || true
     done < <(find "$target" -depth -type d -empty)
 
-    rmdir "$target"
+    rmdir --ignore-fail-on-non-empty "$target" 2>/dev/null || true
   done
 }
 
