@@ -99,23 +99,6 @@ __git_other_files () {
 
 antidote load
 fast-theme XDG:seoul256 &> /dev/null
-source /home/emil/.cache/antidote/github.com/junegunn/fzf-git.sh/fzf-git.sh
-
-fzf-git-add-completion() {
-    if [[ $LBUFFER == "git add "* ]]; then
-        local files=$(_fzf_git_files)
-
-        if [[ -n $files ]]; then
-            LBUFFER="${LBUFFER}${files}"
-        fi
-        zle redisplay
-    else
-        zle expand-or-complete
-    fi
-}
-
-zle -N fzf-git-add-completion
-bindkey '^I' fzf-git-add-completion
 
 HISTSIZE=10000
 SAVEHIST=10000
@@ -149,6 +132,20 @@ prompt pure
 zstyle :prompt:pure:git:stash show yes
 zstyle :prompt:pure:prompt:success color green
 zstyle :prompt:pure:suspended_jobs color 14
+
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+# NOTE: don't use escape sequences (like '%F{red}%d%f') here, fzf-tab will ignore them
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# force zsh not to show completion menu, which allows fzf-tab to capture the unambiguous prefix
+zstyle ':completion:*' menu no
+# preview directory's content with eza when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+# NOTE: This may lead to unexpected behavior since some flags break this plugin. See Aloxaf/fzf-tab#455.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 
 # Aliases ▼
 alias sudo="sudo " # Allow using sudo with aliases
@@ -435,10 +432,26 @@ tmux-scratch-session
 # fi
 # exec tmux attach-session -d -t • >/dev/null 2>&1
 
-source <(fzf --zsh)
+source <(FZF_CTRL_T_COMMAND="" fzf --zsh)
+source /home/emil/.cache/antidote/github.com/junegunn/fzf-git.sh/fzf-git.sh
 
-(( $+commands[xremap] )) && eval "$(xremap --completions zsh)"
-(( $+commands[niri] )) && eval "$(niri completions zsh)"
+_fzf_taskwarrior_ids() {
+    local tasks=$(task status:pending export | jq -r '.[] | "\(.id)\t\(.project // "none")\t\(.description)"' | column -t -s $'\t')
+
+    local formatted_ids=$(echo "$tasks" | fzf -m --reverse --print0 | awk 'BEGIN{RS="\0"; ORS=" "} {print $1}')
+
+    if [[ -n "$formatted_ids" ]]; then
+        LBUFFER+="${formatted_ids% }"
+    fi
+
+    zle reset-prompt
+}
+
+zle -N fzf-task-widget _fzf_taskwarrior_ids
+
+bindkey '^T' fzf-task-widget
+bindkey '^F' fzf-file-widget
+
 
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 
