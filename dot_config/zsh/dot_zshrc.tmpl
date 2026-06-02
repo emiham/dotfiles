@@ -1,4 +1,5 @@
 # TODO mkdir -p /home/emil/.mail/{mailbox.org,gmail,gmail-trackers,kth}
+# zmodload zsh/zprof
 
 set zle_bracketed_paste
 autoload -Uz bracketed-paste-magic url-quote-magic
@@ -545,7 +546,6 @@ unsetopt BG_NICE
 unsetopt CLOBBER # Don't overwrite files with >, use >| to force
 
 source $HOME/code/scripts/tmux/autocomplete-from-tmux
-zmodload zsh/zprof
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
