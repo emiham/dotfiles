@@ -186,23 +186,26 @@ autocmd BufNewFile,BufRead *rc if &ft == '' | setfiletype dosini | endif
 
 if has("autocmd")
   autocmd  BufReadPost        *                                 if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  autocmd  BufWritePost       *                                 if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod +x <afile> | endif | endif
+  augroup chmod_shebang
+    autocmd!
+    autocmd BufWritePost * if getline(1) =~ '^#!' && getline(1) =~ '/bin/' | call system('chmod +x ' . shellescape(expand('<afile>'))) | endif
+  augroup end
   autocmd  BufNewFile         *                                 startinsert | norm GA
   autocmd  BufRead            alot.*.eml                        execute "normal /^$/\n" | execute "normal /^$/\n" | execute ":startinsert"
   autocmd  BufWritePost       ~/.config/mpv/mpv.conf            silent !echo load-config-file %:p | socat - /tmp/mpvsocket
   autocmd  BufWritePost       ~/.config/mpv/input.conf          silent !echo load-input-conf %:p | socat - /tmp/mpvsocket
   autocmd  BufWritePost       ~/.local/build/dwmblocks/config.h !cd ~/.local/build/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
+
+  augroup whitespace
+    autocmd  BufWritePre        *\(.md\)\@<!        :%s/\s\+$//e
+    autocmd  BufWritePre        *.md                :%s/\(\([^ ]\) $\)\|\(   \+$\)/\2/e
+  augroup end
+
+  augroup skeleton
+    autocmd!
+    autocmd BufNewFile * call s:LoadSkeleton()
+  augroup end
 endif
-
-augroup whitespace
-  autocmd  BufWritePre        *\(.md\)\@<!        :%s/\s\+$//e
-  autocmd  BufWritePre        *.md                :%s/\(\([^ ]\) $\)\|\(   \+$\)/\2/e
-augroup end
-
-augroup skeleton
-  autocmd!
-  autocmd BufNewFile * call s:LoadSkeleton()
-augroup end
 
 function! s:LoadSkeleton() abort
   let l:ext = expand('%:e')
