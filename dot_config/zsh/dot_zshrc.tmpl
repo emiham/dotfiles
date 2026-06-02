@@ -233,35 +233,6 @@ function deadlines {
     fi
 }
 
-function nextsuffix {
-    local name="$1.bak"
-    if [ ! -e "$name" ]; then
-        printf "%s" "$name"
-    else
-        local -i num=2
-        while [ -e "$name$num" ]; do
-            num+=1
-        done
-        printf "%s%d" "$name" "$num"
-    fi
-}
-
-function bak {
-    if [[ "$1" =~ .*.bak[0-9]*$ ]]; then
-	local ori=${1%.bak*}
-	local tmp="$(nextsuffix "$ori")"
-	if [ -e "$ori" ]; then
-	    mv "$ori" "$tmp"
-	    mv "$1" "$ori"
-	    mv "$tmp" "$(nextsuffix "$ori")"
-	else
-	    mv "$1" "$ori"
-	fi
-    else
-	mv "$1" "$(nextsuffix "$1")"
-    fi
-}
-
 function mkcd {
   \mkdir -p "$1"
   cd "$1"
