@@ -232,6 +232,8 @@ local lsps = {
   {
     "typescript-language-server",
     {
+      filetypes = { "typescript" },
+      cmd = { "typescript-language-server", "--stdio" },
       compilerOptions = {
         module = "commonjs",
         target = "es6",
