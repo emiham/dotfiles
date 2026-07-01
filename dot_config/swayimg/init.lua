@@ -1,25 +1,16 @@
--- Example config for Swayimg.
--- This file contains the default configuration used by the application.
-
--- The viewer searches for the config file in the following locations:
--- 1. $XDG_CONFIG_HOME/swayimg/init.lua
--- 2. $HOME/.config/swayimg/init.lua
--- 3. $XDG_CONFIG_DIRS/swayimg/init.lua
--- 4. /etc/xdg/swayimg/init.lua
-
--- General config
-swayimg.set_mode("viewer") -- mode at startup
-swayimg.enable_antialiasing(false) -- anti-aliasing
+swayimg.set_mode("viewer")
+swayimg.enable_antialiasing(false)
 aa = false -- We need to keep track of anti-aliasing state by ourselves
-swayimg.enable_decoration(false) -- window title/buttons/borders
-swayimg.enable_overlay(false) -- window overlay mode
--- swayimg.enable_exif_orientation(true) -- image orientation by EXIF
-swayimg.set_dnd_button("MouseRight") -- drag-and-drop mouse button
+swayimg.enable_decoration(false)
+swayimg.enable_overlay(false)
+swayimg.enable_exif_orientation(true)
+swayimg.set_dnd_button("MouseRight")
 
 -- Image list configuration
 swayimg.imagelist.set_order("alpha") -- list order
 swayimg.imagelist.enable_reverse(false) -- reverse order
 swayimg.imagelist.enable_recursive(false) -- recursive directory reading
+recursive = false -- We need to keep track of recursive state by ourselves
 swayimg.imagelist.enable_adjacent(true) -- add adjacent files from same dir
 -- swayimg.imagelist.enable_fsmon(true) -- enable file system monitoring
 
@@ -48,6 +39,7 @@ swayimg.viewer.limit_preload(3) -- number of images to preload
 swayimg.viewer.set_mark_color(0xff808080) -- mark icon color
 swayimg.viewer.set_text("topleft", { -- top left text block scheme
   "File: {name}",
+  "Path: {path}",
   "Format: {format}",
   "File size: {sizehr}",
   "File time: {time}",
@@ -162,10 +154,13 @@ swayimg.viewer.on_key("Shift-k", function() swayimg.viewer.switch_image("prev_di
 swayimg.viewer.on_key("g", function() swayimg.viewer.switch_image("first") end)
 swayimg.viewer.on_key("Shift-g", function() swayimg.viewer.switch_image("last") end)
 
-swayimg.viewer.on_key("Shift+d", function()
+function trash_image()
   local image = swayimg.viewer.get_image()
-  os.execute("trash-put " .. image.path)
-end)
+  local escaped_path = "'" .. image.path .. "'"
+  os.execute("trash-put " .. escaped_path)
+end
+
+swayimg.viewer.on_key("Shift+d", function() trash_image() end)
 swayimg.viewer.on_key("q", function() swayimg.exit() end)
 swayimg.viewer.on_key("a", function()
   aa = not aa
@@ -190,10 +185,32 @@ swayimg.gallery.on_key("g", function() swayimg.gallery.switch_image("first") end
 swayimg.gallery.on_key("Shift-g", function() swayimg.gallery.switch_image("last") end)
 swayimg.gallery.on_key("Ctrl-u", function() swayimg.gallery.switch_image("pgup") end)
 swayimg.gallery.on_key("Ctrl-d", function() swayimg.gallery.switch_image("pgdown") end)
-swayimg.gallery.on_key("Shift+d", function()
-  local image = swayimg.gallery.get_image()
-  os.execute("trash-put " .. image.path)
-end)
+swayimg.gallery.on_key("Shift+d", function() trash_image() end)
 swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
-swayimg.gallery.on_key("Escape", function() swayimg.set_mode("viewer") end)
+swayimg.viewer.on_key("Escape", function() swayimg.set_mode("gallery") end)
 swayimg.gallery.on_key("q", function() swayimg.exit() end)
+
+swayimg.viewer.on_key("i", function() if swayimg.text.visible() then swayimg.text.hide() else swayimg.text.show() end end)
+swayimg.gallery.on_key("i", function() if swayimg.text.visible() then swayimg.text.hide() else swayimg.text.show() end end)
+
+swayimg.gallery.on_key("Shift+r", function()
+  swayimg.imagelist.enable_recursive(not recursive)
+  if recursive then
+    local cwd = io.popen("pwd -P"):read("*l")
+    local escaped_cwd = cwd:gsub("([%^%$%%%.%*%+%-%?%[%]])", "%%%1")
+
+    local current_images = swayimg.imagelist.get()
+    local targets_to_remove = {}
+
+    for _, item in ipairs(current_images) do
+      if item.path and item.path:match('^' .. escaped_cwd .. '/.+/.+') then
+        table.insert(targets_to_remove, item.path)
+      end
+    end
+
+    swayimg.imagelist.remove(targets_to_remove)
+  else
+    swayimg.imagelist.add(".")
+  end
+  recursive = not recursive
+end)
