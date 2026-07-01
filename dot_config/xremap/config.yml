@@ -41,6 +41,8 @@ keymap:
             launch: ["beets-rate-album"]
           r:
             launch: ["beets-rate-album"]
+          Shift-R:
+            launch: ["rym"]
           Shift-Minus:
             launch: ["/home/emil/code/music-ratings/print"]
           h:
