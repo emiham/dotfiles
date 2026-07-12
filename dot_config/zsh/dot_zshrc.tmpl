@@ -19,6 +19,65 @@ pastefinish() {
 zstyle :bracketed-paste-magic paste-init pasteinit
 zstyle :bracketed-paste-magic paste-finish pastefinish
 
+typeset -g _emoji_redraw_fd=""
+typeset -g _emoji_redraw_pid=""
+typeset -g _emoji_is_redrawing=0
+
+_emoji_redraw_callback() {
+    # Unregister and close the file descriptor passed by ZLE ($1)
+    zle -F "$1"
+    local fd=$1
+    exec {fd}<&-
+    _emoji_redraw_fd=""
+    _emoji_redraw_pid=""
+
+    # Set the guard variable to prevent an infinite loop, redraw, then unset
+    _emoji_is_redrawing=1
+    zle redisplay
+    _emoji_is_redrawing=0
+}
+
+# 2. The Hook: Runs every time ZLE is about to redraw the line (on keystrokes)
+_emoji_flag_check_hook() {
+    # If this redraw was forced by our own callback, ignore it
+    if (( _emoji_is_redrawing )); then
+        return 0
+    fi
+
+    if [[ "$BUFFER" =~ "[$'\U1F1E6'-$'\U1F1FF']|$'\U1F3F3'|$'\U1F3F4'" ]]; then
+        if [[ -n "$_emoji_redraw_pid" ]]; then
+            kill $_emoji_redraw_pid 2>/dev/null
+        fi
+        if [[ -n "$_emoji_redraw_fd" ]]; then
+            zle -F "$_emoji_redraw_fd"
+            local open_fd=$_emoji_redraw_fd
+            exec {open_fd}<&-
+            _emoji_redraw_fd=""
+        fi
+
+        # Start a new background timer subshell (Debounce delay: 0.05 seconds)
+        # It sleeps, then sends a bite of data through a pipe to signal completion
+        exec {_emoji_redraw_fd}< <(sleep 0.05; echo "go")
+        _emoji_redraw_pid=$!
+
+        # Tell ZLE to listen to this file descriptor and call our callback when ready
+        zle -F "$_emoji_redraw_fd" _emoji_redraw_callback
+    fi
+}
+
+_emoji_redraw_init() {
+    # Ensure add-zle-hook-widget is available (Zsh 5.3+)
+    autoload -Uz add-zle-hook-widget 2>/dev/null
+    if [ $? -eq 0 ]; then
+        add-zle-hook-widget zle-line-pre-redraw _emoji_flag_check_hook
+    else
+        # Fallback for older Zsh versions
+        zle-line-pre-redraw-hooks+=(_emoji_flag_check_hook)
+    fi
+}
+
+_emoji_redraw_init
+
 # Break at /.
 WORDCHARS='*?_-[]~=&;!#$%^(){}<>\'
 
