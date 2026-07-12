@@ -1,0 +1,9 @@
+[Unit]
+Description=Power off PC via MQTT
+
+[Service]
+Type=simple
+ExecStart=/home/emil/code/scripts/mqtt/mqtt-poweroff
+
+[Install]
+WantedBy=default.target

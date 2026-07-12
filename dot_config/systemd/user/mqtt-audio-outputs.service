@@ -1,0 +1,9 @@
+[Unit]
+Description=Switch audio outputs via MQTT
+
+[Service]
+Type=simple
+ExecStart=/home/emil/code/scripts/mqtt/mqtt-audio-outputs
+
+[Install]
+WantedBy=default.target
