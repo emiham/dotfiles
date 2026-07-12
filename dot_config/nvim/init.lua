@@ -166,13 +166,6 @@ vim.keymap.set(
   { desc = "Toggle all folds" }
 )
 
-vim.keymap.set(
-  "n",
-  "<leader>m",
-  function() require("minty.huefy").open({ border = true }) end,
-  { desc = "Open color picker" }
-)
-
 -- TODO Move to floating window under cursor
 vim.keymap.set("n", "<leader>i", vim.show_pos, { desc = "Inspect" })
 
