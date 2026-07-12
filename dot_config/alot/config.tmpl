@@ -24,6 +24,7 @@ hooksfile = $XDG_CONFIG_HOME/alot/hooks.py
     q = bclose
     l = untag unread; select; fold *; unfold tag:unread; move last; unfold
     U = call hooks.unsubscribe(ui)
+    R = call hooks.getmail(ui)
     enter = untag unread; select; fold *; unfold tag:unread; move last; unfold
     / = refineprompt
     f = forward
