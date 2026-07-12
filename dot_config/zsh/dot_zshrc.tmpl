@@ -264,7 +264,6 @@ alias gf='echo "\033[0;32m>tfw no gf"'
 alias my_ip="curl http://checkip.amazonaws.com"
 alias plants="topydo -t ~/sync/todo/plants.txt"
 alias cht='function _cht(){ curl cht.sh/$1; }; _cht'
-alias fkill="ps -ef | fzf --header-lines=1 | awk '{print \$2}' | xargs -r -o kill"
 alias tmpvim"nvim $(mktemp)"
 alias fpac="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 alias fyay="pacman -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
