@@ -1,0 +1,9 @@
+[Unit]
+Description=Set volume to MQTT topic
+
+[Service]
+Type=simple
+ExecStart=/home/emil/code/scripts/mqtt/mqtt-volume_set
+
+[Install]
+WantedBy=default.target

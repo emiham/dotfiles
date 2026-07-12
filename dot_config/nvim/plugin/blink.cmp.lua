@@ -88,6 +88,7 @@ require("blink.cmp").setup({
       python = { inherit_defaults = true, "ecolog" },
       sh = { inherit_defaults = true, "ecolog" },
       bash = { inherit_defaults = true, "ecolog" },
+      codecompanion = { "codecompanion" },
     },
     providers = {
       git = {

@@ -128,3 +128,13 @@ async def schedule(ui):
     initial_tagstring = ",".join(sorted(tags)) + "," + send_time
     r = await ui.apply_command(PromptCommand("retag " + initial_tagstring))
     return r
+
+
+def getmail(ui=None):
+    ui.notify("fetching email..")
+    msg = subprocess.Popen(
+        "mbsync -a".split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
+    msg = subprocess.Popen(
+        "mail_notify".split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )

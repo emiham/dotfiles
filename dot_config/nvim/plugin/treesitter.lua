@@ -44,8 +44,9 @@ require("nvim-treesitter").setup({
       lookahead = true,
 
       keymaps = {
-        ["af"] = "@function.outer",
-        ["if"] = "@function.inner",
+        -- NOTE: Currently doing this in mini.ai instead
+        -- ["af"] = "@function.outer",
+        -- ["if"] = "@function.inner",
         ["ac"] = "@class.outer",
         ["ic"] = {
           query = "@class.inner",

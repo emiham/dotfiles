@@ -41,6 +41,8 @@ keymap:
             launch: ["beets-rate-album"]
           r:
             launch: ["beets-rate-album"]
+          Shift-R:
+            launch: ["rym"]
           Shift-Minus:
             launch: ["/home/emil/code/music-ratings/print"]
           h:
@@ -108,6 +110,8 @@ keymap:
             launch: ["task-add-from-browser"]
           e:
             launch: ["uwsm", "app", "--", "foot", "taskwarrior-tui"]
+          Shift-E:
+            launch: ["uwsm", "app", "--", "foot", "task", "edit", "+LATEST"]
           l:
             launch: ["tasks-onclick"]
           n:

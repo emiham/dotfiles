@@ -19,4 +19,4 @@ local function open_youtube_url()
   end
 end
 
-mp.add_key_binding("o", "open-youtube-from-id", open_youtube_url)
+mp.add_key_binding("y", "open-youtube-from-id", open_youtube_url)
