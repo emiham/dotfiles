@@ -110,6 +110,8 @@ keymap:
             launch: ["task-add-from-browser"]
           e:
             launch: ["uwsm", "app", "--", "foot", "taskwarrior-tui"]
+          Shift-E:
+            launch: ["uwsm", "app", "--", "foot", "task", "edit", "+LATEST"]
           l:
             launch: ["tasks-onclick"]
           n:
