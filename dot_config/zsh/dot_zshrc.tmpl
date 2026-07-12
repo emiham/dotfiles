@@ -560,6 +560,13 @@ function zle_yazi {
 zle -N zle_yazi
 bindkey "^[e" zle_yazi
 
+# Use last command's output as argument
+insert-sub() {
+  LBUFFER+='$(!!)'
+}
+zle -N insert-sub
+bindkey '^[r' insert-sub
+
 # History navigation
 function my-redraw-prompt() {
   {
