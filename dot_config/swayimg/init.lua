@@ -105,10 +105,7 @@ swayimg.gallery.set_text("topright", { -- top right text block scheme
 -- bind Enter key to open image in viewer
 swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
 -- bind the left arrow key to select thumbnail on the left side
-swayimg.gallery.on_key(
-  "Left",
-  function() swayimg.gallery.switch_image("left") end
-)
+swayimg.gallery.on_key("Left", function() swayimg.gallery.select("left") end)
 
 --
 -- Other configuration examples
@@ -142,17 +139,17 @@ swayimg.gallery.on_key("Ctrl-p", function()
 end)
 
 -- stylua: ignore start
-swayimg.viewer.on_key("j", function() swayimg.viewer.switch_image("next") end)
-swayimg.viewer.on_key("k", function() swayimg.viewer.switch_image("prev") end)
-swayimg.viewer.on_key("Space", function() swayimg.viewer.switch_image("next") end)
-swayimg.viewer.on_key("n", function() swayimg.viewer.switch_image("next") end)
-swayimg.viewer.on_key("p", function() swayimg.viewer.switch_image("prev") end)
+swayimg.viewer.on_key("j", function() swayimg.viewer.open("next") end)
+swayimg.viewer.on_key("k", function() swayimg.viewer.open("prev") end)
+swayimg.viewer.on_key("Space", function() swayimg.viewer.open("next") end)
+swayimg.viewer.on_key("n", function() swayimg.viewer.open("next") end)
+swayimg.viewer.on_key("p", function() swayimg.viewer.open("prev") end)
 
-swayimg.viewer.on_key("Shift-j", function() swayimg.viewer.switch_image("next_dir") end)
-swayimg.viewer.on_key("Shift-k", function() swayimg.viewer.switch_image("prev_dir") end)
+swayimg.viewer.on_key("Shift-j", function() swayimg.viewer.open("next_dir") end)
+swayimg.viewer.on_key("Shift-k", function() swayimg.viewer.open("prev_dir") end)
 
-swayimg.viewer.on_key("g", function() swayimg.viewer.switch_image("first") end)
-swayimg.viewer.on_key("Shift-g", function() swayimg.viewer.switch_image("last") end)
+swayimg.viewer.on_key("g", function() swayimg.viewer.open("first") end)
+swayimg.viewer.on_key("Shift-g", function() swayimg.viewer.open("last") end)
 
 function trash_image()
   local image = swayimg.viewer.get_image()
@@ -177,14 +174,14 @@ swayimg.viewer.on_key("Minus", function()
   swayimg.viewer.set_abs_scale(scale)
 end)
 
-swayimg.gallery.on_key("h", function() swayimg.gallery.switch_image("left") end)
-swayimg.gallery.on_key("j", function() swayimg.gallery.switch_image("down") end)
-swayimg.gallery.on_key("k", function() swayimg.gallery.switch_image("up") end)
-swayimg.gallery.on_key("l", function() swayimg.gallery.switch_image("right") end)
-swayimg.gallery.on_key("g", function() swayimg.gallery.switch_image("first") end)
-swayimg.gallery.on_key("Shift-g", function() swayimg.gallery.switch_image("last") end)
-swayimg.gallery.on_key("Ctrl-u", function() swayimg.gallery.switch_image("pgup") end)
-swayimg.gallery.on_key("Ctrl-d", function() swayimg.gallery.switch_image("pgdown") end)
+swayimg.gallery.on_key("h", function() swayimg.gallery.select("left") end)
+swayimg.gallery.on_key("j", function() swayimg.gallery.select("down") end)
+swayimg.gallery.on_key("k", function() swayimg.gallery.select("up") end)
+swayimg.gallery.on_key("l", function() swayimg.gallery.select("right") end)
+swayimg.gallery.on_key("g", function() swayimg.gallery.select("first") end)
+swayimg.gallery.on_key("Shift-g", function() swayimg.gallery.select("last") end)
+swayimg.gallery.on_key("Ctrl-u", function() swayimg.gallery.select("pgup") end)
+swayimg.gallery.on_key("Ctrl-d", function() swayimg.gallery.select("pgdown") end)
 swayimg.gallery.on_key("Shift+d", function() trash_image() end)
 swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
 swayimg.viewer.on_key("Escape", function() swayimg.set_mode("gallery") end)
