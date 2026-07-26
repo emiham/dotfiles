@@ -16,7 +16,7 @@ hooksfile = $XDG_CONFIG_HOME/alot/hooks.py
     v = pipeto urlscan 2>/dev/null
     q = bclose; refresh
     h = bclose; refresh
-    c = pipeto /home/emil/.local/scripts/khard-add-email
+    c = pipeto khard-add-email
     U = call hooks.unsubscribe(ui)
   [[search]]
     a = tag archive; untag new; untag inbox
