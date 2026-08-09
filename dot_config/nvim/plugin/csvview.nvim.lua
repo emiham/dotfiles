@@ -29,3 +29,22 @@ require("csvview").setup({
     },
   },
 })
+
+vim.api.nvim_create_user_command("CsvSort", function(opts)
+  local bufnr = vim.api.nvim_get_current_buf()
+  local csvview_util = require("csvview.util")
+
+  local cursor_info = csvview_util.get_cursor(bufnr)
+  if not cursor_info or not cursor_info.pos then
+    vim.notify("Could not detect CSV column under cursor", vim.log.levels.WARN)
+    return
+  end
+
+  local col_idx = cursor_info.pos[2]
+  local flags = opts.args
+
+  local cmd = string.format("%%!csvsort -c %d %s", col_idx, flags)
+  vim.cmd(cmd)
+  vim.cmd.CsvViewDisable()
+  vim.cmd.CsvViewEnable()
+end, { nargs = "*" })
