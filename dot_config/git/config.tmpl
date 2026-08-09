@@ -28,7 +28,7 @@
 	staash = stash --all
 	lg = "!f() { \
 	      git log --graph --abbrev-commit --decorate --date=relative --color=always \
-	      --format=format:'%C(auto)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %C(reset)%x00%G?%x00%an%x00%C(bold yellow)%d%C(reset)' --all -n 15 \"$@\"| \
+	      --format=format:'%C(auto)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %C(reset)%x00%G?%x00%an%x00%C(bold blue)%d%C(reset) %C(yellow)%N%C(reset)' --all -n 15 \"$@\"| \
 	      awk -F'\\0' '{ \
 		      color=\"\\033[31m\"; \
 			      if ($2==\"G\") color=\"\\033[32m\"; \
@@ -115,6 +115,9 @@
 	context = brightblack
 	meta = cyan
 	frag = blue
+
+[color "status"]
+	added = green
 
 [advice]
 statusHints = false
