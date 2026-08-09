@@ -141,12 +141,18 @@ local lsps = {
     },
   },
   {
+    "ty",
+    {
+      settings = { ty = {} },
+    },
+  },
+  {
     "basedpyright",
     {
       settings = {
         basedpyright = {
           analysis = {
-            typeCheckingMode = "standard",
+            typeCheckingMode = "off",
             ignore = { "*" },
             autoSearchPaths = true,
             diagnosticMode = "openFilesOnly",
