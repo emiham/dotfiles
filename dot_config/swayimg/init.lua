@@ -1,43 +1,39 @@
-swayimg.set_mode("viewer")
-swayimg.enable_antialiasing(false)
-aa = false -- We need to keep track of anti-aliasing state by ourselves
-swayimg.enable_decoration(false)
-swayimg.enable_overlay(false)
-swayimg.enable_exif_orientation(true)
-swayimg.set_dnd_button("MouseRight")
+swayimg.mode = "viewer"
+swayimg.antialiasing = false
+swayimg.decoration = false
+swayimg.overlay = false
+swayimg.exif_orientation = true
+swayimg.dnd_button = "MouseRight"
 
--- Image list configuration
-swayimg.imagelist.set_order("alpha") -- list order
-swayimg.imagelist.enable_reverse(false) -- reverse order
-swayimg.imagelist.enable_recursive(false) -- recursive directory reading
-recursive = false -- We need to keep track of recursive state by ourselves
-swayimg.imagelist.enable_adjacent(true) -- add adjacent files from same dir
+swayimg.imagelist.order = "alpha"
+swayimg.imagelist.reverse = false
+swayimg.imagelist.recursive = false
+swayimg.imagelist.adjacent = true
 -- swayimg.imagelist.enable_fsmon(true) -- enable file system monitoring
 
--- Text overlay configuration
-swayimg.text.set_font("monospace") -- font name
-swayimg.text.set_size(14) -- font size in pixels
--- swayimg.text.set_spacing(0) -- line spacing
-swayimg.text.set_padding(10) -- padding from window edge
-swayimg.text.set_foreground(0xffd0d0d0) -- foreground text color
-swayimg.text.set_background(0x00000000) -- text background color
-swayimg.text.set_shadow(0x0d000000) -- text shadow color
-swayimg.text.set_timeout(5) -- layer hide timeout
-swayimg.text.set_status_timeout(3) -- status message hide timeout
-swayimg.text.hide()
+swayimg.text.font = "monospace"
+swayimg.text.size = 14
+-- swayimg.text.spacing = 0
+swayimg.text.padding = 10
+swayimg.text.color = 0xffd0d0d0
+swayimg.text.background = 0x00000000
+swayimg.text.shadow = 0x0d000000
+swayimg.text.timeout = 5
+swayimg.text.status_timeout = 3
+swayimg.text.visible = false
 
 -- Image viewer mode
-swayimg.viewer.set_default_scale("optimal") -- default image scale
-swayimg.viewer.set_default_position("center") -- default image position
-swayimg.viewer.set_drag_button("MouseLeft") -- mouse button to drag image
-swayimg.viewer.set_window_background(0xff3a3a3a) -- window background color
-swayimg.viewer.set_image_chessboard(20, 0xff3a3a3a, 0xff4e4e4e) -- chessboard
-swayimg.viewer.enable_centering(true) -- enable automatic centering
-swayimg.viewer.enable_loop(true) -- enable image list loop mode
-swayimg.viewer.limit_preload(3) -- number of images to preload
--- swayimg.viewer.limit_history(1) -- number of the history cache
-swayimg.viewer.set_mark_color(0xff808080) -- mark icon color
-swayimg.viewer.set_text("topleft", { -- top left text block scheme
+swayimg.viewer.default_scale = "optimal"
+swayimg.viewer.default_position = "center"
+swayimg.viewer.drag_button = "MouseLeft"
+swayimg.viewer.set_window_background(0xff3a3a3a)
+swayimg.viewer.set_image_chessboard(20, 0xff3a3a3a, 0xff4e4e4e)
+swayimg.viewer.autocenter = true
+swayimg.viewer.loop = true
+swayimg.viewer.preload = 3
+-- swayimg.viewer.history = 1
+swayimg.viewer.mark_color = 0xff808080
+swayimg.viewer.set_text("topleft", {
   "File: {name}",
   "Path: {path}",
   "Format: {format}",
@@ -46,96 +42,62 @@ swayimg.viewer.set_text("topleft", { -- top left text block scheme
   "EXIF date: {meta.Exif.Photo.DateTimeOriginal}",
   "EXIF camera: {meta.Exif.Image.Model}",
 })
-swayimg.viewer.set_text("topright", { -- top right text block scheme
+swayimg.viewer.set_text("topright", {
   "Image: {list.index} of {list.total}",
   "Frame: {frame.index} of {frame.total}",
   "Size: {frame.width}x{frame.height}",
 })
-swayimg.viewer.set_text("bottomleft", { -- bottom left text block scheme
-  "Scale: {scale}",
-})
+swayimg.viewer.set_text("bottomleft", { "Scale: {scale}" })
 
--- Key and mouse bindings in viewer mode (example only, not all):
-
--- bind Escape key for exit
-swayimg.viewer.on_key("Escape", function() swayimg.exit() end)
--- bind the left arrow key to move the image to the left by 1/10 of the application window size
-swayimg.viewer.on_key("Left", function()
-  local wnd = swayimg.get_window_size()
-  local pos = swayimg.viewer.get_position()
-  swayimg.viewer.set_abs_position(math.floor(pos.x + wnd.width / 10), pos.y)
-end)
--- bind mouse vertical scroll button with pressed Ctrl to zoom in the image at mouse pointer coordinates
-swayimg.viewer.on_mouse("Ctrl-ScrollUp", function()
+local function zoom(factor)
   local pos = swayimg.get_mouse_pos()
-  local scale = swayimg.viewer.get_scale()
-  scale = scale + scale / 10
-  swayimg.viewer.set_abs_scale(scale, pos.x, pos.y)
-end)
+  local scale = swayimg.viewer.scale
+  swayimg.viewer.set_abs_scale(scale * (1 + factor), pos.x, pos.y)
+end
 
--- Slide show mode, same config as for viewer mode with the following defaults:
-swayimg.slideshow.set_timeout(5) -- timeout to switch image
-swayimg.slideshow.set_default_scale("fit") -- default image scale
-swayimg.slideshow.set_window_background("auto") -- window background mode
--- swayimg.slideshow.limit_history(0) -- number of the history cache
+-- rotate image
+swayimg.viewer.on_key("]", function() swayimg.viewer.rotate(90) end)
+swayimg.viewer.on_key("[", function() swayimg.viewer.rotate(270) end)
+
+-- flip image
+swayimg.viewer.on_key("m", function() swayimg.viewer.flip_vertical() end)
+swayimg.viewer.on_key(
+  "Shift+m",
+  function() swayimg.viewer.flip_horizontal() end
+)
+
+swayimg.slideshow.timeout = 5
+swayimg.slideshow.default_scale = "fit"
+swayimg.slideshow.set_window_background("auto")
+swayimg.slideshow.history = 0
 swayimg.slideshow.set_text("topleft", { "{name}" }) -- top left text block scheme
 
--- Gallery mode
-swayimg.gallery.set_aspect("fill") -- thumbnail aspect ratio
-swayimg.gallery.set_thumb_size(300) -- thumbnail size in pixels
-swayimg.gallery.set_padding_size(5) -- padding between thumbnails
-swayimg.gallery.set_border_size(5) -- border size for selected thumbnail
-swayimg.gallery.set_border_color(0xffaaaaaa) -- border color for selected thumbnail
-swayimg.gallery.set_selected_scale(1.15) -- scale for selected thumbnail
-swayimg.gallery.set_selected_color(0xff404040) -- background color for selected thumbnail
-swayimg.gallery.set_unselected_color(0xff202020) -- background color for unselected thumbnail
-swayimg.gallery.set_window_color(0xff3a3a3a) -- window background color
-swayimg.gallery.limit_cache(0) -- number of thumbnails stored in memory
-swayimg.gallery.enable_preload(false) -- preloading invisible thumbnails
-swayimg.gallery.enable_pstore(false) -- enable persistent storage for thumbnails
-swayimg.gallery.set_text("topleft", { -- top left text block scheme
-  "File: {name}",
-})
-swayimg.gallery.set_text("topright", { -- top right text block scheme
-  "{list.index} of {list.total}",
-})
+swayimg.gallery.aspect = "fill"
+swayimg.gallery.thumb_size = 300
+swayimg.gallery.padding_size = 5
+swayimg.gallery.border_size = 5
+swayimg.gallery.border_color = 0xffaaaaaa
+swayimg.gallery.selected_scale = 1.15
+swayimg.gallery.selected_color = 0xff404040
+swayimg.gallery.unselected_color = 0xff202020
+swayimg.gallery.window_color = 0xff3a3a3a
+swayimg.gallery.cache = 0
+swayimg.gallery.preload = false
+swayimg.gallery.pstore = false
+swayimg.gallery.set_text("topleft", { "File: {name}" })
+swayimg.gallery.set_text("topright", { "{list.index} of {list.total}" })
 
--- Key and mouse bindings in gallery mode (example only, not all):
-
--- bind Enter key to open image in viewer
 swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
--- bind the left arrow key to select thumbnail on the left side
 swayimg.gallery.on_key("Left", function() swayimg.gallery.select("left") end)
-
---
--- Other configuration examples
---
 
 -- force set scale mode on window resize (useful for tiling compositors)
 swayimg.on_window_resize(function()
-  local mode = swayimg.get_mode()
-  if mode ~= "gallery" then swayimg[mode].set_fix_scale("optimal") end
+  if swayimg.mode ~= "gallery" then swayimg[mode].set_fix_scale("optimal") end
 end)
 
--- bind the Delete key in slide show mode to delete the current file and display a status message
-swayimg.slideshow.on_key("Delete", function()
-  local image = swayimg.slideshow.get_image()
-  os.remove(image.path)
-  swayimg.text.set_status("File " .. image.path .. " removed")
-end)
-
--- set a custom window title in gallery mode
 swayimg.gallery.on_image_change(function()
-  local image = swayimg.gallery.get_image()
-  swayimg.set_title("Gallery: " .. image.path)
-end)
-
--- print paths to all marked files by pressing Ctrl-p in gallery mode
-swayimg.gallery.on_key("Ctrl-p", function()
-  local entries = swayimg.imagelist.get()
-  for _, entry in ipairs(entries) do
-    if entry.mark then print(entry.path) end
-  end
+  local image = swayimg.gallery.get_image() or "no image"
+  swayimg.title = "Gallery: " .. image.path
 end)
 
 -- stylua: ignore start
@@ -152,27 +114,24 @@ swayimg.viewer.on_key("g", function() swayimg.viewer.open("first") end)
 swayimg.viewer.on_key("Shift-g", function() swayimg.viewer.open("last") end)
 
 function trash_image()
-  local image = swayimg.viewer.get_image()
+  local image = swayimg[swayimg.mode].get_image()
   local escaped_path = "'" .. image.path .. "'"
   os.execute("trash-put " .. escaped_path)
+  swayimg.text.status = "File " .. image.path .. " trashed"
 end
 
-swayimg.viewer.on_key("Shift+d", function() trash_image() end)
-swayimg.viewer.on_key("q", function() swayimg.exit() end)
-swayimg.viewer.on_key("a", function()
-  aa = not aa
-  swayimg.enable_antialiasing(aa)
+swayimg.viewer.on_key("a", function() swayimg.antialiasing = not swayimg.antialiasing end)
+swayimg.viewer.on_key("Plus", function() zoom(0.1) end)
+swayimg.viewer.on_key("Minus", function() zoom(-0.1) end)
+
+swayimg.viewer.on_mouse("Ctrl-ScrollUp", function() zoom(0.1) end)
+swayimg.viewer.on_mouse("Ctrl-ScrollDown", function() zoom(-0.1) end)
+
+swayimg.viewer.on_key("backspace", function()
+  swayimg.viewer.reset()
 end)
-swayimg.viewer.on_key("Plus", function()
-  local scale = swayimg.viewer.get_scale()
-  scale = scale + scale / 10
-  swayimg.viewer.set_abs_scale(scale)
-end)
-swayimg.viewer.on_key("Minus", function()
-  local scale = swayimg.viewer.get_scale()
-  scale = scale - scale / 10
-  swayimg.viewer.set_abs_scale(scale)
-end)
+
+swayimg.viewer.on_key("Escape", function() swayimg.mode = "gallery" end)
 
 swayimg.gallery.on_key("h", function() swayimg.gallery.select("left") end)
 swayimg.gallery.on_key("j", function() swayimg.gallery.select("down") end)
@@ -182,17 +141,23 @@ swayimg.gallery.on_key("g", function() swayimg.gallery.select("first") end)
 swayimg.gallery.on_key("Shift-g", function() swayimg.gallery.select("last") end)
 swayimg.gallery.on_key("Ctrl-u", function() swayimg.gallery.select("pgup") end)
 swayimg.gallery.on_key("Ctrl-d", function() swayimg.gallery.select("pgdown") end)
-swayimg.gallery.on_key("Shift+d", function() trash_image() end)
-swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
-swayimg.viewer.on_key("Escape", function() swayimg.set_mode("gallery") end)
-swayimg.gallery.on_key("q", function() swayimg.exit() end)
+swayimg.gallery.on_key("Return", function() swayimg.mode = "viewer" end)
+swayimg.gallery.on_key("Ctrl-p", function()
+  -- print paths to all marked files
+  local entries = swayimg.imagelist.get()
+  for _, entry in ipairs(entries) do
+    if entry.mark then print(entry.path) end
+  end
+end)
 
-swayimg.viewer.on_key("i", function() if swayimg.text.visible() then swayimg.text.hide() else swayimg.text.show() end end)
-swayimg.gallery.on_key("i", function() if swayimg.text.visible() then swayimg.text.hide() else swayimg.text.show() end end)
+for _, mode in ipairs({"viewer", "gallery"}) do
+  swayimg[mode].on_key("i", function() swayimg.text.visible = not swayimg.text.visible end)
+  swayimg[mode].on_key("Shift+d", function() trash_image() end)
+  swayimg[mode].on_key("q", function() swayimg.exit() end)
+end
 
 swayimg.gallery.on_key("Shift+r", function()
-  swayimg.imagelist.enable_recursive(not recursive)
-  if recursive then
+  if swayimg.imagelist.recursive then
     local cwd = io.popen("pwd -P"):read("*l")
     local escaped_cwd = cwd:gsub("([%^%$%%%.%*%+%-%?%[%]])", "%%%1")
 
@@ -209,5 +174,5 @@ swayimg.gallery.on_key("Shift+r", function()
   else
     swayimg.imagelist.add(".")
   end
-  recursive = not recursive
+  swayimg.imagelist.recursive = not swayimg.imagelist.recursive
 end)
