@@ -468,6 +468,8 @@ tmux-scratch-session
 # exec tmux attach-session -d -t • >/dev/null 2>&1
 
 source <(FZF_CTRL_T_COMMAND="" fzf --zsh)
+export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always --style=numbers {}'"
+
 source /home/emil/.cache/antidote/github.com/junegunn/fzf-git.sh/fzf-git.sh
 
 _fzf_taskwarrior_ids() {
@@ -481,11 +483,15 @@ _fzf_taskwarrior_ids() {
 
     zle reset-prompt
 }
-
 zle -N fzf-task-widget _fzf_taskwarrior_ids
-
 bindkey '^T' fzf-task-widget
-bindkey '^F' fzf-file-widget
+
+_fzf_flat_files() {
+  local FZF_CTRL_T_COMMAND="command find -L \$dir -maxdepth 1 2> /dev/null | sed '1d; s#^\./##'"
+  zle fzf-file-widget
+}
+zle -N _fzf_flat_files
+bindkey '^F' _fzf_flat_files
 
 load_completion_cache() {
     local cmd=$1
