@@ -455,8 +455,11 @@ binds {
     Mod+Shift+Ctrl+Alt+Q {
         quit skip-confirmation=true
     }
-    // TODO Rebind, not used very often so this could be something more useful / less annoying to accidcentaly press
+    // TODO Rebind, not used very often so this could be something more useful / less annoying to accidentally press
     Mod+S {
         spawn "nirius" "toggle-follow-mode"
     }
+    // Not registered in xremap, could maybe be fixed but probably not worth the hassle
+    XF86MonBrightnessUp   allow-when-locked=true { spawn "brightnessctl" "set" "+5%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "set" "5%-"; }
 }
