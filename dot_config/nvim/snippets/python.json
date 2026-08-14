@@ -1,0 +1,9 @@
+{
+  "main": {
+    "prefix": "main",
+    "body": [
+      "if __name__ == \"__main__\":\n    main()"
+    ],
+    "description": "script main function skeleton"
+  }
+}
