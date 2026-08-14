@@ -11,9 +11,7 @@ vim.keymap.set({ "i", "s" }, "<C-E>", function()
   if ls.choice_active() then ls.change_choice(1) end
 end, { silent = true })
 
-local s, t = ls.snippet, ls.text_node
-local f = ls.function_node
-local i = ls.insert_node
+local s, t, f, i = ls.snippet, ls.text_node, ls.function_node, ls.insert_node
 
 local function get_date_info(days, fmt)
   return os.date(fmt, os.time() + (days * 86400))
@@ -49,5 +47,25 @@ for i_ = 1, 7 do
 
   table.insert(snippets, s(day_name, t(date_val)))
 end
+
+local function inside_print_args(line_to_cursor)
+	return line_to_cursor:match("print%s*%([^%)]*$") ~= nil
+end
+
+ls.add_snippets("python", {
+  s(
+    {
+      trig = "sep",
+      name = "sep='\\n'",
+      desc = "Insert sep='\\n' kwarg inside Python print function",
+      show_condition = inside_print_args,
+      condition = inside_print_args,
+    },
+    {
+      t('sep="\\n"'),
+      i(0),
+    }
+  ),
+})
 
 ls.add_snippets("all", snippets)
