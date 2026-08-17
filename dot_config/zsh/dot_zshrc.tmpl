@@ -1,4 +1,3 @@
-# TODO mkdir -p /home/emil/.mail/{mailbox.org,gmail,gmail-trackers,kth}
 # zmodload zsh/zprof
 
 set zle_bracketed_paste
@@ -233,12 +232,6 @@ alias du="du -h"
 alias restart-failed="systemctl --user --failed --no-legend | awk '{print $2}' | xargs -r systemctl --user restart"
 
 alias sz="exec zsh"
-alias ez="nvim $XDG_CONFIG_HOME/zsh/.zshrc"
-alias ev="nvim $XDG_CONFIG_HOME/vim/vimrc"
-alias evp="nvim $XDG_CONFIG_HOME/vim/rc/plugins.vim"
-alias evpo="nvim $XDG_CONFIG_HOME/vim/rc/plugins-vimonly.vim"
-alias en="nvim $XDG_CONFIG_HOME/nvim/init.lua"
-alias enp="nvim $XDG_CONFIG_HOME/nvim/lua/plugins/everything_else.lua"
 if command -v eza >/dev/null 2>&1; then
     alias l="eza -l --git --no-quotes"
 else
@@ -250,10 +243,10 @@ alias y="newsraft -f $XDG_CONFIG_HOME/newsraft/feeds-youtube"
 alias c="ikhal && vdirsyncer sync &> /dev/null"
 alias g="git-st"
 alias gt='git log --graph --full-history --all --color \ --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"'
+alias lg="lazygit"
 alias tw='timew'
 
 alias htop="htop -t"
-alias svim="sudo -E vim" # Use .vimrc with sudo vim
 alias diary="nvim ~/docs/diary.md"
 alias irc="tmux new -s irc 'weechat'"
 alias weather="curl wttr.in/stockholm"
@@ -262,11 +255,10 @@ alias wine32="WINEARCH=win32 WINEPREFIX=~/.win32 wine"
 alias webcam="mpv av://v4l2:/dev/video0 --profile=low-latency --untimed"
 alias gf='echo "\033[0;32m>tfw no gf"'
 alias my_ip="curl http://checkip.amazonaws.com"
-alias plants="topydo -t ~/sync/todo/plants.txt"
 alias cht='function _cht(){ curl cht.sh/$1; }; _cht'
 alias tmpvim"nvim $(mktemp)"
 alias fpac="pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
-alias fyay="pacman -Slq | fzf --multi --preview 'yay -Si {1}' | xargs -ro yay -S"
+alias faru="pacman -Slq | fzf --multi --preview 'paru -Si {1}' | xargs -ro paru -S"
 alias friends="go run ~/code/mine/friends/main.go"
 
 # ▲
@@ -277,18 +269,6 @@ function eac {
     pushd "${eacdir}/Microsoft.VC80.CRT"
     WINEPREFIX=$wineprefix WINEDEBUG=-all wine "${eacdir}/EAC.exe"
     popd
-}
-
-function pkb {
-    nvim ~/docs/PKB/$(date +"%Y-%m-%d_")"$1".md;
-}
-
-function deadlines {
-    if [ $# -eq 0 ]; then
-	khal list -a Deadlines today 7d
-    else
-	khal list -a Deadlines today "$1"d
-    fi
 }
 
 function mkcd {
