@@ -73,3 +73,8 @@ on   = "!"
 for  = "unix"
 run  = 'shell "$SHELL" --block'
 desc = "Open $SHELL here"
+
+[[mgr.prepend_keymap]]
+on   = "B"
+run  = 'shell "$SHELL" --block -- beet import %h'
+desc = "beet import folder"
