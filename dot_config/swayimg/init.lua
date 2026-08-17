@@ -87,12 +87,12 @@ swayimg.gallery.pstore = false
 swayimg.gallery.set_text("topleft", { "File: {name}" })
 swayimg.gallery.set_text("topright", { "{list.index} of {list.total}" })
 
-swayimg.gallery.on_key("Return", function() swayimg.set_mode("viewer") end)
+swayimg.gallery.on_key("Return", function() swayimg.mode = "viewer" end)
 swayimg.gallery.on_key("Left", function() swayimg.gallery.select("left") end)
 
 -- force set scale mode on window resize (useful for tiling compositors)
 swayimg.on_window_resize(function()
-  if swayimg.mode ~= "gallery" then swayimg[mode].set_fix_scale("optimal") end
+  if swayimg.mode ~= "gallery" then swayimg.fix_scale = "optimal" end
 end)
 
 swayimg.gallery.on_image_change(function()
