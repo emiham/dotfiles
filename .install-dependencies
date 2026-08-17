@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+set -o errexit
+set -o nounset
+set -o pipefail
+if [[ "${TRACE-0}" == "1" ]]; then set -o xtrace; fi
+
+programs=(
+    keepassxc
+    chezmoi_modify_manager
+)
+
+missing=()
+for program in "${programs[@]}"; do
+    type "$program" >/dev/null 2>&1 || missing+=("$program")
+done
+
+if [ ${#missing[@]} -eq 0 ]; then
+    exit
+fi
+
+if type pacman >/dev/null 2>&1; then
+    paru -S "${missing[@]}"
+elif type apt-get >/dev/null 2>&1; then
+    sudo apt-get update && sudo apt-get install -y "${missing[@]}"
