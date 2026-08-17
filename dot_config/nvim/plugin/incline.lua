@@ -1,4 +1,7 @@
-vim.pack.add({ "https://github.com/b0o/incline.nvim" })
+vim.pack.add({
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/b0o/incline.nvim",
+})
 
 local helpers = require("incline.helpers")
 require("incline").setup({
