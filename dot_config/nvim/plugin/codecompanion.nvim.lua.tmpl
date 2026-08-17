@@ -1,0 +1,41 @@
+vim.pack.add({
+  "https://www.github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  {
+    src = "https://www.github.com/olimorris/codecompanion.nvim",
+    version = vim.version.range("^19.0.0"),
+  },
+})
+
+require("codecompanion").setup({
+  interactions = {
+    inline = {
+      adapter = "openrouter",
+    },
+    cmd = {
+      adapter = "openrouter",
+    },
+    chat = {
+      adapter = "openrouter",
+    },
+  },
+  opts = {
+    log_level = "DEBUG",
+  },
+  adapters = {
+    http = {
+      openrouter = function()
+        return require("codecompanion.adapters").extend("openrouter", {
+          env = {
+            api_key = "{{ keepassxcAttribute "OpenRouter" "API key" }}",
+          },
+          schema = {
+            model = {
+              default = "openrouter/free",
+            },
+          },
+        })
+      end,
+    },
+  },
+})
