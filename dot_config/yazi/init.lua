@@ -2,7 +2,9 @@ require("session"):setup({
   sync_yanked = true,
 })
 
-require("git"):setup()
+require("git"):setup {
+  order = 1500,
+}
 
 Status:children_add(function()
   local h = cx.active.current.hovered
@@ -11,7 +13,7 @@ Status:children_add(function()
   else
     return ui.Line({
       ui.Span(os.date("%Y-%m-%d %H:%M", tostring(h.cha.mtime):sub(1, 10)))
-        :fg("blue"),
+          :fg("blue"),
       ui.Span(" "),
     })
   end
