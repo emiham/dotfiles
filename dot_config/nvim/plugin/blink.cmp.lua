@@ -3,6 +3,7 @@ vim.pack.add({
   "https://github.com/rafamadriz/friendly-snippets",
   "https://github.com/ribru17/blink-cmp-spell",
   "https://github.com/brenoprata10/nvim-highlight-colors",
+  "https://github.com/bydlw98/blink-cmp-env",
   {
     src = "https://github.com/saghen/blink.cmp",
     version = vim.version.range("1.x"),
@@ -85,9 +86,9 @@ require("blink.cmp").setup({
     per_filetype = {
       lua = { inherit_defaults = true, "lazydev" },
       sql = { inherit_defaults = true, "dadbod" },
-      python = { inherit_defaults = true, "ecolog" },
-      sh = { inherit_defaults = true, "ecolog" },
-      bash = { inherit_defaults = true, "ecolog" },
+      python = { inherit_defaults = true, "env" },
+      sh = { inherit_defaults = true, "env" },
+      bash = { inherit_defaults = true, "env" },
       codecompanion = { "codecompanion" },
     },
     providers = {
@@ -150,10 +151,6 @@ require("blink.cmp").setup({
           },
         },
       },
-      ecolog = {
-        name = "ecolog",
-        module = "ecolog.integrations.cmp.blink_cmp",
-      },
       spell = {
         name = "Spell",
         module = "blink-cmp-spell",
@@ -187,6 +184,16 @@ require("blink.cmp").setup({
         name = "LazyDev",
         module = "lazydev.integrations.blink",
         score_offset = 100,
+      },
+      env = {
+        name = "Env",
+        module = "blink-cmp-env",
+        --- @type blink-cmp-env.Options
+        opts = {
+          item_kind = require("blink.cmp.types").CompletionItemKind.Variable,
+          show_braces = false,
+          show_documentation_window = true,
+        },
       },
     },
   },
