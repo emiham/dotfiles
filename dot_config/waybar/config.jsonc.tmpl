@@ -20,8 +20,10 @@
     "network",
     {{- end }}
     // "custom/anki",
-    "custom/tasks",
+    // "custom/tasks",
+    {{- if eq .chezmoi.hostname "kusanagi" }}
     "custom/mail",
+    {{- end }}
     "custom/weather",
     "clock"
   ],
