@@ -214,6 +214,9 @@ local lsps = {
           hint = {
             enable = true,
           },
+          format = {
+            enable = false,
+          },
         },
       },
     },
