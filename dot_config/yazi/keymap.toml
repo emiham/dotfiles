@@ -67,3 +67,9 @@ desc = "Open Recycle Bin menu"
 on = ["<Tab>"]
 run = "cd $OLDPWD"
 desc = "Jump to last directory"
+
+[[mgr.prepend_keymap]]
+on   = "!"
+for  = "unix"
+run  = 'shell "$SHELL" --block'
+desc = "Open $SHELL here"
