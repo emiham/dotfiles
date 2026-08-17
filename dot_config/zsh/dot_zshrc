@@ -436,9 +436,9 @@ function zle-line-init {
 }
 zle -N zle-line-init
 
-{{- if eq .chezmoi.osRelease.id "arch" }}
-source /usr/share/doc/pkgfile/command-not-found.zsh
-{{- end }}
+if [[ $(grep -i '^ID=' /etc/os-release | cut -d= -f2 | tr -d '"') == arch ]]; then
+  source /usr/share/doc/pkgfile/command-not-found.zsh
+fi
 
 # Always enter tmux
 # tmux-scratch-session
