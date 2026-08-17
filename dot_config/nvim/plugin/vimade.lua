@@ -1,7 +1,7 @@
 vim.pack.add({ "https://github.com/tadaa/vimade" })
 
 require("vimade").setup({
-  recipe = { "default", { animate = false } },
+  recipe = { "minimalist", { animate = false } },
   ncmode = "buffers",
   fadelevel = 0.6,
   tint = {},
@@ -88,5 +88,6 @@ require("vimade").setup({
         },
       },
     },
+    apidocs = { buf_opts = { ft = "markdown" } },
   },
 })
