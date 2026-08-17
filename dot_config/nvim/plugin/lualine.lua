@@ -1,8 +1,8 @@
 vim.pack.add({
   "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/franco-ruggeri/codecompanion-lualine.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
 })
-
 local function getWords()
   if vim.bo.filetype == "text" or vim.bo.filetype == "markdown" then
     return tostring(vim.fn.wordcount().words) .. " words"
@@ -34,6 +34,10 @@ require("lualine").setup({
       },
     },
     lualine_x = {
+      {
+        "codecompanion",
+        icon = "",
+      },
       "encoding",
       "fileformat",
       {
