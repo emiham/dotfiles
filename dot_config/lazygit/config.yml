@@ -1,0 +1,12 @@
+customCommands:
+  - key: "C"
+    command: 'git add "{{ .SelectedFile.Name }}" && git commit -m "{{index .PromptResponses 0}}"'
+    context: "files"
+    prompts:
+      - type: 'input'
+        title: 'Commit Message'
+        initialValue: ''
+    loadingText: 'commiting'
+
+gui:
+  showBottomLine: false
