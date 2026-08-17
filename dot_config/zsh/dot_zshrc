@@ -23,56 +23,56 @@ typeset -g _emoji_redraw_pid=""
 typeset -g _emoji_is_redrawing=0
 
 _emoji_redraw_callback() {
-    # Unregister and close the file descriptor passed by ZLE ($1)
-    zle -F "$1"
-    local fd=$1
-    exec {fd}<&-
-    _emoji_redraw_fd=""
-    _emoji_redraw_pid=""
+  # Unregister and close the file descriptor passed by ZLE ($1)
+  zle -F "$1"
+  local fd=$1
+  exec {fd}<&-
+  _emoji_redraw_fd=""
+  _emoji_redraw_pid=""
 
-    # Set the guard variable to prevent an infinite loop, redraw, then unset
-    _emoji_is_redrawing=1
-    zle redisplay
-    _emoji_is_redrawing=0
+  # Set the guard variable to prevent an infinite loop, redraw, then unset
+  _emoji_is_redrawing=1
+  zle redisplay
+  _emoji_is_redrawing=0
 }
 
 # 2. The Hook: Runs every time ZLE is about to redraw the line (on keystrokes)
 _emoji_flag_check_hook() {
-    # If this redraw was forced by our own callback, ignore it
-    if (( _emoji_is_redrawing )); then
-        return 0
+  # If this redraw was forced by our own callback, ignore it
+  if (( _emoji_is_redrawing )); then
+    return 0
+  fi
+
+  if [[ "$BUFFER" =~ "[$'\U1F1E6'-$'\U1F1FF']|$'\U1F3F3'|$'\U1F3F4'" ]]; then
+    if [[ -n "$_emoji_redraw_pid" ]]; then
+      kill $_emoji_redraw_pid 2>/dev/null
+    fi
+    if [[ -n "$_emoji_redraw_fd" ]]; then
+      zle -F "$_emoji_redraw_fd"
+      local open_fd=$_emoji_redraw_fd
+      exec {open_fd}<&-
+      _emoji_redraw_fd=""
     fi
 
-    if [[ "$BUFFER" =~ "[$'\U1F1E6'-$'\U1F1FF']|$'\U1F3F3'|$'\U1F3F4'" ]]; then
-        if [[ -n "$_emoji_redraw_pid" ]]; then
-            kill $_emoji_redraw_pid 2>/dev/null
-        fi
-        if [[ -n "$_emoji_redraw_fd" ]]; then
-            zle -F "$_emoji_redraw_fd"
-            local open_fd=$_emoji_redraw_fd
-            exec {open_fd}<&-
-            _emoji_redraw_fd=""
-        fi
+    # Start a new background timer subshell (Debounce delay: 0.05 seconds)
+    # It sleeps, then sends a bite of data through a pipe to signal completion
+    exec {_emoji_redraw_fd}< <(sleep 0.05; echo "go")
+    _emoji_redraw_pid=$!
 
-        # Start a new background timer subshell (Debounce delay: 0.05 seconds)
-        # It sleeps, then sends a bite of data through a pipe to signal completion
-        exec {_emoji_redraw_fd}< <(sleep 0.05; echo "go")
-        _emoji_redraw_pid=$!
-
-        # Tell ZLE to listen to this file descriptor and call our callback when ready
-        zle -F "$_emoji_redraw_fd" _emoji_redraw_callback
-    fi
+    # Tell ZLE to listen to this file descriptor and call our callback when ready
+    zle -F "$_emoji_redraw_fd" _emoji_redraw_callback
+  fi
 }
 
 _emoji_redraw_init() {
-    # Ensure add-zle-hook-widget is available (Zsh 5.3+)
-    autoload -Uz add-zle-hook-widget 2>/dev/null
-    if [ $? -eq 0 ]; then
-        add-zle-hook-widget zle-line-pre-redraw _emoji_flag_check_hook
-    else
-        # Fallback for older Zsh versions
-        zle-line-pre-redraw-hooks+=(_emoji_flag_check_hook)
-    fi
+  # Ensure add-zle-hook-widget is available (Zsh 5.3+)
+  autoload -Uz add-zle-hook-widget 2>/dev/null
+  if [ $? -eq 0 ]; then
+    add-zle-hook-widget zle-line-pre-redraw _emoji_flag_check_hook
+  else
+    # Fallback for older Zsh versions
+    zle-line-pre-redraw-hooks+=(_emoji_flag_check_hook)
+  fi
 }
 
 _emoji_redraw_init
@@ -97,19 +97,19 @@ function zvm_after_init() {
 }
 
 function zvm_config() {
-    # https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
-    ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
-    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-    ZVM_INIT_MODE=sourcing
+  # https://github.com/jeffreytse/zsh-vi-mode?tab=readme-ov-file#execute-extra-commands
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jk
+  ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+  ZVM_INIT_MODE=sourcing
 }
 
 if [ -e '/usr/share/zsh-antidote/antidote.zsh' ]; then
-    source '/usr/share/zsh-antidote/antidote.zsh'
+  source '/usr/share/zsh-antidote/antidote.zsh'
 elif [ -e "${ZDOTDIR}/.antidote" ]; then
-    source "${ZDOTDIR}/.antidote/antidote.zsh"
+  source "${ZDOTDIR}/.antidote/antidote.zsh"
 else
-    git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR}/.antidote"
-    source "${ZDOTDIR}/.antidote/antidote.zsh"
+  git clone --depth=1 https://github.com/mattmc3/antidote.git "${ZDOTDIR}/.antidote"
+  source "${ZDOTDIR}/.antidote/antidote.zsh"
 fi
 
 # Better git completion
@@ -233,9 +233,9 @@ alias restart-failed="systemctl --user --failed --no-legend | awk '{print $2}' |
 
 alias sz="exec zsh"
 if command -v eza >/dev/null 2>&1; then
-    alias l="eza -l --git --no-quotes"
+  alias l="eza -l --git --no-quotes"
 else
-    alias l="ls -lh"
+  alias l="ls -lh"
 fi
 alias la="l -A"
 alias n="newsraft"
@@ -264,11 +264,11 @@ alias friends="go run ~/code/mine/friends/main.go"
 # ▲
 
 function eac {
-    local wineprefix="$WINEPREFIX-eac"
-    local eacdir="${wineprefix}/drive_c/Program Files/Exact Audio Copy"
-    pushd "${eacdir}/Microsoft.VC80.CRT"
-    WINEPREFIX=$wineprefix WINEDEBUG=-all wine "${eacdir}/EAC.exe"
-    popd
+  local wineprefix="$WINEPREFIX-eac"
+  local eacdir="${wineprefix}/drive_c/Program Files/Exact Audio Copy"
+  pushd "${eacdir}/Microsoft.VC80.CRT"
+  WINEPREFIX=$wineprefix WINEDEBUG=-all wine "${eacdir}/EAC.exe"
+  popd
 }
 
 function mkcd {
@@ -406,9 +406,9 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 
 function copy-last-command-widget() {
-    local last_command=$(fc -ln -1)
-    print -rn -- "$last_command" | wl-copy
-    zle reset-prompt
+  local last_command=$(fc -ln -1)
+  print -rn -- "$last_command" | wl-copy
+  zle reset-prompt
 }
 
 zle -N copy-last-command-widget
@@ -453,15 +453,15 @@ export FZF_CTRL_T_OPTS="--preview '[ -d {} ] && tree -C {} || bat --color=always
 source /home/emil/.cache/antidote/github.com/junegunn/fzf-git.sh/fzf-git.sh
 
 _fzf_taskwarrior_ids() {
-    local tasks=$(task status:pending export | jq -r '.[] | "\(.id)\t\(.project // "none")\t\(.description)"' | column -t -s $'\t')
+  local tasks=$(task status:pending export | jq -r '.[] | "\(.id)\t\(.project // "none")\t\(.description)"' | column -t -s $'\t')
 
-    local formatted_ids=$(echo "$tasks" | fzf -m --reverse --print0 | awk 'BEGIN{RS="\0"; ORS=" "} {print $1}')
+  local formatted_ids=$(echo "$tasks" | fzf -m --reverse --print0 | awk 'BEGIN{RS="\0"; ORS=" "} {print $1}')
 
-    if [[ -n "$formatted_ids" ]]; then
-        LBUFFER+="${formatted_ids% }"
-    fi
+  if [[ -n "$formatted_ids" ]]; then
+    LBUFFER+="${formatted_ids% }"
+  fi
 
-    zle reset-prompt
+  zle reset-prompt
 }
 zle -N fzf-task-widget _fzf_taskwarrior_ids
 bindkey '^T' fzf-task-widget
@@ -474,12 +474,12 @@ zle -N _fzf_flat_files
 bindkey '^F' _fzf_flat_files
 
 load_completion_cache() {
-    local cmd=$1
-    local cache_file="$XDG_CACHE_HOME/$cmd.zsh"
-    if (( $+commands[$cmd] )); then
-        [[ ! -f "$cache_file" ]] && ${(k)commands[$cmd]} completions zsh > "$cache_file"
-        source "$cache_file"
-    fi
+  local cmd=$1
+  local cache_file="$XDG_CACHE_HOME/$cmd.zsh"
+  if (( $+commands[$cmd] )); then
+    [[ ! -f "$cache_file" ]] && ${(k)commands[$cmd]} completions zsh > "$cache_file"
+    source "$cache_file"
+  fi
 }
 
 load_completion_cache xremap
@@ -487,39 +487,39 @@ load_completion_cache niri
 
 (( $+commands[atuin] )) && eval "$(atuin init zsh --disable-up-arrow)"
 if (( $+commands[atuin] )); then
-    [[ ! -f "$XDG_CACHE_HOME/atuin.zsh" ]] && atuin init zsh --disable-up-arrow > "$XDG_CACHE_HOME/atuin.zsh"
-    source "$XDG_CACHE_HOME/atuin.zsh"
+  [[ ! -f "$XDG_CACHE_HOME/atuin.zsh" ]] && atuin init zsh --disable-up-arrow > "$XDG_CACHE_HOME/atuin.zsh"
+  source "$XDG_CACHE_HOME/atuin.zsh"
 fi
 
 # Dynamic window title
 autoload -Uz add-zsh-hook
 
 function xterm_title_precmd () {
-	print -Pn -- '\e]2;%n@%m %~\a'
-	[[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005\e\\'
+  print -Pn -- '\e]2;%n@%m %~\a'
+  [[ "$TERM" == 'screen'* ]] && print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005\e\\'
 }
 
 function xterm_title_preexec () {
-	print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
-	[[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005 %# ' && print -n -- "${(q)1}\e\\"; }
+  print -Pn -- '\e]2;%n@%m %~ %# ' && print -n -- "${(q)1}\a"
+  [[ "$TERM" == 'screen'* ]] && { print -Pn -- '\e_\005%n\005@\005%m\005 \005%~\005 %# ' && print -n -- "${(q)1}\e\\"; }
 }
 
 if [[ "$TERM" == (Eterm*|alacritty*|aterm*|gnome*|konsole*|kterm*|putty*|rxvt*|screen*|tmux*|xterm*|st*) ]]; then
-	add-zsh-hook -Uz precmd xterm_title_precmd
-	add-zsh-hook -Uz preexec xterm_title_preexec
+  add-zsh-hook -Uz precmd xterm_title_precmd
+  add-zsh-hook -Uz preexec xterm_title_preexec
 fi
 
 # foot
 function foot_precmd() {
-    print -Pn "\e]133;A\e\\"
-    if ! builtin zle; then
-      print -n "\e]133;D\e\\"
-    fi
+  print -Pn "\e]133;A\e\\"
+  if ! builtin zle; then
+    print -n "\e]133;D\e\\"
+  fi
 }
 add-zsh-hook -Uz precmd foot_precmd
 
 function foot_preexec() {
-    print -n "\e]133;C\e\\"
+  print -n "\e]133;C\e\\"
 }
 add-zsh-hook -Uz preexec foot_preexec
 
@@ -528,19 +528,19 @@ function set_win_title(){
 
 # yazi
 function yazi_cd() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-		builtin cd -- "$cwd"
-	fi
-	rm -f -- "$tmp"
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
 }
 
 function zle_yazi {
-    yazi_cd <$TTY
-    zle redisplay
-    zle reset-prompt
-    xterm_title_precmd
+  yazi_cd <$TTY
+  zle redisplay
+  zle reset-prompt
+  xterm_title_precmd
 }
 
 zle -N zle_yazi
@@ -612,10 +612,10 @@ unsetopt CLOBBER # Don't overwrite files with >, use >| to force
 source $HOME/code/scripts/tmux/autocomplete-from-tmux
 
 conda() {
-    unset -f conda
-    __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-    eval "$__conda_setup"
-    conda "$@"
+  unset -f conda
+  __conda_setup="$('/usr/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  eval "$__conda_setup"
+  conda "$@"
 }
 
 if (( $+commands[zoxide] )); then
