@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
         if #locations == 1 then
           local client = vim.lsp.get_client_by_id(ctx.client_id)
           local encoding = client and client.offset_encoding or "utf-8"
-          vim.lsp.util.show_document(locations[1], encoding, {focus = true})
+          vim.lsp.util.show_document(locations[1], encoding, { focus = true })
         else
           require("mini.extra").pickers.lsp({ scope = "definition" })
         end
@@ -144,23 +144,6 @@ local lsps = {
     "ty",
     {
       settings = { ty = {} },
-    },
-  },
-  {
-    "basedpyright",
-    {
-      settings = {
-        basedpyright = {
-          analysis = {
-            typeCheckingMode = "off",
-            ignore = { "*" },
-            autoSearchPaths = true,
-            diagnosticMode = "openFilesOnly",
-            useLibraryCodeForTypes = true,
-          },
-          disableOrganizeImports = true,
-        },
-      },
     },
   },
   { "jdtls" },
