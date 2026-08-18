@@ -182,9 +182,8 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zcompcache"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
-local zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"
 local plugins_txt="${ZDOTDIR:-$HOME}/.zsh_plugins.txt"
-if [[ "$plugins_txt" -nt "$zcompdump" || "${ZDOTDIR:-$HOME}/.zshrc" -nt "$zcompdump" ]]; then
+if [[ "$plugins_txt" -nt "$ZCOMPDUMP" || "${ZDOTDIR:-$HOME}/.zshrc" -nt "$ZCOMPDUMP" ]]; then
   compinit
 else
   compinit -C

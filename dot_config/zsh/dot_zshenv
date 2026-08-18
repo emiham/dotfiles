@@ -97,6 +97,7 @@ export XKB_DEFAULT_LAYOUT=se
 export XMODIFIER="@im=fcitx"
 export XMODIFIERS="@im=fcitx"
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZCOMPDUMP="$XDG_DATA_HOME/zcompdump"
 
 # This should hopefully fix games pausing when not in focus
 # If it doesn't work try just one or the other
