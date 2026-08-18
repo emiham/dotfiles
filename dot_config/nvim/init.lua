@@ -227,3 +227,9 @@ vim.keymap.set(
   [[y:%s/<C-r>0//g<Left><Left>]],
   { desc = "Replace selection" }
 )
+
+vim.api.nvim_create_user_command(
+  "PackUpdate",
+  function() vim.pack.update() end,
+  {}
+)
