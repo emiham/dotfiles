@@ -47,6 +47,7 @@ require("conform").setup({
   format_on_save = function(bufnr)
     local bufname = vim.api.nvim_buf_get_name(bufnr)
     if bufname:match("/imapnotify/") then return end
+    if vim.bo[bufnr].filetype == "sql" then return end
     return {
       timeout_ms = 500,
       lsp_fallback = true,
