@@ -1,7 +1,7 @@
 vim.api.nvim_create_autocmd("PackChanged", {
   callback = function(ev)
     local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "blink.cmp" and (kind == 'install' or kind == 'update') then
+    if name == "blink.cmp" and (kind == "install" or kind == "update") then
       vim.cmd("BlinkCmp build")
     end
   end,
@@ -86,7 +86,7 @@ require("blink.cmp").setup({
   fuzzy = {
     prebuilt_binaries = {
       download = false,
-    }
+    },
   },
   sources = {
     default = {
@@ -100,7 +100,6 @@ require("blink.cmp").setup({
     },
     per_filetype = {
       lua = { inherit_defaults = true, "lazydev" },
-      sql = { inherit_defaults = true, "dadbod" },
       python = { inherit_defaults = true, "env" },
       sh = { inherit_defaults = true, "env" },
       bash = { inherit_defaults = true, "env" },
@@ -192,10 +191,6 @@ require("blink.cmp").setup({
           end,
         },
       },
-      dadbod = {
-        name = "Dadbod",
-        module = "vim_dadbod_completion.blink",
-      },
       lazydev = {
         name = "LazyDev",
         module = "lazydev.integrations.blink",
@@ -210,9 +205,10 @@ require("blink.cmp").setup({
           show_braces = false,
           show_documentation_window = true,
         },
+      },
       choice = {
-        name = 'LuaSnip Choice Nodes',
-        module = 'blink-cmp-luasnip-choice',
+        name = "LuaSnip Choice Nodes",
+        module = "blink-cmp-luasnip-choice",
         opts = {},
       },
     },
