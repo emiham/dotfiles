@@ -17,6 +17,10 @@
       {
         "language": "python",
         "path": "./python.json"
+      },
+      {
+        "language": "template",
+        "path": "./template.json"
       }
     ]
   }
