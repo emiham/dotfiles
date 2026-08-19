@@ -5,5 +5,13 @@
       "if __name__ == \"__main__\":\n    main()"
     ],
     "description": "script main function skeleton"
+  },
+  "open file": {
+    "prefix": "with open",
+    "body": [
+      "with open(${1:filename}, '${2|r,w,a,rb,wb|}') as ${3:f}:",
+      "\t${0:}"
+    ],
+    "description": "Open a file safely using a with statement"
   }
 }
