@@ -1,0 +1,8 @@
+timeout 60 'timew stop && timew modify end:-1min @1' resume 'timew smart-continue'
+timeout 300 'niri msg action power-off-monitors' resume 'niri msg action power-on-monitors'
+{{- if eq .chezmoi.hostname "kusanagi" }}
+timeout 300 'mqtt pub -t kusanagi-presence -m "0" -h homeassistant.local' resume 'mqtt pub -t kusanagi-presence -m "1" -h homeassistant.local'
+{{- else if eq .chezmoi.hostname "aisaka" }}
+timeout 1800 'systemctl suspend'
+before-sleep 'hyprlock'
+{{- end }}
