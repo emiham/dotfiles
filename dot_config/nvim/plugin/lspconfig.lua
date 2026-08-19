@@ -1,6 +1,7 @@
 vim.pack.add({
   "https://github.com/mfussenegger/nvim-jdtls",
   "https://github.com/saghen/blink.cmp",
+  "https://github.com/nanotee/sqls.nvim",
   { src = "https://github.com/neovim/nvim-lspconfig" },
 })
 
@@ -148,14 +149,14 @@ local lsps = {
   },
   { "jdtls" },
   {
-    "sqlls",
+    "sqls",
     {
       settings = {
-        sqlls = {
+        sqls = {
           connections = {
             {
               driver = "postgresql",
-              dataSourceName = "host=127.0.0.1 port=5432 user=emil dbname=dbas sslmode=disable",
+              dataSourceName = "dbname=world",
             },
           },
         },
