@@ -165,15 +165,17 @@ local lsps = {
   },
   {
     "clangd",
-    settings = {
-      clangd = {
-        InlayHints = {
-          Designators = true,
-          Enabled = true,
-          ParameterNames = true,
-          DeducedTypes = true,
+    {
+      settings = {
+        clangd = {
+          InlayHints = {
+            Designators = true,
+            Enabled = true,
+            ParameterNames = true,
+            DeducedTypes = true,
+          },
+          fallbackFlags = { "-std=c++20" },
         },
-        fallbackFlags = { "-std=c++20" },
       },
     },
   },
@@ -301,36 +303,3 @@ for _, lsp in pairs(lsps) do
     capabilities = capabilities
   end
 end
-
--- TODO Split (or stop using?)
--- require("mason-tool-installer").setup({
---   ensure_installed = {
---     "ruff",
---     "basedpyright",
---     "jdtls",
---     "sqlls",
---     "clangd",
---     "bash-language-server", -- bashls
---     "texlab",
---     "yaml-language-server", -- yamlls
---     "haskell-language-server", -- hls
---     "taplo",
---     "rust-analyzer", -- rust_analyzer
---     "lua-language-server", -- lua_ls
---     "typescript-language-server",
---     "harper-ls",
---     "ltex-ls-plus",
---     "awk-language-server",
---     "stylua",
---     "prettierd",
---     "eslint_d",
---     "rustfmt",
---     "google-java-format",
---     "jq",
---     "latexindent",
---     "clang-format",
---     "beautysh",
---     "debugpy",
---     "kdlfmt",
---   },
--- })
