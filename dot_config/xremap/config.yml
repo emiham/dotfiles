@@ -80,9 +80,6 @@ keymap:
           - "rofi"
           - "-show"
           - "drun"
-          - "-drun-match-fields"
-          - "name,generic"
-          - "-drun-show-actions"
           - "-run-command"
           - "uwsm app -- {cmd}"
       Super-Shift-D:
@@ -92,8 +89,6 @@ keymap:
           - "run"
           - "-run-command"
           - "uwsm app -- {cmd}"
-      Super-Z:
-        launch: ["uwsm", "app", "--", "dmenu-system"]
       Super-V:
         launch: ["dmenu-paste"]
       Super-U:
@@ -112,19 +107,19 @@ keymap:
             launch: ["uwsm", "app", "--", "foot", "taskwarrior-tui"]
           Shift-E:
             launch: ["uwsm", "app", "--", "foot", "task", "edit", "+LATEST"]
-          l:
-            launch: ["tasks-onclick"]
           n:
             launch: ["dmenu-napkin"]
           g:
             launch: ["dmenu-ha-groceries"]
           c:
             launch: ["dmenu-calendar-add"]
-      Super-P:
-        launch: ["keepmenu"]
+      # Super-P:
+      #   launch: ["keepmenu"]
       Super-Shift-Enter:
         launch: ["dmenu-sshmenu"]
-      Super-Shift-M:
+
+      # Notifications
+      Super-N:
         remap:
           c:
             launch: ["dunstctl", "clear-all"]
@@ -165,22 +160,6 @@ keymap:
       Super-Shift-SysRq:
         launch: ["ames", "-r"]
 
-      # Anki
-      # Back
-      # Super-BTN_SIDE:
-      #   launch: ["anki_bg", "2"]
-      # Super-Shift-BTN_SIDE:
-      #   launch: ["anki_bg", "1"]
-      # # Forward
-      # Super-BTN_EXTRA:
-      #   launch: ["anki_bg", "0"]
-      # Super-Shift-BTN_EXTRA:
-      #   launch: ["anki_bg", "4"]
-
-      # Game controller
-      # BTN_MODE:
-      #   held:
-
       # Misc
       Super-Shift-N:
         launch:
@@ -217,30 +196,6 @@ keymap:
             "music ratings",
             "python",
             "/home/emil/code/music-ratings/player.py",
-          ]
-      F23:
-        launch:
-          [
-            "mqtt",
-            "pub",
-            "-t",
-            "desk",
-            "-h",
-            "homeassistant.local",
-            "-m",
-            "sit",
-          ]
-      F24:
-        launch:
-          [
-            "mqtt",
-            "pub",
-            "-t",
-            "desk",
-            "-h",
-            "homeassistant.local",
-            "-m",
-            "stand",
           ]
 
   - name: Wiimote global
