@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Wi-Fi
+Exec=iwmenu -l custom --launcher-command "rofi -dmenu -i -p wi-fi"
+Icon=network-wireless
+
+Categories=System;Network
+Keywords=wifi;network;
+
+NoDisplay=false
+Terminal=false

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Youtube
+Exec=dmenu-watchlater
+Icon=video-x-generic
+
+Categories=AudioVideo;Video;
+Keywords=youtube;video;media;
+
+NoDisplay=false
+Terminal=false

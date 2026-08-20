@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Anime
+Exec=/home/emil/code/malpv/.venv/bin/python /home/emil/code/malpv/main.py
+Icon=video-display
+
+Categories=AudioVideo;Video;
+Keywords=anime;
+
+NoDisplay=false
+Terminal=false

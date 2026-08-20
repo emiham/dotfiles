@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Reboot
+Comment=Reboot the system
+Exec=bash -c '[ "$(echo -e "Yes\\nNo" | rofi -dmenu -i -p "Reboot?" -selected-row 0)" = "Yes" ] && systemctl reboot'
+Icon=system-reboot
+Terminal=false
+Categories=System;
+Keywords=restart;

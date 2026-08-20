@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Documents
+Exec=dmenu-docs
+Icon=help-browser
+
+Categories=Utility;Documentation;
+Keywords=docs;
+
+NoDisplay=false
+Terminal=false

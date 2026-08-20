@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Bluetooth
+Exec=bzmenu -l custom --launcher-command "rofi -dmenu -i -p bluetooth"
+Icon=network-bluetooth
+
+Categories=System
+Keywords=bluetooth;
+
+NoDisplay=false
+Terminal=false

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Lock
+Comment=Lock the screen using hyprlock
+Exec=hyprlock
+Icon=system-lock-screen
+Terminal=false
+Categories=System;

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Music
+Exec=dmenu-music-misc
+Icon=multimedia-audio-player
+
+Categories=AudioVideo;Audio;
+Keywords=music;
+
+NoDisplay=false
+Terminal=false

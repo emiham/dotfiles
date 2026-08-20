@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Contacts
+Exec=dmenu-khard
+Icon=x-office-address-book
+
+Categories=Office;Utility;
+Keywords=contacts;addressbook;khard;carddav;
+
+NoDisplay=false
+Terminal=false

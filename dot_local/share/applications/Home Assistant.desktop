@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Home Assistant
+Exec=dmenu-homeassistant
+Icon=network-server
+
+Categories=Network;Utility;
+Keywords=homeassistant;hass;
+
+NoDisplay=false
+Terminal=false

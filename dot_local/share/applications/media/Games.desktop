@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Games
+Exec=rofi -modi games -show games
+Icon=input-gaming
+
+Categories=Game;
+Keywords=gaming;steam;
+
+NoDisplay=false
+Terminal=false

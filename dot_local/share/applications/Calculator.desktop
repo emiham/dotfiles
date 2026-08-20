@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Calculator
+Exec=rofi -show calc -no-history -calc-command "notify-send '{expression}' '{result}'"
+Icon=accessories-calculator
+
+Categories=Utility;Calculator;
+Keywords=calc;calculator;math;
+
+NoDisplay=false
+Terminal=false

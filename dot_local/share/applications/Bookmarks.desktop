@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Firefox Bookmarks
+Exec=dmenu-firefox
+Icon=user-bookmarks
+
+Categories=Network;WebBrowser;
+Keywords=bookmarks;firefox;browser;urls;
+
+NoDisplay=false
+Terminal=false

@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Books
+Exec=dmenu-books
+Icon=accessories-dictionary
+
+Categories=Utility;Education;
+Keywords=books;library;
+
+NoDisplay=false
+Terminal=false

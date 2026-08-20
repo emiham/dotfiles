@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Systemd
+Exec=dmenu-systemd
+Icon=preferences-system
+
+Categories=System;Settings;
+Keywords=systemd;services;units;systemctl;
+
+NoDisplay=false
+Terminal=false

@@ -1,0 +1,20 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Desk
+Comment=Control standing desk position via MQTT
+Exec=
+Icon=preferences-desktop
+Terminal=false
+Categories=Utility;Settings;
+Actions=Sit;Stand;
+
+[Desktop Action Sit]
+Name=Sit
+Icon=go-down
+Exec=mqtt pub -t desk -h homeassistant.local -m sit
+
+[Desktop Action Stand]
+Name=Stand
+Icon=go-up
+Exec=mqtt pub -t desk -h homeassistant.local -m stand

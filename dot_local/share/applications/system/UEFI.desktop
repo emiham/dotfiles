@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Reboot to UEFI
+Comment=Reboot into UEFI setup
+Exec=bash -c '[ "$(echo -e "Yes\\nNo" | rofi -dmenu -i -p "Reboot to UEFI Setup?" -selected-row 0)" = "Yes" ] && systemctl reboot --firmware-setup'
+Icon=system-reboot
+Terminal=false
+Categories=System;

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+
+Name=Wishlist
+Exec=dmenu-wishlist
+Icon=emblem-favorite
+
+Categories=Utility;
+
+NoDisplay=false
+Terminal=false

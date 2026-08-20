@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Power off
+Comment=Power off the system
+Exec=bash -c '[ "$(echo -e "Yes\\nNo" | rofi -dmenu -i -p "Power Off?" -selected-row 0)" = "Yes" ] && systemctl poweroff'
+Icon=system-shutdown
+Terminal=false
+Categories=System;

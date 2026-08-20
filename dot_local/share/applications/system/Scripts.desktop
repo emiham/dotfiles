@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+
+Name=Scripts
+Exec=dmenu-scripts
+Icon=system-run
+
+Categories=Utility;System;
+
+NoDisplay=false
+Terminal=false

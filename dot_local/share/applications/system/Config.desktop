@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=Config
+Exec=dmenu-config
+Icon=preferences-system
+
+Categories=Settings;System;
+Keywords=config;dotfiles;
+
+NoDisplay=false
+Terminal=false

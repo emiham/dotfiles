@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Reboot to Windows
+Comment=Reboot into Windows OS
+Exec=bash -c '[ "$(echo -e "Yes\\nNo" | rofi -dmenu -i -p "Reboot into Windows?" -selected-row 0)" = "Yes" ] && (mqtt pub -t headphones -h homeassistant.local -m 1; mqtt pub -t desk -h homeassistant.local -m sit; systemctl reboot --boot-loader-entry=windows.conf)'
+Icon=system-reboot
+Terminal=false
+Categories=System;

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+
+Name=Focus Mode
+Exec=dmenu-focus
+Icon=preferences-desktop-accessibility
+
+Categories=Utility;
+
+NoDisplay=false
+Terminal=false

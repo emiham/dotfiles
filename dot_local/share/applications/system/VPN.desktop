@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+
+Name=VPN
+Exec=dmenu-vpn
+Icon=network-vpn
+
+Categories=Network;System;
+Keywords=vpn;network;connection;
+
+NoDisplay=false
+Terminal=false
