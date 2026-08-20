@@ -85,7 +85,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { desc = "LSP: List workspace folders", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>D", function()
+    vim.keymap.set("n", "ld", function()
       require("mini.extra").pickers.lsp({ scope = "type_definition" })
     end, { desc = "LSP: Go to type definition", unpack(opts) })
 
