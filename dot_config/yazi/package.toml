@@ -1,0 +1,20 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump-to-char"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:smart-enter"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+
+[[plugin.deps]]
+use = "Deepak22903/kdeconnect-send"
+
+[[plugin.deps]]
+use = "uhs-robert/recycle-bin"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:mime-ext"
+
+[[flavor.deps]]
+use = "emiham/seoul256"
