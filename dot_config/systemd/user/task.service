@@ -1,0 +1,9 @@
+[Unit]
+Description=Synchronize Taskwarrior
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/task synchronize
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Synchronize Taskwarrior
+After=network.target
+
+[Timer]
+OnBootSec=5m
+OnUnitActiveSec=1h
+Persistent=True
+
+[Install]
+WantedBy=timers.target
