@@ -1,5 +1,15 @@
 vim.cmd("source ~/.config/vim/vimrc")
 
+local bisect_plugin = vim.fn.glob(
+  vim.fn.stdpath("data") .. "/site/pack/*/start/nvim-plugin-bisect",
+  false,
+  true
+)[1]
+if bisect_plugin then
+  vim.opt.rtp:prepend(bisect_plugin)
+  require("bisect").setup()
+end
+
 -- vimrc overrides
 vim.go.laststatus = 3
 vim.o.foldmethod = "expr"
@@ -122,15 +132,15 @@ vim.g.clipboard = {
 }
 
 -- stylua: ignore start
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank to clipboard (motion)" })
-vim.keymap.set("v", "<leader>y", '"+y', { desc = "Yank to clipboard (selection)" })
+vim.keymap.set({'n','v'}, "<leader>y", '"+y', { desc = "Yank to clipboard" })
+vim.keymap.set({'n','v'}, "<leader>d", '"+d', { desc = "Delete to clipboard" })
+vim.keymap.set({'n','v'}, "<leader>c", '"+c', { desc = "Change to clipboard" })
 vim.keymap.set("n", "<leader>Y", '"+Y', { remap = true, desc = "Yank line to clipboard" })
-vim.keymap.set("n", "<leader>d", '"+d', { desc = "Delete to clipboard (motion)" })
-vim.keymap.set("v", "<leader>d", '"+d', { desc = "Delete to clipboard (selection)" })
 vim.keymap.set("n", "<leader>D", '"+D', { desc = "Delete line to clipboard" })
-vim.keymap.set("n", "<leader>c", '"+c', { desc = "Change to clipboard (motion)" })
-vim.keymap.set("v", "<leader>c", '"+c', { desc = "Change to clipboard (selection)" })
 vim.keymap.set("n", "<leader>C", '"+C', { desc = "Change line to clipboard" })
+
+vim.keymap.set({'n', 'v'}, '-d', '"_d', { desc = "Delete without copying" })
+vim.keymap.set("n", "-D", '"_D', { desc = "Delete line without copying" })
 -- stylua: ignore end
 
 local function insert_line(direction)
