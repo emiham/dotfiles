@@ -77,15 +77,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, { desc = "LSP: Signature help", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, { desc = "LSP: Add workspace folder", unpack(opts) })
+    vim.keymap.set("n", "<leader>lw", vim.lsp.buf.add_workspace_folder, { desc = "LSP: Add workspace folder", unpack(opts) })
 
-    vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, { desc = "LSP: Remove workspace folder", unpack(opts) })
+    vim.keymap.set("n", "<leader>lW", vim.lsp.buf.remove_workspace_folder, { desc = "LSP: Remove workspace folder", unpack(opts) })
 
     vim.keymap.set("n", "<leader>wl", function()
       print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
     end, { desc = "LSP: List workspace folders", unpack(opts) })
 
-    vim.keymap.set("n", "ld", function()
+    vim.keymap.set("n", "<leader>ld", function()
       require("mini.extra").pickers.lsp({ scope = "type_definition" })
     end, { desc = "LSP: Go to type definition", unpack(opts) })
 
