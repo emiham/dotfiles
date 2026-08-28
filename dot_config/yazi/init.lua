@@ -2,9 +2,9 @@ require("session"):setup({
   sync_yanked = true,
 })
 
-require("git"):setup {
+require("git"):setup({
   order = 1500,
-}
+})
 
 Status:children_add(function()
   local h = cx.active.current.hovered
@@ -13,22 +13,23 @@ Status:children_add(function()
   else
     return ui.Line({
       ui.Span(os.date("%Y-%m-%d %H:%M", tostring(h.cha.mtime):sub(1, 10)))
-          :fg("blue"),
+        :fg("blue"),
       ui.Span(" "),
     })
   end
 end, 500, Status.RIGHT)
 
 require("mime-ext.local"):setup({
+  custom_only = true,
   -- Expand the existing filename database (lowercase), for example:
   with_files = {
-    makefile = "text/makefile",
+    -- makefile = "text/makefile",
     -- ...
   },
 
   -- Expand the existing extension database (lowercase), for example:
   with_exts = {
-    mk = "text/makefile",
+    -- mk = "text/makefile",
     -- ...
   },
 
