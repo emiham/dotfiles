@@ -60,11 +60,11 @@ swayimg.viewer.on_key("]", function() swayimg.viewer.rotate(90) end)
 swayimg.viewer.on_key("[", function() swayimg.viewer.rotate(270) end)
 
 -- flip image
-swayimg.viewer.on_key("m", function() swayimg.viewer.flip_vertical() end)
-swayimg.viewer.on_key(
-  "Shift+m",
-  function() swayimg.viewer.flip_horizontal() end
-)
+-- swayimg.viewer.on_key("m", function() swayimg.viewer.flip_vertical() end)
+-- swayimg.viewer.on_key(
+--   "Shift+m",
+--   function() swayimg.viewer.flip_horizontal() end
+-- )
 
 swayimg.slideshow.timeout = 5
 swayimg.slideshow.default_scale = "fit"
@@ -92,7 +92,9 @@ swayimg.gallery.on_key("Left", function() swayimg.gallery.select("left") end)
 
 -- force set scale mode on window resize (useful for tiling compositors)
 swayimg.on_window_resize(function()
-  if swayimg.mode ~= "gallery" then swayimg.fix_scale = "optimal" end
+  if swayimg.mode ~= "gallery" then
+    swayimg[swayimg.mode].set_fix_scale("optimal")
+  end
 end)
 
 swayimg.gallery.on_image_change(function()
@@ -133,6 +135,56 @@ end)
 
 swayimg.viewer.on_key("Escape", function() swayimg.mode = "gallery" end)
 
+local function input(prompt, initial_path)
+  local p = prompt and string.format(" -p %q", prompt) or ' -p "swayimg"'
+  local f = initial_path and string.format(" -filter %q", initial_path) or ""
+
+  local handle = io.popen("rofi -theme-str 'entry {width: 100%;}' -dmenu" .. p .. f, "r")
+  if handle then
+    res = handle:read("*l")
+    handle:close()
+    return res
+  else
+    swayimg.text.status = "Failed to run input command"
+  end
+end
+
+function move(images, path)
+  if not images or #images == 0 then
+    swayimg.text.status = "no images to move"
+    return
+  end
+
+  local escaped_paths = {}
+  for _, img in ipairs(images) do
+    table.insert(escaped_paths, "'" .. img.path:gsub("'", "'\\''") .. "'")
+  end
+
+  local escaped_dest = "'" .. path:gsub("'", "'\\''") .. "'"
+  os.execute("mv " .. table.concat(escaped_paths, " ") .. " " .. escaped_dest)
+  swayimg.text.status = #images .. " files moved to " .. path
+end
+
+local function get_marked()
+  local entries = swayimg.imagelist.get()
+  local marked = {}
+  for _, entry in ipairs(entries) do
+    if entry.mark then table.insert(marked, entry) end
+  end
+  return marked
+end
+
+local function get_marked_or_selected()
+  -- Always returns a table
+  marked = get_marked()
+  if next(marked) ~= nil then
+    return marked
+  else
+    swayimg.text.status = swayimg[swayimg.mode].get_image().path
+    return {swayimg[swayimg.mode].get_image()}
+  end
+end
+
 swayimg.gallery.on_key("h", function() swayimg.gallery.select("left") end)
 swayimg.gallery.on_key("j", function() swayimg.gallery.select("down") end)
 swayimg.gallery.on_key("k", function() swayimg.gallery.select("up") end)
@@ -142,11 +194,10 @@ swayimg.gallery.on_key("Shift-g", function() swayimg.gallery.select("last") end)
 swayimg.gallery.on_key("Ctrl-u", function() swayimg.gallery.select("pgup") end)
 swayimg.gallery.on_key("Ctrl-d", function() swayimg.gallery.select("pgdown") end)
 swayimg.gallery.on_key("Return", function() swayimg.mode = "viewer" end)
+swayimg.gallery.on_key("Space", function() swayimg.gallery.mark_image() end)
 swayimg.gallery.on_key("Ctrl-p", function()
-  -- print paths to all marked files
-  local entries = swayimg.imagelist.get()
-  for _, entry in ipairs(entries) do
-    if entry.mark then print(entry.path) end
+  for _, entry in ipairs(get_marked()) do
+    print(entry.path)
   end
 end)
 
@@ -154,6 +205,9 @@ for _, mode in ipairs({"viewer", "gallery"}) do
   swayimg[mode].on_key("i", function() swayimg.text.visible = not swayimg.text.visible end)
   swayimg[mode].on_key("Shift+d", function() trash_image() end)
   swayimg[mode].on_key("q", function() swayimg.exit() end)
+  swayimg[mode].on_key("m", function()
+    move(get_marked_or_selected(), input("move ", swayimg[mode].get_image().path))
+  end)
 end
 
 swayimg.gallery.on_key("Shift+r", function()
