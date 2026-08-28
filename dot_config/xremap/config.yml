@@ -71,6 +71,8 @@ keymap:
         launch: ["volume", "+2.5"]
       VolumeDown:
         launch: ["volume", "-2.5"]
+      Mute:
+        launch: ["pactl", "set-sink-mute", "@DEFAULT_SINK@", "toggle"]
       Super-Alt-M:
         launch: ["audio-outputs"]
 
