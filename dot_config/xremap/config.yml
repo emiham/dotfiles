@@ -123,6 +123,8 @@ keymap:
       # Notifications
       Super-N:
         remap:
+          Super-N:
+            launch: ["dmenu-dunst"]
           c:
             launch: ["dunstctl", "clear-all"]
           a:
