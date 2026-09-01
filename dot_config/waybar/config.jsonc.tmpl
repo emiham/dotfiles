@@ -79,18 +79,10 @@
   },
   "pulseaudio": {
     "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-muted": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
+    "format-muted": "<span color='#4e4e4e' size='{{ .font_size_pt }}pt'> </span>",
     "format-icons": {
-      "alsa_output.pci-0000_00_1f.3.analog-stereo": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": " ",
-      "headphone": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "hands-free": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "headset": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "phone": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "phone-muted": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "portable": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
-      "car": "<span color='#d75f87' size='{{ .font_size_pt }}pt'></span>",
+      "headphone": "<span color='#87af87' size='{{ .font_size_pt }}pt'></span>",
+      "headset": "<span color='#85add4' size='{{ .font_size_pt }}pt'></span>",
       "default": [
         "<span color='#87af87' size='{{ .font_size_pt }}pt'></span>",
         "<span color='#87af87' size='{{ .font_size_pt }}pt'></span>",
@@ -109,26 +101,54 @@
     "ignored-sinks": ["Easy Effects Sink"]
   },
   "battery": {
-    "format": "{icon} {capacity}%",
-    "format-icons": ["", "", "", "", ""]
+    "format": "{icon}",
+    "format-icons":  {
+      "default": [
+        "<span color='#d75f87' size='{{ .font_size_pt }}pt'>󰂎</span>",
+        "<span color='#d75f87' size='{{ .font_size_pt }}pt'>󰁺</span>",
+        "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰁻</span>",
+        "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰁼</span>",
+        "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰁽</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰁾</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰁿</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂀</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂁</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂂</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰁹</span>"
+      ],
+      "charging": [
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰢟</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰢜</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂆</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂇</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂈</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰢝</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂉</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰢞</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂊</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂋</span>",
+        "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰂅</span>"
+      ]
+    },
+    "tooltip-format": "{capacity}% ({timeTo})"
   },
   "network": {
     "format-wifi": "{icon}",
     "format-icons": [
-      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
       "<span color='#d75f87' size='{{ .font_size_pt }}pt'>󰖩</span>",
-      "<span color='#d75f87' size='{{ .font_size_pt }}pt'>󰖩</span>"
+      "<span color='#d75f87' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#ffd787' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>",
+      "<span color='#87af87' size='{{ .font_size_pt }}pt'>󰖩</span>"
     ],
     "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-    "format-ethernet": "󰈀  Connected",
-    "format-disconnected": "  Offline"
+    "format-ethernet": "󰈀",
+    "format-disconnected": ""
   },
   "clock": {
     "format": "<span color='#87af87' size='{{ .font_size_pt }}pt'></span> {:%H:%M}",
