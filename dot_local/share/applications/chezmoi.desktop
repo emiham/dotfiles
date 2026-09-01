@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+
+Name=chezmoi
+Exec=/usr/bin/chezmoi cd
+
+NoDisplay=false
+Terminal=true
