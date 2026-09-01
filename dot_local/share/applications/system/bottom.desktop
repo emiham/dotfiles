@@ -1,0 +1,14 @@
+[Desktop Entry]
+Type=Application
+
+Name=bottom
+Exec=/usr/bin/btm
+Icon=
+
+Comment=
+
+Categories=
+Keywords=btm;
+
+NoDisplay=false
+Terminal=true
