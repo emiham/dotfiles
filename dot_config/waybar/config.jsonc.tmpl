@@ -11,7 +11,9 @@
     {{- end }}
     "pulseaudio",
     "custom/disk",
+    {{- if eq .chezmoi.hostname "kusanagi" }}
     "custom/disk#media",
+    {{- end }}
     "cpu",
     "memory",
     // "systemd-failed-units",
