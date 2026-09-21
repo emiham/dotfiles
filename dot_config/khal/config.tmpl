@@ -28,6 +28,14 @@ color = brown
 path = ~/.local/share/calendars/default/work/
 color = dark red
 
+[[SALT]]
+path = ~/.local/share/calendars/default/{{ (keepassxc "Mejl (Google)").UserName }}/
+color = dark red
+
+[[Skillio]]
+path = ~/.local/share/calendars/default/{{ keepassxcAttribute "Mejl (Google)" "Skillio modules calendar" }}/
+color = dark red
+
 [[SSBM]]
 path = ~/.local/share/calendars/default/ssbm/
 color = light green

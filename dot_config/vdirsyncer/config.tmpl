@@ -54,4 +54,19 @@ client_id = "{{ keepassxcAttribute "Google" "Calendar sync client ID" }}"
 # Make sure to publish app if this expires
 client_secret = "{{ keepassxcAttribute "Google" "Calendar sync secret" }}"
 
+[pair gcal_salt]
+a = "personal_calendar_local"
+b = "google_salt"
+collections = ["{{ (keepassxc "Mejl (Google)").UserName }}", "{{ keepassxcAttribute "Mejl (Google)" "Skillio modules calendar" }}"]
+metadata = ["displayname", "color"]
+conflict_resolution = ["command", "nvim", "-d"]
+
+# If this breaks you probably have to delete the token file
+[storage google_salt]
+type = "google_calendar"
+token_file = "~/.local/share/calendars/token_salt"
+client_id = "{{ keepassxcAttribute "Mejl (Google)" "Calendar client ID" }}"
+# Make sure to publish app if this expires
+client_secret = "{{ keepassxcAttribute "Mejl (Google)" "Calendar client secret" }}"
+
 # vim: ft=conf
