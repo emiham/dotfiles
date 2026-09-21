@@ -9,6 +9,11 @@ require("incline").setup({
     padding = 0,
     margin = { horizontal = 0, vertical = 0 },
   },
+  hide = {
+    cursorline = "smart",
+    focused_win = false,
+    only_win = true,
+  },
   render = function(props)
     local bufname = vim.api.nvim_buf_get_name(props.buf)
 
