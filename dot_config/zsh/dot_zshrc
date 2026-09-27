@@ -472,6 +472,8 @@ _fzf_flat_files() {
 zle -N _fzf_flat_files
 bindkey '^F' _fzf_flat_files
 
+source $ZDOTDIR/fzf.zsh
+
 load_completion_cache() {
   local cmd=$1
   local cache_file="$XDG_CACHE_HOME/$cmd.zsh"
