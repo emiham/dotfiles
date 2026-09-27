@@ -33,21 +33,23 @@ swayimg.viewer.loop = true
 swayimg.viewer.preload = 3
 -- swayimg.viewer.history = 1
 swayimg.viewer.mark_color = 0xff808080
-swayimg.viewer.set_text("topleft", {
-  "File: {name}",
-  "Path: {path}",
-  "Format: {format}",
-  "File size: {sizehr}",
-  "File time: {time}",
-  "EXIF date: {meta.Exif.Photo.DateTimeOriginal}",
-  "EXIF camera: {meta.Exif.Image.Model}",
-})
-swayimg.viewer.set_text("topright", {
-  "Image: {list.index} of {list.total}",
-  "Frame: {frame.index} of {frame.total}",
-  "Size: {frame.width}x{frame.height}",
-})
-swayimg.viewer.set_text("bottomleft", { "Scale: {scale}" })
+swayimg.viewer.text = {
+  topleft = {
+    "File: {name}",
+    "Path: {path}",
+    "Format: {format}",
+    "File size: {sizehr}",
+    "File time: {time}",
+    "EXIF date: {meta.Exif.Photo.DateTimeOriginal}",
+    "EXIF camera: {meta.Exif.Image.Model}",
+  },
+  topright = {
+    "Image: {list.index} of {list.total}",
+    "Frame: {frame.index} of {frame.total}",
+    "Size: {frame.width}x{frame.height}",
+  },
+  bottomleft = { "Scale: {scale}" },
+}
 
 local function zoom(factor)
   local pos = swayimg.get_mouse_pos()
@@ -70,7 +72,7 @@ swayimg.slideshow.timeout = 5
 swayimg.slideshow.default_scale = "fit"
 swayimg.slideshow.set_window_background("auto")
 swayimg.slideshow.history = 0
-swayimg.slideshow.set_text("topleft", { "{name}" }) -- top left text block scheme
+swayimg.slideshow.text = { topleft = { "{name}" } } -- top left text block scheme
 
 swayimg.gallery.aspect = "fill"
 swayimg.gallery.thumb_size = 300
@@ -84,8 +86,8 @@ swayimg.gallery.window_color = 0xff3a3a3a
 swayimg.gallery.cache = 0
 swayimg.gallery.preload = false
 swayimg.gallery.pstore = false
-swayimg.gallery.set_text("topleft", { "File: {name}" })
-swayimg.gallery.set_text("topright", { "{list.index} of {list.total}" })
+swayimg.gallery.text = { topleft = { "File: {name}" } }
+swayimg.gallery.text = { topright = { "{list.index} of {list.total}" } }
 
 swayimg.gallery.on_key("Return", function() swayimg.mode = "viewer" end)
 swayimg.gallery.on_key("Left", function() swayimg.gallery.select("left") end)
@@ -115,11 +117,35 @@ swayimg.viewer.on_key("Shift-k", function() swayimg.viewer.open("prev_dir") end)
 swayimg.viewer.on_key("g", function() swayimg.viewer.open("first") end)
 swayimg.viewer.on_key("Shift-g", function() swayimg.viewer.open("last") end)
 
-function trash_image()
-  local image = swayimg[swayimg.mode].get_image()
-  local escaped_path = "'" .. image.path .. "'"
-  os.execute("trash-put " .. escaped_path)
-  swayimg.text.status = "File " .. image.path .. " trashed"
+function trash(images)
+  if not images or #images == 0 then
+    swayimg.text.status = "no images to trash"
+    return
+  end
+
+  local escaped_paths = {}
+  for _, img in ipairs(images) do
+    table.insert(escaped_paths, "'" .. img.path:gsub("'", "'\\''") .. "'")
+  end
+
+  os.execute("trash-put " .. table.concat(escaped_paths, " "))
+  swayimg.text.status = #images .. " files trashed"
+end
+
+function move(images, path)
+  if not images or #images == 0 then
+    swayimg.text.status = "no images to move"
+    return
+  end
+
+  local escaped_paths = {}
+  for _, img in ipairs(images) do
+    table.insert(escaped_paths, "'" .. img.path:gsub("'", "'\\''") .. "'")
+  end
+
+  local escaped_dest = "'" .. path:gsub("'", "'\\''") .. "'"
+  os.execute("mv " .. table.concat(escaped_paths, " ") .. " " .. escaped_dest)
+  swayimg.text.status = #images .. " files moved to " .. path
 end
 
 swayimg.viewer.on_key("a", function() swayimg.antialiasing = not swayimg.antialiasing end)
@@ -162,6 +188,7 @@ function move(images, path)
 
   local escaped_dest = "'" .. path:gsub("'", "'\\''") .. "'"
   os.execute("mv " .. table.concat(escaped_paths, " ") .. " " .. escaped_dest)
+  -- TODO Print error if not successful
   swayimg.text.status = #images .. " files moved to " .. path
 end
 
@@ -203,7 +230,9 @@ end)
 
 for _, mode in ipairs({"viewer", "gallery"}) do
   swayimg[mode].on_key("i", function() swayimg.text.visible = not swayimg.text.visible end)
-  swayimg[mode].on_key("Shift+d", function() trash_image() end)
+  swayimg[mode].on_key("Shift+d", function()
+    trash(get_marked_or_selected())
+  end)
   swayimg[mode].on_key("q", function() swayimg.exit() end)
   swayimg[mode].on_key("m", function()
     move(get_marked_or_selected(), input("move ", swayimg[mode].get_image().path))
