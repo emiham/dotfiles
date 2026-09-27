@@ -8,7 +8,7 @@ Requires=niri.service
 [Service]
 Type=simple
 ExecStart=/usr/bin/swayidle
-ExecStartPost=pkill -SIGUSR1 swayidle
+; ExecStartPost=pkill -SIGUSR1 swayidle
 Restart=always
 
 [Install]
