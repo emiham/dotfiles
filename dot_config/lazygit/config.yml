@@ -10,3 +10,6 @@ customCommands:
 
 gui:
   showBottomLine: false
+  theme:
+    selectedLineBgColor:
+      - black
