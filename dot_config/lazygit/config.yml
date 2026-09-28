@@ -13,3 +13,6 @@ gui:
   theme:
     selectedLineBgColor:
       - black
+  authorColors:
+    'Emil Hammarberg': '#87af87'
+    '*': 'red'
