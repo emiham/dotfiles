@@ -1,12 +1,3 @@
-vim.api.nvim_create_autocmd("PackChanged", {
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "blink.cmp" and (kind == "install" or kind == "update") then
-      vim.cmd("BlinkCmp build")
-    end
-  end,
-})
-
 vim.pack.add({
   "https://github.com/Kaiser-Yang/blink-cmp-git",
   "https://github.com/rafamadriz/friendly-snippets",
@@ -14,19 +5,8 @@ vim.pack.add({
   "https://github.com/brenoprata10/nvim-highlight-colors",
   "https://github.com/bydlw98/blink-cmp-env",
   "https://github.com/becknik/blink-cmp-luasnip-choice",
-  {
-    src = "https://github.com/saghen/blink.cmp",
-    version = vim.version.range("1.x"),
-  },
-})
-
-vim.api.nvim_create_autocmd("PackChanged", {
-  callback = function(ev)
-    local name, kind = ev.data.spec.name, ev.data.kind
-    if name == "blink.cmp" and kind == "update" then
-      vim.cmd("BlinkCmp build")
-    end
-  end,
+  "https://github.com/saghen/blink.lib",
+  "https://github.com/saghen/blink.cmp",
 })
 
 require("nvim-highlight-colors").setup({
@@ -47,7 +27,10 @@ require("nvim-highlight-colors").setup({
   },
 })
 
-require("blink.cmp").setup({
+local cmp = require("blink.cmp")
+cmp.build():pwait()
+
+cmp.setup({
   keymap = {
     preset = "default",
     ["<Tab>"] = { "snippet_forward", "select_next", "fallback" },
@@ -81,11 +64,6 @@ require("blink.cmp").setup({
     enabled = false,
     window = {
       show_documentation = true,
-    },
-  },
-  fuzzy = {
-    prebuilt_binaries = {
-      download = false,
     },
   },
   sources = {
