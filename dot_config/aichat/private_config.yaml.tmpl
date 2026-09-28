@@ -1,0 +1,8 @@
+keybindings: vi
+clients:
+- type: openai-compatible
+  name: openrouter
+  api_base: https://openrouter.ai/api/v1
+  models:
+  - name: openrouter/free
+  api_key: {{ keepassxcAttribute "OpenRouter" "API key" }}
