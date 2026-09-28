@@ -199,7 +199,7 @@ end, { desc = "Run current line in terminal" })
 
 vim.keymap.set(
   "n",
-  "<leader>x",
+  "<leader>X",
   "<cmd>.lua<CR>",
   { desc = "Execute the current line" }
 )
