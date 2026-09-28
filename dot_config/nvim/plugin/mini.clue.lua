@@ -45,6 +45,7 @@ miniclue.setup({
       desc = "+Treesitter Incremental Selection",
     },
     { mode = "n", keys = "<Leader>P", desc = "+Chainsaw" },
+    { mode = { "n", "x" }, keys = "<Leader>x", desc = "+CodeCompanion" },
 
     miniclue.gen_clues.builtin_completion(),
     miniclue.gen_clues.g(),

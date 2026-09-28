@@ -40,4 +40,7 @@ require("codecompanion").setup({
   },
 })
 
-vim.keymap.set({"n", "v"}, "<leader>x", ":CodeCompanion<CR>", { desc = "CodeCompanion" })
+vim.keymap.set({"n", "v"}, "<leader>xx", ":CodeCompanion<CR>", { desc = "Inline" })
+vim.keymap.set({"n", "v"}, "<leader>xc", ":CodeCompanionChat<CR>", { desc = "Chat" })
+vim.keymap.set({"n", "v"}, "<leader>xf", ":CodeCompanion Fix this<CR>", { desc = '"Fix this"' })
+vim.keymap.set({"n", "v"}, "<leader>xe", ":CodeCompanion Explain this<CR>", { desc = '"Explain this"' })
