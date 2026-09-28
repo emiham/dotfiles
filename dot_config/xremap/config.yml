@@ -103,6 +103,8 @@ keymap:
             launch: ["dmenu-task-annotate-latest"]
           d:
             launch: ["dmenu-task-do"]
+          o:
+            launch: ["dmenu-task-open"]
           w:
             launch: ["task-add-from-browser"]
           e:
