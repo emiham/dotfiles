@@ -1,5 +1,5 @@
-// TODO I want a separate workspace for Anki, but it has to be hidden from normal navigation
-// Current script is too slow
+include "monitor.kdl"
+
 input {
     keyboard {
         xkb {
@@ -108,6 +108,8 @@ window-rule {
 }
 {{- if eq .chezmoi.hostname "aisaka" }}
 window-rule {
+    match app-id="^(firefox|slack|anki|foot)$"
+    // exclude app-id="^(slack)$"
     open-maximized-to-edges true
 }
 {{- end }}
@@ -219,9 +221,15 @@ binds {
     Mod+Shift+C repeat=false {
         close-window
     }
-    Mod+Escape repeat=false {
-        close-window
-    }
+    {{- if eq .chezmoi.hostname "aisaka" }}
+      Mod+Escape repeat=false {
+          spawn "hyprlock"
+      }
+    {{- else }}
+      Mod+Escape repeat=false {
+          close-window
+      }
+    {{- end }}
     Mod+H {
         focus-column-left
     }
@@ -277,18 +285,18 @@ binds {
     Mod+Shift+G {
         spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "-s" "last"
     }
-    // Mod+Left {
-    //     focus-monitor-left
-    // }
-    // Mod+Down {
-    //     focus-monitor-down
-    // }
-    // Mod+Up {
-    //     focus-monitor-up
-    // }
-    // Mod+Right {
-    //     focus-monitor-right
-    // }
+    Mod+Left {
+        focus-monitor-left
+    }
+    Mod+Down {
+        focus-monitor-down
+    }
+    Mod+Up {
+        focus-monitor-up
+    }
+    Mod+Right {
+        focus-monitor-right
+    }
     Mod+Shift+Left {
         move-column-to-monitor-left
     }
@@ -307,12 +315,12 @@ binds {
     // Mod+K {
     //     spawn "python" "/home/emil/code/niri/niri_tweaks/niri_workspace_helper.py" "prev" "-s" "-z" "scratch" "anki" "chat"
     // }
-    Mod+Down {
-        move-workspace-down
-    }
-    Mod+Up {
-        move-workspace-up
-    }
+    // Mod+Down {
+    //     move-workspace-down
+    // }
+    // Mod+Up {
+    //     move-workspace-up
+    // }
     Mod+Shift+Ctrl+Left {
         move-workspace-to-monitor-left
     }
