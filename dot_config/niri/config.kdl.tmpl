@@ -185,6 +185,14 @@ layer-rule {
     block-out-from "screencast"
 }
 window-rule {
+    match is-window-cast-target=true
+
+    border {
+        active-color "#add4fb"
+        inactive-color "#85add4"
+    }
+}
+window-rule {
     match title="Steam Big Picture Mode"
     match app-id="<NULL>" title=".*Steam.*"
     match app-id="gamescope"
