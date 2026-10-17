@@ -21,7 +21,7 @@ require("vimade").setup({
         "PmenuSbar",
         "PmenuThumb",
       },
-      buf_opts = { buftype = { "prompt" } },
+      buf_opts = { buftype = { "prompt", "nofile" } },
     },
     default_block_floats = function(win, active)
       return win.win_config.relative ~= ""
