@@ -215,6 +215,7 @@ audio/m3u=mpv.desktop;
 audio/m4a=mpv.desktop;
 audio/mp1=mpv.desktop;
 audio/mp2=mpv.desktop;
+inode/directory=yazi.desktop
 audio/mp3=mpv.desktop;
 audio/mp4=mpv.desktop;
 audio/mpeg2=mpv.desktop;
