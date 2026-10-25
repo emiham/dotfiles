@@ -1,12 +1,14 @@
 customCommands:
   - key: "C"
-    command: 'git add "{{ .SelectedFile.Name }}" && git commit -m "{{index .PromptResponses 0}}"'
+    command:
+      'git add "{{ .SelectedFile.Name }}" && git commit -m "{{index
+      .PromptResponses 0}}"'
     context: "files"
     prompts:
-      - type: 'input'
-        title: 'Commit Message'
-        initialValue: ''
-    loadingText: 'commiting'
+      - type: "input"
+        title: "Commit Message"
+        initialValue: ""
+    loadingText: "commiting"
 
 gui:
   showBottomLine: false
@@ -14,5 +16,10 @@ gui:
     selectedLineBgColor:
       - black
   authorColors:
-    'Emil Hammarberg': '#87af87'
-    '*': 'red'
+    "Emil Hammarberg": "#87af87"
+    "*": "red"
+
+git:
+  paging:
+    externalDiffCommand:
+      difft --color=always --display=inline --syntax-highlight=on --tab-width=2
