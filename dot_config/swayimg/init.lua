@@ -28,7 +28,7 @@ swayimg.viewer.default_position = "center"
 swayimg.viewer.drag_button = "MouseLeft"
 swayimg.viewer.set_window_background(0xff3a3a3a)
 swayimg.viewer.set_image_chessboard(20, 0xff3a3a3a, 0xff4e4e4e)
-swayimg.viewer.autocenter = true
+swayimg.viewer.autopos = "center"
 swayimg.viewer.loop = true
 swayimg.viewer.preload = 3
 -- swayimg.viewer.history = 1
@@ -152,8 +152,13 @@ swayimg.viewer.on_key("a", function() swayimg.antialiasing = not swayimg.antiali
 swayimg.viewer.on_key("Plus", function() zoom(0.1) end)
 swayimg.viewer.on_key("Minus", function() zoom(-0.1) end)
 
-swayimg.viewer.on_mouse("Ctrl-ScrollUp", function() zoom(0.1) end)
-swayimg.viewer.on_mouse("Ctrl-ScrollDown", function() zoom(-0.1) end)
+swayimg.viewer.on_scroll(function(_, _, v)
+  if v < 0 then
+    zoom(0.1)
+  else
+    zoom(-0.1)
+  end
+end)
 
 swayimg.viewer.on_key("backspace", function()
   swayimg.viewer.reset()
