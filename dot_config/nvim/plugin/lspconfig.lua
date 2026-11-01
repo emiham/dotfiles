@@ -289,6 +289,7 @@ local lsps = {
   },
   { "svelte" },
   { "arduino-language-server" },
+  { "jsonls" },
 }
 
 for _, lsp in pairs(lsps) do
