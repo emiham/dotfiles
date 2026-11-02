@@ -2,7 +2,7 @@
 Description=Clipse Clipboard Manager
 Documentation=https://github.com/savedra1/clipse
 PartOf=graphical-session.target
-After=graphical-session.target
+After=niri.service
 
 [Service]
 Type=oneshot

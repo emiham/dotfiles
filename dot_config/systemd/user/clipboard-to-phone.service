@@ -1,6 +1,5 @@
 [Unit]
 Description=Send clipboard to phone via kdeconnect-cli
-Requires=graphical-session.target
 After=app-org.kde.kdeconnect.daemon@autostart.service
 PartOf=app-org.kde.kdeconnect.daemon@autostart.service
 ConditionEnvironment=WAYLAND_DISPLAY
