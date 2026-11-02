@@ -57,7 +57,7 @@ client_secret = "{{ keepassxcAttribute "Google" "Calendar sync secret" }}"
 [pair gcal_salt]
 a = "personal_calendar_local"
 b = "google_salt"
-collections = ["{{ (keepassxc "Mejl (Google)").UserName }}", "{{ keepassxcAttribute "Mejl (Google)" "Skillio modules calendar" }}"]
+collections = ["{{ (keepassxc "Mejl (Google)").UserName }}"]
 metadata = ["displayname", "color"]
 conflict_resolution = ["command", "nvim", "-d"]
 
