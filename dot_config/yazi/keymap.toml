@@ -46,7 +46,7 @@ run = "link --relative"
 desc = "symlink to yanked file(s)"
 
 [[mgr.prepend_keymap]]
-on = ["g", "t"]
+on = ["g", "T"]
 run = "tasks_show"
 
 [[mgr.prepend_keymap]]
