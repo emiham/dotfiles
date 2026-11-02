@@ -378,6 +378,8 @@ bindkey '^Z' smart_ctrl_z
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
+zstyle ':completion:*:expand:*' keep-prefix true
+zstyle ':completion:*:expand:*' tag-order all-expansions
 zstyle ':completion:*' format 'Completing %d'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*' menu select=2
