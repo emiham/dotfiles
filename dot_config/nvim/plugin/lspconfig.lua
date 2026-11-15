@@ -290,6 +290,7 @@ local lsps = {
   { "svelte" },
   { "arduino-language-server" },
   { "jsonls" },
+  -- TODO https://github.com/sqlfluff/sqlfluff
 }
 
 for _, lsp in pairs(lsps) do
