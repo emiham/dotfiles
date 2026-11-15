@@ -1,6 +1,9 @@
 vim.pack.add({ "https://github.com/sindrets/diffview.nvim" })
 
 require("diffview").setup({
+  default_args = {
+    DiffviewOpen = { "--imply-local" },
+  },
   view = {
     merge_tool = {
       layout = "diff4_mixed",
