@@ -99,7 +99,8 @@
       ]
     },
     "scroll-step": 2.5,
-    "on-click": "wiremix",
+    "on-click": "foot -a foot-float wiremix",
+    "on-click-right": "foot -a foot-float snapvol -H 192.168.1.127 i",
     "ignored-sinks": ["Easy Effects Sink"]
   },
   "battery": {
@@ -192,7 +193,8 @@
     "format-stopped": "",
     "tooltip-format": "{album}\n{elapsedTime}/{totalTime}",
     "format-disconnected": "",
-    "on-click": "mpc toggle"
+    "on-click": "mpc toggle",
+    "on-click-right": "foot -a foot-float rmpc"
   },
   "systemd-failed-units": {
     "format": "✗ {nr_failed}",
