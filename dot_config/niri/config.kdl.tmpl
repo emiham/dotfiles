@@ -114,6 +114,10 @@ window-rule {
 }
 {{- end }}
 window-rule {
+    match app-id="^foot-float$"
+    open-floating true
+}
+window-rule {
     match app-id="^anki$" title="^Browse"
     open-maximized-to-edges true
 }
